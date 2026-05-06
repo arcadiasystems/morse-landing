@@ -14,7 +14,7 @@ export default function App() {
   return (
     <>
       <Nav />
-      <main style={{ paddingTop: '104px' }}>
+      <main style={{ paddingTop: '96px' }}>
         <Hero />
         <LogoMarquee />
         <HowItWorks />

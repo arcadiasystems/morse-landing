@@ -4,49 +4,85 @@
   z-index: 100;
 }
 
-/* ── Announcement Banner ─────────────────────────────────── */
+/* ── Announcement strip ─────────────────────────────────── */
 .banner {
-  height: 44px;
-  background: var(--highlight);
-  color: var(--highlight-text);
+  height: 36px;
+  background: linear-gradient(90deg, rgba(68, 76, 231, 0.12) 0%, rgba(182, 100, 255, 0.10) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12.5px;
   padding: 0 28px;
-  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.bannerRight {
-  display: flex;
-  gap: 20px;
-  position: absolute;
-  right: 28px;
+.bannerInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1120px;
+  width: 100%;
+  justify-content: center;
+}
+
+.bannerDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--highlight);
+  box-shadow: 0 0 10px var(--highlight);
+  animation: navPulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes navPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.55; transform: scale(0.85); }
+}
+
+.bannerText {
+  color: var(--text-bright);
+  font-weight: 500;
+  letter-spacing: 0.005em;
 }
 
 .bannerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 500;
   font-size: 12px;
-  font-weight: 600;
-  color: rgba(0,0,0,0.6);
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
   transition: color var(--ease);
 }
-
-.bannerLink:hover { color: #000; }
+.bannerLink:hover { color: var(--text-bright); }
+.bannerLink svg { transition: transform var(--ease); }
+.bannerLink:hover svg { transform: translateX(2px); }
 
 @media (max-width: 768px) {
   .banner { display: none; }
 }
 
-/* ── Nav ─────────────────────────────────────────────────── */
+/* ── Nav ────────────────────────────────────────────────── */
 .nav {
   height: 60px;
   display: flex;
   align-items: center;
-  background: var(--bg-header);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(5, 7, 15, 0.65);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navScrolled {
+  background: rgba(5, 7, 15, 0.85);
+  border-bottom-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .inner {
@@ -76,39 +112,37 @@
 .links {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-size: 14px;
-  font-weight: 450;
-  color: var(--text-muted);
-  padding: 6px 12px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 7px 12px;
   border-radius: var(--r-sm);
   transition: color var(--ease), background var(--ease);
 }
 
 .link:hover {
-  color: var(--text);
-  background: rgba(255,255,255,0.04);
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-/* ── Dropdown ────────────────────────────────────────────── */
-.dropParent {
-  position: relative;
-}
+/* ── Dropdown ───────────────────────────────────────────── */
+.dropParent { position: relative; }
 
 .dropTrigger {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-size: 14px;
-  font-weight: 450;
-  color: var(--text-muted);
-  padding: 6px 12px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 7px 12px;
   border-radius: var(--r-sm);
   background: none;
   border: none;
@@ -118,99 +152,199 @@
 }
 
 .dropTrigger:hover {
-  color: var(--text);
-  background: rgba(255,255,255,0.04);
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 200px;
-  padding-top: 8px;
+  min-width: 220px;
+  padding-top: 10px;
   visibility: hidden;
   opacity: 0;
+  transform: translateY(-4px);
   pointer-events: none;
-  transition: opacity 0.12s ease, visibility 0.12s ease;
+  transition: opacity 0.16s ease, visibility 0.16s ease, transform 0.16s ease;
 }
 
 .dropParent:hover .dropdown {
   visibility: visible;
   opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
-.dropParent:hover .dropChevron {
-  transform: rotate(180deg);
-}
-
-.dropChevron {
-  transition: transform 0.15s ease;
-}
+.dropParent:hover .dropChevron { transform: rotate(180deg); }
+.dropChevron { transition: transform 0.18s ease; }
 
 .dropdownInner {
-  background: #0e1426;
-  border: 1px solid var(--border);
+  background: rgba(14, 20, 38, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--r-md);
   padding: 6px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .dropItem {
   display: block;
   font-size: 13px;
-  font-weight: 450;
-  color: var(--text-muted);
-  padding: 8px 12px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 9px 12px;
   border-radius: var(--r-sm);
   transition: color var(--ease), background var(--ease);
 }
 
 .dropItem:hover {
   color: var(--text-bright);
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.07);
 }
 
-/* ── Star badge ──────────────────────────────────────────── */
+/* ── Star badge ─────────────────────────────────────────── */
 .starBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
-  color: var(--text-subtle);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  padding: 1px 7px;
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2px 7px;
   border-radius: 100px;
-  transition: color var(--ease);
+  transition: background var(--ease), border-color var(--ease);
+}
+.starBadge svg { color: var(--highlight); }
+.link:hover .starBadge {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
-.link:hover .starBadge { color: var(--text-muted); }
-
-/* ── CTA ─────────────────────────────────────────────────── */
+/* ── Actions ────────────────────────────────────────────── */
 .actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-left: auto;
 }
 
-.btnPrimary {
-  display: inline-flex;
-  align-items: center;
-  font-size: 14px;
+.actions :global(.morse-btn--small) {
+  height: 38px;
+  padding: 0 18px;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+/* ── Mobile menu toggle ─────────────────────────────────── */
+.menuToggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--ease), border-color var(--ease);
+}
+.menuToggle:hover { background: rgba(255, 255, 255, 0.08); }
+
+.menuBar {
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 1.5px;
+  background: var(--text-bright);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: transform 0.22s ease, opacity 0.22s ease, top 0.22s ease;
+}
+.menuBar:nth-child(1) { top: 13px; }
+.menuBar:nth-child(2) { top: 18.5px; }
+.menuBar:nth-child(3) { top: 24px; }
+
+.menuBarTopOpen { top: 18.5px !important; transform: translateX(-50%) rotate(45deg); }
+.menuBarMidOpen { opacity: 0; }
+.menuBarBotOpen { top: 18.5px !important; transform: translateX(-50%) rotate(-45deg); }
+
+/* ── Mobile sheet ───────────────────────────────────────── */
+.mobileSheet {
+  position: fixed;
+  top: 60px;
+  left: 0; right: 0;
+  bottom: 0;
+  background: rgba(5, 7, 15, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease;
+  overflow-y: auto;
+  z-index: 99;
+}
+.mobileSheetOpen {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobileInner {
+  padding: 24px 28px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobileGroupLabel {
+  font-family: var(--mono);
+  font-size: 11px;
   font-weight: 600;
-  padding: 8px 18px;
-  border-radius: var(--r-sm);
-  background: var(--accent);
-  color: #fff;
-  transition: background var(--ease), box-shadow var(--ease);
-  white-space: nowrap;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 12px 0 6px;
 }
 
-.btnPrimary:hover {
-  background: var(--accent-bright);
-  box-shadow: var(--accent-glow);
+.mobileLink {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-bright);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color var(--ease);
+}
+.mobileLink:hover { color: var(--accent-bright); }
+
+.mobileSep {
+  height: 12px;
 }
 
-@media (max-width: 640px) {
+.mobileCta {
+  margin-top: 24px;
+}
+.mobileCta :global(.morse-btn) {
+  width: 100%;
+}
+
+/* ── Breakpoints ────────────────────────────────────────── */
+@media (max-width: 860px) {
   .links { display: none; }
+  .menuToggle { display: inline-flex; align-items: center; justify-content: center; }
+  .actions :global(.morse-btn) { display: none; } /* CTA moves into the sheet */
+}
+
+@media (min-width: 861px) {
+  .mobileSheet { display: none; }
+}
+
+@media (max-width: 480px) {
+  .inner { gap: 16px; padding: 0 18px; }
+  .wordmark { display: none; } /* logo only on very narrow */
 }
