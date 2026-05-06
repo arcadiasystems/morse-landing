@@ -1,0 +1,52 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:        #00D4B4;
+  --accent-bright: #1AFFD8;
+  --accent-dim:    #009E86;
+  --accent-bg:     rgba(0, 212, 180, 0.07);
+  --accent-border: rgba(0, 212, 180, 0.25);
+  --accent-glow:   0 0 40px rgba(0, 212, 180, 0.18);
+
+  --bg:            #07090F;
+  --bg-surface:    #0D1525;
+  --bg-surface-2:  #0A1220;
+  --bg-card:       #0F1A2E;
+  --bg-header:     rgba(7, 9, 15, 0.88);
+
+  --text:          #C8DFEF;
+  --text-bright:   #EDF6FF;
+  --text-muted:    #4A6680;
+  --text-subtle:   #2E4560;
+
+  --border:        rgba(255,255,255,0.06);
+  --border-accent: rgba(0, 212, 180, 0.22);
+
+  --font:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', monospace;
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+
+  --ease: 0.15s ease;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  text-align: left;
+}
+
+a { color: inherit; text-decoration: none; }
