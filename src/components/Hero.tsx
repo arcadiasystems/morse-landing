@@ -1,108 +1,65 @@
-import { useState } from 'react'
 import styles from './Hero.module.css'
+import Button from './ui/Button'
+import CodeTerminal from './ui/CodeTerminal'
 
 const DOCS = 'https://morse-docs.vercel.app'
 
-type Lang = 'typescript' | 'javascript' | 'cli'
+const TERMINAL_TABS = [
+  {
+    label: 'TYPESCRIPT',
+    language: 'typescript',
+    code: `import { MorseClient } from '@morse/sdk'
 
-const snippets: Record<Lang, React.ReactNode> = {
-  typescript: (
-    <>
-      <span className={styles.kw}>import</span>
-      {' { MorseClient } '}
-      <span className={styles.kw}>from</span>
-      {' '}
-      <span className={styles.str}>'@morse/sdk'</span>
-      {'\n\n'}
-      <span className={styles.kw}>const</span>
-      {' client = '}
-      <span className={styles.kw}>new</span>
-      {' '}
-      <span className={styles.fn}>MorseClient</span>
-      {'({ network: '}
-      <span className={styles.str}>'testnet'</span>
-      {' })\n\n'}
-      <span className={styles.cmt}>{'// create a publication on-chain\n'}</span>
-      <span className={styles.kw}>const</span>
-      {' pub = '}
-      <span className={styles.kw}>await</span>
-      {' client.'}
-      <span className={styles.fn}>createPublication</span>
-      {'({\n  slug: '}
-      <span className={styles.str}>'my-blog'</span>
-      {',\n  policy: '}
-      <span className={styles.str}>'public'</span>
-      {',\n})\n\n'}
-      <span className={styles.cmt}>{'// publish to Walrus\n'}</span>
-      <span className={styles.kw}>await</span>
-      {' pub.'}
-      <span className={styles.fn}>publish</span>
-      {'({\n  collection: '}
-      <span className={styles.str}>'posts'</span>
-      {',\n  slug: '}
-      <span className={styles.str}>'hello-world'</span>
-      {',\n  content: { title, body },\n})'}
-    </>
-  ),
-  javascript: (
-    <>
-      <span className={styles.kw}>const</span>
-      {' { MorseClient } = '}
-      <span className={styles.fn}>require</span>
-      {'('}
-      <span className={styles.str}>'@morse/sdk'</span>
-      {')\n\n'}
-      <span className={styles.kw}>const</span>
-      {' client = '}
-      <span className={styles.kw}>new</span>
-      {' '}
-      <span className={styles.fn}>MorseClient</span>
-      {'({ network: '}
-      <span className={styles.str}>'testnet'</span>
-      {' })\n\n'}
-      <span className={styles.cmt}>{'// create a publication\n'}</span>
-      <span className={styles.kw}>const</span>
-      {' pub = '}
-      <span className={styles.kw}>await</span>
-      {' client.'}
-      <span className={styles.fn}>createPublication</span>
-      {'({ slug: '}
-      <span className={styles.str}>'my-blog'</span>
-      {' })\n\n'}
-      <span className={styles.cmt}>{'// publish content\n'}</span>
-      <span className={styles.kw}>await</span>
-      {' pub.'}
-      <span className={styles.fn}>publish</span>
-      {'({\n  collection: '}
-      <span className={styles.str}>'posts'</span>
-      {',\n  slug: '}
-      <span className={styles.str}>'hello-world'</span>
-      {',\n  content,\n})'}
-    </>
-  ),
-  cli: (
-    <>
-      <span className={styles.cmt}>{'# initialise a new publication\n'}</span>
-      <span className={styles.acc}>{'morse'}</span>
-      {' init '}
-      <span className={styles.str}>my-blog</span>
-      {' --network testnet\n\n'}
-      <span className={styles.cmt}>{'# create a collection schema\n'}</span>
-      <span className={styles.acc}>{'morse'}</span>
-      {' collections create posts\n\n'}
-      <span className={styles.cmt}>{'# publish an entry\n'}</span>
-      <span className={styles.acc}>{'morse'}</span>
-      {' publish posts/hello-world.md\n\n'}
-      <span className={styles.cmt}>{'# list all entries\n'}</span>
-      <span className={styles.acc}>{'morse'}</span>
-      {' entries list --pub my-blog'}
-    </>
-  ),
-}
+const client = new MorseClient({ network: 'testnet' })
+
+// create a publication on-chain
+const pub = await client.createPublication({
+  slug: 'my-blog',
+  policy: 'public',
+})
+
+// publish to Walrus
+await pub.publish({
+  collection: 'posts',
+  slug: 'hello-world',
+  content: { title, body },
+})`,
+  },
+  {
+    label: 'JAVASCRIPT',
+    language: 'javascript',
+    code: `const { MorseClient } = require('@morse/sdk')
+
+const client = new MorseClient({ network: 'testnet' })
+
+// create a publication
+const pub = await client.createPublication({ slug: 'my-blog' })
+
+// publish content
+await pub.publish({
+  collection: 'posts',
+  slug: 'hello-world',
+  content,
+})`,
+  },
+  {
+    label: 'CLI',
+    language: 'plaintext',
+    code: `# initialise a new publication
+morse init my-blog --network testnet
+
+# create a collection schema
+morse collections create posts
+
+# publish an entry
+morse publish posts/hello-world.md
+
+# list all entries
+morse entries list --pub my-blog`,
+  },
+]
 
 export function Hero() {
-  const [lang, setLang] = useState<Lang>('typescript')
-
   return (
     <section className={styles.hero}>
       {/* Blur blobs */}
@@ -132,12 +89,12 @@ export function Hero() {
           </p>
 
           <div className={styles.actions}>
-            <a href={`${DOCS}/quick-start.html`} className={styles.btnPrimary}>
+            <Button variant="primary" color="ultraviolet" href={`${DOCS}/quick-start.html`}>
               Start Building
-            </a>
-            <a href={`${DOCS}/index.html`} className={styles.btnOutline}>
+            </Button>
+            <Button variant="secondary" color="ultraviolet" href={`${DOCS}/index.html`}>
               Read the Docs
-            </a>
+            </Button>
           </div>
 
           <div className={styles.stack}>
@@ -169,28 +126,7 @@ export function Hero() {
 
         {/* Right col — terminal */}
         <div className={styles.right}>
-          <div className={styles.terminal}>
-            {/* macOS dots */}
-            <div className={styles.termBar}>
-              <span className={`${styles.termDot} ${styles.dotRed}`} />
-              <span className={`${styles.termDot} ${styles.dotYel}`} />
-              <span className={`${styles.termDot} ${styles.dotGrn}`} />
-              <div className={styles.termTabs}>
-                {(['typescript', 'javascript', 'cli'] as Lang[]).map((l) => (
-                  <button
-                    key={l}
-                    className={`${styles.termTab} ${lang === l ? styles.termTabActive : ''}`}
-                    onClick={() => setLang(l)}
-                  >
-                    {l === 'cli' ? 'CLI' : l === 'typescript' ? 'TypeScript' : 'JavaScript'}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <pre className={styles.termCode}>
-              <code>{snippets[lang]}</code>
-            </pre>
-          </div>
+          <CodeTerminal tabs={TERMINAL_TABS} minHeight="420px" />
         </div>
       </div>
     </section>
