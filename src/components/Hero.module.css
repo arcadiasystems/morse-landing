@@ -173,24 +173,41 @@
 .stack {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .stackItem {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  color: var(--text-subtle);
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 7px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color var(--ease), background var(--ease);
 }
 
-.stackItem svg { opacity: 0.4; }
+.stackItem:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.stackItem svg {
+  opacity: 1;
+  color: var(--accent-bright);
+}
 
 .stackSep {
-  width: 1px;
-  height: 14px;
-  background: var(--border);
+  display: none;
 }
 
 /* ── Terminal ───────────────────────────────────────────── */
