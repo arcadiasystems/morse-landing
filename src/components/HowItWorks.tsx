@@ -1,4 +1,5 @@
 import styles from './HowItWorks.module.css'
+import DeployPipeline from './illustrations/DeployPipeline'
 
 const steps = [
   {
@@ -32,6 +33,10 @@ export function HowItWorks() {
             Governance lives on Sui. Content payloads live on Walrus. Reads are served by indexers
             anyone can run. Each layer is independently replaceable.
           </p>
+        </div>
+
+        <div style={{ margin: '0 auto 72px', maxWidth: '1000px' }}>
+          <DeployPipeline />
         </div>
 
         <div className={styles.flow}>
