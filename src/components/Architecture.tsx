@@ -1,4 +1,12 @@
 import styles from './Architecture.module.css'
+import WalrusNetwork from './illustrations/WalrusNetwork'
+
+const LEGEND = [
+  { label: 'Publisher', color: '#444ce7' },
+  { label: 'Walrus',    color: '#1ff1a5' },
+  { label: 'AI Agent',  color: '#ff6bff' },
+  { label: 'Sui',       color: '#dbff4b' },
+]
 
 const layers = [
   { icon: '⛓', name: 'Sui Blockchain', desc: 'Publications, collections, entries, capabilities', badge: 'Live', badgeType: 'live' },
@@ -12,6 +20,69 @@ export function Architecture() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
+        <div
+          style={{
+            position: 'relative',
+            height: 280,
+            marginBottom: 56,
+            borderRadius: 14,
+            overflow: 'hidden',
+            background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(13, 19, 48, 0.7) 0%, rgba(7, 9, 28, 0.4) 60%, transparent 100%), #07091c',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+          }}
+        >
+          <WalrusNetwork />
+          <div
+            style={{
+              position: 'absolute',
+              top: 14,
+              left: 16,
+              fontFamily: 'var(--mono)',
+              fontSize: 10,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: 'var(--text-muted)',
+              pointerEvents: 'none',
+            }}
+          >
+            Live network · publisher → walrus
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 14,
+              left: 16,
+              display: 'flex',
+              gap: 14,
+              flexWrap: 'wrap',
+              pointerEvents: 'none',
+            }}
+          >
+            {LEGEND.map(({ label, color }) => (
+              <span
+                key={label}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  fontFamily: 'var(--mono)',
+                  fontSize: 11,
+                  color: 'var(--text-bright)',
+                }}
+              >
+                <span
+                  style={{
+                    width: 8, height: 8, borderRadius: '50%',
+                    background: color,
+                    boxShadow: `0 0 8px ${color}`,
+                  }}
+                />
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+
         <div className={styles.layout}>
           <div className={styles.text}>
             <p className={styles.label}>Architecture</p>
