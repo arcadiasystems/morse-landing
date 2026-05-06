@@ -131,7 +131,7 @@
 }
 
 .badge_live {
-  background: rgba(0,212,180,0.12);
+  background: var(--accent-bg);
   color: var(--accent);
   border: 1px solid var(--accent-border);
 }

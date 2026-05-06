@@ -1,5 +1,6 @@
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
+import { LogoMarquee } from './components/LogoMarquee'
 import { HowItWorks } from './components/HowItWorks'
 import { Features } from './components/Features'
 import { Architecture } from './components/Architecture'
@@ -12,8 +13,9 @@ export default function App() {
   return (
     <>
       <Nav />
-      <main>
+      <main style={{ paddingTop: '104px' }}>
         <Hero />
+        <LogoMarquee />
         <HowItWorks />
         <Features />
         <Architecture />
