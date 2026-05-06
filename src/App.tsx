@@ -3,6 +3,7 @@ import { Hero } from './components/Hero'
 import { LogoMarquee } from './components/LogoMarquee'
 import { HowItWorks } from './components/HowItWorks'
 import { Features } from './components/Features'
+import InfraSection from './components/InfraSection'
 import { Architecture } from './components/Architecture'
 import { CodeSection } from './components/CodeSection'
 import { WhyMorse } from './components/WhyMorse'
@@ -18,6 +19,7 @@ export default function App() {
         <LogoMarquee />
         <HowItWorks />
         <Features />
+        <InfraSection />
         <Architecture />
         <CodeSection />
         <WhyMorse />
