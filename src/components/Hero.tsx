@@ -1,6 +1,7 @@
 import styles from './Hero.module.css'
 import Button from './ui/Button'
 import CodeTerminal from './ui/CodeTerminal'
+import MeshGradient from './backgrounds/MeshGradient'
 
 const DOCS = 'https://morse-docs.vercel.app'
 
@@ -62,13 +63,7 @@ morse entries list --pub my-blog`,
 export function Hero() {
   return (
     <section className={styles.hero}>
-      {/* Blur blobs */}
-      <div className={`${styles.blob} ${styles.blobPink}`} />
-      <div className={`${styles.blob} ${styles.blobYellow}`} />
-      <div className={`${styles.blob} ${styles.blobGreen}`} />
-
-      {/* Dot grid */}
-      <div className={styles.grid} />
+      <MeshGradient />
 
       <div className={styles.inner}>
         {/* Left col */}
