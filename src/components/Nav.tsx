@@ -32,7 +32,7 @@ export function Nav() {
       {/* ── Announcement banner ─────────────────────────── */}
       <div className={styles.banner}>
         <span className={styles.bannerText}>
-          Morse Protocol v1 je live — pročitaj announcement →
+          Morse Protocol v1 is live on Sui Testnet — read the announcement →
         </span>
         <div className={styles.bannerRight}>
           <a href={`${DOCS}/index.html`} className={styles.bannerLink}>Docs</a>
