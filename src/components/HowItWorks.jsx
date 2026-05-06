@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import DeployPipeline from './illustrations/DeployPipeline'
 
 const STYLE_ID = 'morse-how-styles'
 
@@ -58,9 +59,15 @@ const css = `
   max-width: 500px;
 }
 
+/* ── Pipeline animation ─────────────────────────────────── */
+.morse-how__pipeline {
+  margin: 64px auto 0;
+  max-width: 1000px;
+}
+
 /* ── Grid (gap-as-border) ───────────────────────────────── */
 .morse-how__grid {
-  margin-top: 64px;
+  margin-top: 56px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
@@ -237,6 +244,10 @@ export function HowItWorks() {
             and runs on infrastructure anyone can host.
           </p>
         </header>
+
+        <div className="morse-how__pipeline">
+          <DeployPipeline />
+        </div>
 
         <div className="morse-how__grid">
           {STEPS.map((s) => {
