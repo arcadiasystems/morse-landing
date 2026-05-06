@@ -15,7 +15,7 @@ const logos = [
 
 export function LogoMarquee() {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} section-secondary`}>
       <p className={styles.label}>Trusted by builders on Sui</p>
       <div className={styles.track}>
         <div className={styles.inner}>

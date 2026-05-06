@@ -1,8 +1,7 @@
 .wrapper {
   padding: 48px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-surface-2);
+  border-top: 1px solid var(--section-border);
+  border-bottom: 1px solid var(--section-border);
   overflow: hidden;
 }
 

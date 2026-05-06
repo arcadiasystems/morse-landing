@@ -125,7 +125,7 @@ export function Features() {
   return (
     <>
       {sections.map((s) => (
-        <section key={s.eyebrow} className={styles.section}>
+        <section key={s.eyebrow} className={`${styles.section} section-pad section-primary`}>
           <div className={`${styles.inner} ${s.reverse ? styles.reverse : ''}`}>
             <div className={styles.text}>
               <p className={styles.eyebrow}>{s.eyebrow}</p>

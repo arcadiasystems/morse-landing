@@ -1,7 +1,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Primary accent — indigo/ultraviolet */
+  /* ─── Brand accents ─────────────────────────── */
   --accent:        #444CE7;
   --accent-bright: #6366f1;
   --accent-dim:    #3730a3;
@@ -9,35 +9,48 @@
   --accent-border: rgba(68, 76, 231, 0.25);
   --accent-glow:   0 0 40px rgba(68, 76, 231, 0.18);
 
-  /* Highlight accent — neon yellow */
   --highlight:      #dbff4b;
   --highlight-text: #000;
 
-  /* Backgrounds */
-  --bg:            #05070f;
-  --bg-surface:    #0a0d1a;
-  --bg-surface-2:  #080b16;
-  --bg-card:       #0c1022;
-  --bg-header:     rgba(5, 7, 15, 0.88);
+  /* ─── Background hierarchy ──────────────────── */
+  --bg-primary:     #05070f;     /* main dark — majority of sections     */
+  --bg-secondary:   #080b18;     /* slightly blue-dark — alternating     */
+  --bg-card:        #0c0f1e;     /* card backgrounds                     */
+  --bg-card-hover:  #0f1328;     /* card hover                           */
 
-  /* Text */
+  --bg:             var(--bg-primary);   /* legacy alias */
+  --bg-surface:     #0a0d1a;             /* legacy — used by older modules */
+  --bg-surface-2:   #080b16;             /* legacy */
+  --bg-header:      rgba(5, 7, 15, 0.88);
+
+  --section-border: rgba(255, 255, 255, 0.06);
+
+  /* ─── Spacing system ────────────────────────── */
+  --section-pad-y:  100px;
+  --section-pad-x:  28px;
+  --container-max:  1120px;
+
+  /* ─── Text ──────────────────────────────────── */
   --text:          #a8b8d0;
   --text-bright:   #f0f2f8;
   --text-muted:    #6b7fa3;
   --text-subtle:   #2a3550;
 
-  /* Borders */
-  --border:        rgba(255,255,255,0.07);
+  /* ─── Borders ───────────────────────────────── */
+  --border:        rgba(255, 255, 255, 0.07);
   --border-accent: rgba(68, 76, 231, 0.22);
 
-  /* Blob colors */
+  /* ─── Blob colors ───────────────────────────── */
   --blob-pink:   #FF6BFF;
   --blob-yellow: #dbff4b;
   --blob-green:  #34D399;
 
+  /* ─── Typography ────────────────────────────── */
   --font:  'Inter', system-ui, sans-serif;
-  --mono:  'JetBrains Mono', monospace;
+  --mono:  'Noto Sans Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular,
+           Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
+  /* ─── Radii ─────────────────────────────────── */
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 16px;
@@ -50,7 +63,7 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: var(--font);
-  background: var(--bg);
+  background: var(--bg-primary);
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -63,3 +76,91 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+/* ════════════════════════════════════════════════════════════
+   GLOBAL UTILITIES — foundation for every section
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Section backgrounds (alternating) ─────────────────────── */
+.section-primary   { background: var(--bg-primary); }
+.section-secondary { background: var(--bg-secondary); }
+
+.section-border-top    { border-top:    1px solid var(--section-border); }
+.section-border-bottom { border-bottom: 1px solid var(--section-border); }
+
+/* ── Layout primitives ─────────────────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--section-pad-x);
+}
+
+.section-pad {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+/* ── Dot grid (reusable overlay) ───────────────────────────── */
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.dot-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+  mask-image:         radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+}
+
+/* ── Eyebrow / label ───────────────────────────────────────── */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dbff4b;
+  margin-bottom: 14px;
+  display: block;
+}
+
+/* ── Section heading ───────────────────────────────────────── */
+.section-h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: #f0f2f8;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.section-lead {
+  font-size: 17px;
+  color: rgba(200, 215, 235, 0.55);
+  line-height: 1.65;
+}
+
+/* ── Card ──────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(68, 76, 231, 0.25);
+}
+
+.card:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0, rgba(68, 76, 231, 0.07), transparent 60%);
+  pointer-events: none;
+}

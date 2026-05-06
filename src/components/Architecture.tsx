@@ -18,8 +18,8 @@ const layers = [
 
 export function Architecture() {
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
+    <section className={`${styles.section} section-pad section-secondary`}>
+      <div className="container">
         <div
           style={{
             position: 'relative',
@@ -85,9 +85,9 @@ export function Architecture() {
 
         <div className={styles.layout}>
           <div className={styles.text}>
-            <p className={styles.label}>Architecture</p>
-            <h2 className={styles.h2}>Every layer is replaceable</h2>
-            <p className={styles.lead}>
+            <p className="eyebrow">Architecture</p>
+            <h2 className="section-h2">Every layer is replaceable</h2>
+            <p className={`section-lead ${styles.lead}`}>
               Only the Sui contracts are the source of truth. All other components can be swapped,
               self-hosted, or run by anyone.
             </p>

@@ -4,12 +4,10 @@ const STYLE_ID = 'morse-infra-styles'
 
 const css = `
 .morse-infra {
-  background: #05070f;
-  padding: 100px 28px;
   width: 100%;
 }
 .morse-infra__inner {
-  max-width: 1120px;
+  max-width: var(--container-max);
   margin: 0 auto;
 }
 
@@ -222,7 +220,7 @@ export default function InfraSection() {
   useEffect(() => { injectStyles() }, [])
 
   return (
-    <section className="morse-infra">
+    <section className="morse-infra section-pad section-secondary">
       <div className="morse-infra__inner">
         <div className="morse-infra__eyebrow">The infrastructure layer</div>
 

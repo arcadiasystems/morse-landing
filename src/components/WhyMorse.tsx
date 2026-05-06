@@ -20,14 +20,14 @@ const cards = [
 
 export function WhyMorse() {
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
-        <p className={styles.label}>Why Morse</p>
-        <h2 className={styles.h2}>Traditional CMSs trade your future for convenience today</h2>
+    <section className={`${styles.section} section-pad section-secondary`}>
+      <div className="container">
+        <p className="eyebrow">Why Morse</p>
+        <h2 className={`section-h2 ${styles.h2}`}>Traditional CMSs trade your future for convenience today</h2>
 
         <div className={styles.grid}>
           {cards.map((c) => (
-            <div key={c.num} className={styles.card}>
+            <div key={c.num} className={`card ${styles.cardLayout}`}>
               <div className={styles.num}>{c.num}</div>
               <div className={styles.title}>{c.title}</div>
               <div className={styles.text}>{c.text}</div>

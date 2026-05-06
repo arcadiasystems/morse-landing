@@ -5,9 +5,9 @@ const DOCS = 'https://morse-docs.vercel.app'
 
 export function CTA() {
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} section-primary`}>
       <div className={styles.container}>
-        <p className={styles.label}>Get started today</p>
+        <p className="eyebrow">Get started today</p>
         <h2 className={styles.h2}>
           Your content,<br />your <span className={styles.accent}>contracts</span>
         </h2>

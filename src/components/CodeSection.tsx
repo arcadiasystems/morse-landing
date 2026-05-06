@@ -32,13 +32,13 @@ await pub.publish({
 
 export function CodeSection() {
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
+    <section className={`${styles.section} section-pad section-primary`}>
+      <div className="container">
         <div className={styles.layout}>
           <div className={styles.text}>
-            <p className={styles.label}>Developer Experience</p>
-            <h2 className={styles.h2}>Agent-first by design</h2>
-            <p className={styles.lead}>
+            <p className="eyebrow">Developer Experience</p>
+            <h2 className="section-h2">Agent-first by design</h2>
+            <p className={`section-lead ${styles.lead}`}>
               A coding agent can define content structures, provision publications, publish entries,
               and operate the entire backend via CLI or SDK without waiting for centralized provisioning.
             </p>

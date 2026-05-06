@@ -24,12 +24,12 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
+    <section className={`${styles.section} section-pad`}>
+      <div className="container">
         <div className={styles.header}>
-          <p className={styles.label}>How it works</p>
-          <h2 className={styles.h2}>Three layers, zero vendor lock-in</h2>
-          <p className={styles.lead}>
+          <p className="eyebrow">How it works</p>
+          <h2 className="section-h2">Three layers, zero vendor lock-in</h2>
+          <p className="section-lead">
             Governance lives on Sui. Content payloads live on Walrus. Reads are served by indexers
             anyone can run. Each layer is independently replaceable.
           </p>
