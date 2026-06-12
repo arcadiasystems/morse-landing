@@ -1,6 +1,7 @@
 import { Cta } from '../ui/Button'
 import { Reveal } from '../ui/Reveal'
 import { Terminal } from '../ui/Terminal'
+import { FramePlate } from '../ui/FramePlate'
 import { DOCS } from '../lib/links'
 import styles from './AgentConsole.module.css'
 
@@ -63,14 +64,17 @@ export function AgentConsole() {
             </div>
           </Reveal>
 
-          <Reveal delay={120} className={styles.consoleCol}>
-            <Terminal
-              filename="morse@testnet"
-              tabs={[
-                { label: 'TYPESCRIPT', code: TS_SNIPPET },
-                { label: 'CLI', code: CLI_SNIPPET },
-              ]}
-            />
+          <Reveal variant="scale" delay={120} className={styles.consoleCol}>
+            <FramePlate caption="@morse/sdk — typescript + cli" tint="signal">
+              <Terminal
+                bare
+                filename="morse@testnet"
+                tabs={[
+                  { label: 'TYPESCRIPT', code: TS_SNIPPET },
+                  { label: 'CLI', code: CLI_SNIPPET },
+                ]}
+              />
+            </FramePlate>
           </Reveal>
         </div>
       </div>

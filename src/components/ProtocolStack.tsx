@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Reveal } from '../ui/Reveal'
 import { MorseGlyphs } from '../ui/MorseGlyphs'
 import styles from './ProtocolStack.module.css'
@@ -78,7 +79,8 @@ export function ProtocolStack() {
   return (
     <section
       id="architecture"
-      className="section-pad hairline-top"
+      className="section-pad hairline-top glow-field"
+      style={{ '--glow-x': '82%', '--glow-y': '24%' } as CSSProperties}
       aria-labelledby="protocol-stack-title"
     >
       <div className="container">
@@ -107,7 +109,7 @@ export function ProtocolStack() {
             </ul>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal delay={120} className={styles.stackWrap}>
             <div className={styles.stack}>
               <span className={styles.connector} aria-hidden="true" />
               <ul className={styles.layers}>

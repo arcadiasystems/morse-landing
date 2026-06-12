@@ -19,6 +19,8 @@
   font-size: 48px;
   line-height: 1;
   color: var(--signal);
+  /* Static glow — lit numerals, never animated. */
+  text-shadow: 0 0 32px var(--signal-glow);
 }
 
 .title {

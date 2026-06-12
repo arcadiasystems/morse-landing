@@ -10,6 +10,8 @@ interface TerminalProps {
   tabs: TerminalTab[]
   /** Mono filename tag shown in the chrome bar, e.g. 'publish.ts'. */
   filename?: string
+  /** Drop the outer border — for use inside a FramePlate, which owns it. */
+  bare?: boolean
 }
 
 // Single pass: comments | strings | keywords. One combined regex so later
@@ -33,7 +35,7 @@ function highlight(code: string): string {
  * Flat brutalist code plate: square corners, hairline border, mono tabs.
  * Syntax accents stay inside the single-accent system (amber + paper tints).
  */
-export function Terminal({ tabs, filename }: TerminalProps) {
+export function Terminal({ tabs, filename, bare = false }: TerminalProps) {
   const [active, setActive] = useState(0)
   const baseId = useId()
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -53,7 +55,7 @@ export function Terminal({ tabs, filename }: TerminalProps) {
   }
 
   return (
-    <div className={styles.terminal}>
+    <div className={bare ? `${styles.terminal} ${styles.bare}` : styles.terminal}>
       <div className={styles.chrome}>
         <div
           className={styles.tabs}

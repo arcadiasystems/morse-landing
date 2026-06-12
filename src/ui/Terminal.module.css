@@ -60,3 +60,8 @@
 .pre :global(.tk-keyword) { color: var(--signal); }
 .pre :global(.tk-string)  { color: var(--paper); }
 .pre :global(.tk-comment) { color: var(--paper-mid); font-style: italic; }
+
+/* Inside a FramePlate the frame owns the border. */
+.bare {
+  border: none;
+}
