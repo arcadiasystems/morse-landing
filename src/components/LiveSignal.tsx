@@ -11,7 +11,7 @@ import styles from './LiveSignal.module.css'
 export function LiveSignal() {
   return (
     <section
-      className={`section-pad glow-field ${styles.section}`}
+      className={`section-pad hairline-top glow-field ${styles.section}`}
       style={{ '--glow-y': '100%', '--glow-h': '50%' } as CSSProperties}
       aria-labelledby="live-signal-title"
     >
