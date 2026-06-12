@@ -305,3 +305,77 @@ npx tsc --noEmit --ignoreConfig --strict --jsx react-jsx --module esnext --modul
 
 Zero errors required. Do NOT run `npm run build` (other agents' files are in
 flight). Do not edit any file outside your assigned set.
+
+## Appendix — Signal Brutalist v2 elevation (depth, lighting, choreography)
+
+Binding addendum. Where this conflicts with sections above, v2 wins.
+brand.md "Depth & lighting (v2)" defines the vocabulary; this appendix defines
+the build.
+
+### New primitives
+
+| Primitive | Path | Contract |
+|---|---|---|
+| `Stagger` | `src/ui/Stagger.tsx` | Wraps each child in `<Reveal delay={from + i*step} variant>`. Props: `step` (default 80), `from` (0), `variant`. Replaces manual `delay={i*80}` math. |
+| `FramePlate` | `src/ui/FramePlate.tsx` | Gradient-washed framed plate: `--r-plate`, `.border-glow`, `--ink-raised`, `--shadow-plate`, bottom-half wash. Props: `caption?` (mono 12px hairline-top row), `tint?: 'signal' \| 'verified' \| 'paper'` (default signal). |
+| `TransmissionRing` | `src/components/TransmissionRing.tsx` | Hero centerpiece. See § Transmission Ring. |
+| `LiveSignal` | `src/components/LiveSignal.tsx` | Section framing `LivingDiff` in a `FramePlate`. Eyebrow `ON AIR`. |
+
+### Extended Reveal API (`src/ui/Reveal.tsx`)
+
+`variant: 'rise' | 'fade' | 'scale' | 'slide' | 'mask' | 'draw'` (default
+`rise` = v1 behavior, all existing call sites unchanged). Plus `duration`
+(600), `distance` (24), `threshold` (0.15), `as` (div). Variants are CSS-only
+via `data-variant`; reduced-motion renders final state instantly.
+`mask` (clip-path) is one-time, headlines/slabs only. `draw` is for lines
+(scaleX/scaleY from origin); gate infinite dash loops behind the parent's
+`.reveal-in` so they start after the draw completes.
+
+### Per-section choreography & lighting map
+
+| Section | Glow field | Entrance |
+|---|---|---|
+| SignalHero | `--glow-x: 72%; --glow-y: 30%` | decode (existing); ring `scale` 150ms; chips pop 120ms after decode done |
+| SignalTicker | none (amber slab) | `mask` wipe, one-time |
+| Transmission | `--glow-x: 18%` | path `draw` → dash loop; cells `Stagger step=80` |
+| LiveSignal | bottom-center lamp | plate `scale` |
+| CapabilitiesBento | none (cell washes instead) | cells `Stagger step=60 variant=scale` |
+| InfraShift | none (MORSE column is the light) | columns `Stagger step=100 variant=slide`; MORSE rows cascade 30ms |
+| ProtocolStack | right side | rows `Stagger step=80 variant=slide`; connector `draw` → dash loop |
+| AgentConsole | none | copy `rise`; frame `scale` 120ms |
+| FailureModes | none | `Stagger step=80` |
+| FinalTransmission | aurora (3-layer, bottom) | headline per-line `mask` 120ms apart; CTAs 300ms; chip 420ms |
+
+### Transmission Ring (hero right column)
+
+≈560×560, `aspect-ratio: 1` (zero CLS), `aria-hidden` + preceding `sr-only`
+description. One SVG: three concentric arcs r≈150/210/270, hairline stroke,
+`stroke-dasharray` derived from `toMorse('MORSE')` (dot→4px, dash→14px) — the
+arcs spell MORSE; outer arc 270° sweep. Two travelling amber dots via
+`offset-path`/`offset-distance` keyframes (14s/22s, opposite), inside
+`@supports`; fallback static lit dots; `will-change: transform` on these only.
+Center beacon: 96px `--r-plate` plate, `.border-glow`, morse "M" glyphs +
+MORSE Unbounded 700; pulse = gradient-halo element, opacity .5→1 +
+scale .96→1.04, 4s alternate. Orbit chips `SUI`/`WALRUS`/`SEAL` at fixed
+angles: 40px inline-SVG icon tile + mono label, `--glass`, `--r-chip`,
+`.border-glow-soft`, `--shadow-plate`; float ±4px 7s alternate phase-staggered.
+Horizon dome below: 1px SVG ellipse arc + `--signal-wash` radial field.
+Three static 1px vertical light streaks. <1024px: ring stacks under copy
+(max 420px). <640px: chips become a static flex row, travellers off.
+
+### Performance guardrails (binding)
+
+- All glow = gradient paint. `filter: blur()` banned. `backdrop-filter`
+  budget: 1 (SiteNav).
+- Infinite loops: transform/opacity only. `will-change` only on persistently
+  animating nodes. Ring + LivingDiff pause off-viewport via IO.
+- ≤ 6 concurrent infinite animations in hero viewport, ≤ 2 elsewhere.
+- Animated shadows banned. `clip-path` reveals one-time only.
+- Layout stability: ring reserves space via `aspect-ratio`; CLS = 0.
+- Budget gate: 4×-CPU-throttled scroll ≥ 55fps median; ≤ 14 composited layers.
+
+### Reduced-motion fallback table
+
+Ring travellers/float/pulse → static lit final state. Arc/chip entrances →
+rendered complete. Reveal variants → existing static pattern. Aurora → static
+gradient field. Draw-gated loops → line fully drawn, no dash flow.

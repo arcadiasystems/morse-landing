@@ -24,6 +24,25 @@
   --hairline:        rgba(242, 242, 239, 0.10);
   --hairline-strong: rgba(242, 242, 239, 0.18);
 
+  /* ─── Depth & lighting (Signal Brutalist v2, see brand.md) ── */
+  --signal-faint:   rgba(255, 176, 0, 0.07);
+  --signal-wash:    rgba(255, 176, 0, 0.14);
+  --verified-faint: rgba(74, 222, 128, 0.07);
+  --paper-wash:     rgba(242, 242, 239, 0.05);
+  /* Fake glass — rgba surface + gradient border, never backdrop-filter. */
+  --glass:          rgba(18, 18, 16, 0.66);
+
+  --border-glow: linear-gradient(180deg,
+      rgba(255, 176, 0, 0.40),
+      rgba(242, 242, 239, 0.10) 45%,
+      rgba(242, 242, 239, 0.04));
+  --border-glow-soft: linear-gradient(180deg,
+      rgba(242, 242, 239, 0.18),
+      rgba(242, 242, 239, 0.04));
+
+  --shadow-plate: 0 24px 48px -24px rgba(0, 0, 0, 0.65);
+  --shadow-glow:  0 0 48px -8px var(--signal-glow);
+
   /* ─── Typography ────────────────────────────── */
   --font-display: 'Unbounded', system-ui, sans-serif;
   --font-body:    'Space Grotesk', system-ui, sans-serif;
@@ -35,11 +54,14 @@
   --section-pad:   clamp(96px, 12vw, 160px);
   --nav-offset:    92px; /* banner 28px + nav bar 64px (SiteNav is fixed) */
 
-  /* ─── Radii — brutalist: square plates, pill CTAs ── */
-  --r-pill: 999px;
+  /* ─── Radii — brutalist: square grids, soft framed plates, pill CTAs ── */
+  --r-pill:  999px;
+  --r-plate: 12px; /* framed plates only — grids/ledgers stay square */
+  --r-chip:  8px;
 
   /* ─── Motion ────────────────────────────────── */
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1); /* scale-in settles */
   --t-micro:  120ms; /* text/color hover feedback */
   --t-state:  150ms; /* surface/background state shifts */
 }
@@ -87,6 +109,37 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hairline-top { border-top: 1px solid var(--hairline); }
+
+/* ── Glow field — one static radial light source per section ──
+   Pure gradient paint, zero runtime cost. Position the lamp per section:
+   <section class="glow-field" style="--glow-x: 20%">. Section content must
+   sit in its own stacking context (position: relative) to paint above it. */
+.glow-field { position: relative; }
+.glow-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse var(--glow-w, 64%) var(--glow-h, 42%) at var(--glow-x, 50%) var(--glow-y, 0%),
+    var(--glow-color, var(--signal-faint)),
+    transparent 70%);
+}
+
+/* ── Gradient hairline border (radius-safe two-layer trick) ── */
+.border-glow,
+.border-glow-soft {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--plate-bg, var(--ink-raised)), var(--plate-bg, var(--ink-raised))) padding-box,
+    var(--border-glow) border-box;
+}
+.border-glow-soft {
+  background:
+    linear-gradient(var(--plate-bg, var(--ink-raised)), var(--plate-bg, var(--ink-raised))) padding-box,
+    var(--border-glow-soft) border-box;
+}
 
 /* ── Skip link (first element in App) ──────────── */
 .skip-link {
