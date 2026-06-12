@@ -1,0 +1,163 @@
+.slab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 96px;
+  padding: 26px 0;
+  background: var(--signal);
+  color: var(--ink);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  overflow: hidden;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  /* var(--ink) here only supplies the opaque alpha stops of the mask. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    var(--ink) 8%,
+    var(--ink) 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    var(--ink) 8%,
+    var(--ink) 92%,
+    transparent
+  );
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 4vw, 56px);
+  padding-right: clamp(28px, 4vw, 56px);
+  white-space: nowrap;
+}
+
+.label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 2.6vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+/* ── Chunky ink overrides on the shared glyph renderer ── */
+
+.morse:global(.morse-glyphs) {
+  gap: 6px;
+}
+
+.morse:global(.morse-glyphs) :global(.dot) {
+  width: 7px;
+  height: 7px;
+}
+
+.morse:global(.morse-glyphs) :global(.dash) {
+  width: 22px;
+  height: 7px;
+}
+
+.morse:global(.morse-glyphs) :global(.gap) {
+  width: 8px;
+}
+
+/* ── Pause control — ink-on-amber, square, 40px hit area ── */
+
+.pauseButton {
+  position: absolute;
+  top: 50%;
+  right: var(--gutter);
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--signal);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition:
+    background-color var(--t-state) var(--ease-out),
+    color var(--t-state) var(--ease-out);
+}
+
+.pauseButton:hover {
+  background: var(--ink);
+  color: var(--signal);
+}
+
+/* The global amber ring is invisible on the amber slab — ink ring here. */
+.pauseButton:focus-visible {
+  outline-color: var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation: ticker-scroll 30s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee:hover .track,
+  .marquee:focus-within .track {
+    animation-play-state: paused;
+  }
+
+  .track.trackPaused {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding: 0 var(--gutter);
+  }
+
+  .track {
+    width: 100%;
+  }
+
+  .row {
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  .row[aria-hidden='true'] {
+    display: none;
+  }
+
+  .pauseButton {
+    display: none;
+  }
+}

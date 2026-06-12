@@ -1,166 +1,219 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* ─── Brand accents ─────────────────────────── */
-  --accent:        #444CE7;
-  --accent-bright: #6366f1;
-  --accent-dim:    #3730a3;
-  --accent-bg:     rgba(68, 76, 231, 0.07);
-  --accent-border: rgba(68, 76, 231, 0.25);
-  --accent-glow:   0 0 40px rgba(68, 76, 231, 0.18);
+  /* ─── Signal Brutalist tokens (see brand.md) ── */
+  --ink:         #0A0A0A;
+  --ink-raised:  #121210;
+  --ink-plate:   #141412;
 
-  --highlight:      #dbff4b;
-  --highlight-text: #000;
+  --paper:       #F2F2EF;
+  --paper-dim:   #9A9A90;
+  /* De-emphasis that still passes AA (5.3:1 on ink) — for secondary content. */
+  --paper-mid:   #84847C;
+  /* Decoration only: ghost numerals, struck rows, aria-hidden texture. Fails AA. */
+  --paper-faint: #55554E;
 
-  /* ─── Background hierarchy ──────────────────── */
-  --bg-primary:     #05070f;     /* main dark — majority of sections     */
-  --bg-secondary:   #080b18;     /* slightly blue-dark — alternating     */
-  --bg-card:        #0c0f1e;     /* card backgrounds                     */
-  --bg-card-hover:  #0f1328;     /* card hover                           */
+  --signal:        #FFB000;
+  --signal-bright: #FFC23D;
+  --signal-glow:   rgba(255, 176, 0, 0.25);
+  --signal-dim:    rgba(255, 176, 0, 0.45);
+  --verified:      #4ADE80;
 
-  --bg:             var(--bg-primary);   /* legacy alias */
-  --bg-surface:     #0a0d1a;             /* legacy — used by older modules */
-  --bg-surface-2:   #080b16;             /* legacy */
-  --bg-header:      rgba(5, 7, 15, 0.88);
+  --ink-veil: rgba(10, 10, 10, 0.92);
 
-  --section-border: rgba(255, 255, 255, 0.06);
-
-  /* ─── Spacing system ────────────────────────── */
-  --section-pad-y:  100px;
-  --section-pad-x:  28px;
-  --container-max:  1120px;
-
-  /* ─── Text ──────────────────────────────────── */
-  --text:          #a8b8d0;
-  --text-bright:   #f0f2f8;
-  --text-muted:    #6b7fa3;
-  --text-subtle:   #2a3550;
-
-  /* ─── Borders ───────────────────────────────── */
-  --border:        rgba(255, 255, 255, 0.07);
-  --border-accent: rgba(68, 76, 231, 0.22);
-
-  /* ─── Blob colors ───────────────────────────── */
-  --blob-pink:   #FF6BFF;
-  --blob-yellow: #dbff4b;
-  --blob-green:  #34D399;
+  --hairline:        rgba(242, 242, 239, 0.10);
+  --hairline-strong: rgba(242, 242, 239, 0.18);
 
   /* ─── Typography ────────────────────────────── */
-  --font:  'Inter', system-ui, sans-serif;
-  --mono:  'Noto Sans Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular,
-           Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-body:    'Space Grotesk', system-ui, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* ─── Radii ─────────────────────────────────── */
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 16px;
-  --r-xl: 24px;
+  /* ─── Layout ────────────────────────────────── */
+  --container-max: 1280px;
+  --gutter:        clamp(20px, 4vw, 40px);
+  --section-pad:   clamp(96px, 12vw, 160px);
+  --nav-offset:    92px; /* banner 28px + nav bar 64px (SiteNav is fixed) */
 
-  --ease: 0.15s ease;
+  /* ─── Radii — brutalist: square plates, pill CTAs ── */
+  --r-pill: 999px;
+
+  /* ─── Motion ────────────────────────────────── */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --t-micro:  120ms; /* text/color hover feedback */
+  --t-state:  150ms; /* surface/background state shifts */
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
-  font-family: var(--font);
-  background: var(--bg-primary);
-  color: var(--text);
+  font-family: var(--font-body);
+  background: var(--ink);
+  color: var(--paper);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-#root {
-  width: 100%;
-  text-align: left;
-}
+#root { width: 100%; text-align: left; }
 
 a { color: inherit; text-decoration: none; }
 
-/* ════════════════════════════════════════════════════════════
-   GLOBAL UTILITIES — foundation for every section
-   ════════════════════════════════════════════════════════════ */
+::selection { background: var(--signal); color: var(--ink); }
 
-/* ── Section backgrounds (alternating) ─────────────────────── */
-.section-primary   { background: var(--bg-primary); }
-.section-secondary { background: var(--bg-secondary); }
+/* Amber focus ring on every interactive element — never remove. */
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
 
-.section-border-top    { border-top:    1px solid var(--section-border); }
-.section-border-bottom { border-bottom: 1px solid var(--section-border); }
+/* ════════════════════════════════════════════════
+   GLOBAL UTILITIES
+   ════════════════════════════════════════════════ */
 
-/* ── Layout primitives ─────────────────────────────────────── */
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--section-pad-x);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
 }
 
 .section-pad {
-  padding: var(--section-pad-y) var(--section-pad-x);
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
 }
 
-/* ── Dot grid (reusable overlay) ───────────────────────────── */
-.dot-grid {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
+.hairline-top { border-top: 1px solid var(--hairline); }
 
-.dot-grid-fade {
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
-  mask-image:         radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
-}
-
-/* ── Eyebrow / label ───────────────────────────────────────── */
-.eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 600;
+/* ── Skip link (first element in App) ──────────── */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 3000;
+  background: var(--signal);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #dbff4b;
-  margin-bottom: 14px;
-  display: block;
+  padding: 10px 16px;
+  transform: translateY(calc(-100% - 16px));
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
+/* ── Bordered mono stamp (LIVE / NOW / ON-CHAIN…) ─ */
+.mono-stamp {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
 }
 
-/* ── Section heading ───────────────────────────────────────── */
-.section-h2 {
-  font-size: clamp(28px, 4vw, 44px);
+/* ── Eyebrow — mono, amber, telegraphic ────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 700;
-  color: #f0f2f8;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 20px;
+}
+.eyebrow::before {
+  /* Alt-text syntax marks the telegraph glyphs decorative for screen readers. */
+  content: '· — ·' / '';
+  letter-spacing: 0.05em;
+  color: var(--signal-dim);
+}
+
+/* ── Display headings ──────────────────────────── */
+.display-h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(30px, 4.6vw, 56px);
+  line-height: 1.02;
   letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin-bottom: 16px;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 20px;
 }
 
 .section-lead {
   font-size: 17px;
-  color: rgba(200, 215, 235, 0.55);
+  color: var(--paper-dim);
   line-height: 1.65;
+  max-width: 56ch;
 }
 
-/* ── Card ──────────────────────────────────────────────────── */
-.card {
-  position: relative;
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.card:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(68, 76, 231, 0.25);
-}
-
-.card:hover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at 50% 0, rgba(68, 76, 231, 0.07), transparent 60%);
+/* ── Film grain overlay (mount once in App) ────── */
+.grain {
+  position: fixed;
+  inset: -100%;
+  width: 300%;
+  height: 300%;
   pointer-events: none;
+  z-index: 2000;
+  opacity: 0.07;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+@media (prefers-reduced-motion: no-preference) {
+  .grain { animation: grain-shift 1.2s steps(4) infinite; }
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-1.2%, 0.8%); }
+  50%  { transform: translate(0.9%, -1.1%); }
+  75%  { transform: translate(-0.7%, -0.6%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── Reveal (used by src/ui/Reveal.tsx) ────────── */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 600ms var(--ease-out),
+      transform 600ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Morse glyph rendering (dots & dashes) ─────── */
+.morse-glyphs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.morse-glyphs .dot,
+.morse-glyphs .dash {
+  display: inline-block;
+  height: 3px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.morse-glyphs .dot  { width: 3px; border-radius: 50%; }
+.morse-glyphs .dash { width: 10px; }
+.morse-glyphs .gap  { display: inline-block; width: 6px; height: 1px; }

@@ -1,0 +1,320 @@
+/* SiteNav — fixed two-layer header: amber banner strip + blurred nav bar. */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+/* ── Banner strip (28px, amber slab) ───────────── */
+
+.banner {
+  position: relative;
+  z-index: 2;
+  height: 28px;
+  background: var(--signal);
+  color: var(--ink);
+}
+
+.bannerInner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bannerMsg {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bannerLinks {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.bannerLink {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+
+.bannerLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 639.98px) {
+  .bannerLinks {
+    display: none;
+  }
+}
+
+/* ── Nav bar (64px, blurred ink) ───────────────── */
+
+.bar {
+  position: relative;
+  z-index: 2;
+  height: 64px;
+  background: var(--ink-veil);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.barInner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Logo — bordered plate: wordmark over its real morse encoding. */
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  border: 1px solid var(--paper);
+  padding: 7px 10px;
+  color: var(--paper);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.logoCode {
+  gap: 2px;
+  color: var(--signal);
+}
+
+.logoCode :global(.dash) {
+  width: 6px;
+}
+
+.logoCode :global(.gap) {
+  width: 4px;
+}
+
+/* Center-left links — mono, brackets flash amber on hover. */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 12px;
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  transition: color var(--t-micro) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--paper);
+}
+
+.link::before,
+.link::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--signal);
+  opacity: 0;
+  transition: opacity var(--t-micro) var(--ease-out);
+}
+
+.link::before {
+  content: '[' / '';
+  left: 2px;
+}
+
+.link::after {
+  content: ']' / '';
+  right: 2px;
+}
+
+.link:hover::before,
+.link:hover::after,
+.link:focus-visible::before,
+.link:focus-visible::after {
+  opacity: 1;
+}
+
+/* Right cluster — GitHub icon + primary CTA. */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--paper-dim);
+  transition: color var(--t-micro) var(--ease-out);
+}
+
+.github:hover {
+  color: var(--paper);
+}
+
+/* Hamburger — 3 bars morph to an X (press micro-feedback). */
+.burger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--hairline);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.burgerBar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition:
+    transform 150ms var(--ease-out),
+    opacity 150ms var(--ease-out);
+}
+
+.burgerOpen .burgerBar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burgerOpen .burgerBar:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerOpen .burgerBar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile overlay menu (<900px) ──────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 132px var(--gutter) 48px;
+  background: var(--ink);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlayOpen {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+}
+
+.menuLink {
+  display: inline-block;
+  padding: 8px 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--paper);
+  transition: color var(--t-micro) var(--ease-out);
+}
+
+.menuLink:hover {
+  color: var(--signal);
+}
+
+.menuFoot {
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .overlay {
+    transition:
+      opacity 150ms var(--ease-out),
+      visibility 0s 150ms;
+  }
+
+  .overlayOpen {
+    transition:
+      opacity 150ms var(--ease-out),
+      visibility 0s;
+  }
+
+  .menuItem {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  .overlayOpen .menuItem {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 300ms var(--ease-out),
+      transform 300ms var(--ease-out);
+    transition-delay: var(--stagger, 0ms);
+  }
+}
+
+@media (max-width: 899.98px) {
+  .links,
+  .actions {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 900px) {
+  .overlay {
+    display: none;
+  }
+}

@@ -1,0 +1,106 @@
+/* ── Ledger table — three flat hairline columns ── */
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 48px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 28px 32px;
+  border: 1px solid var(--hairline);
+  border-right: none;
+}
+
+/* The MORSE column is the only surface allowed --signal-glow. */
+.morse {
+  border: 1px solid var(--signal);
+  box-shadow: 0 0 32px var(--signal-glow);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.colTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--paper-mid);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Amber color for the global .mono-stamp on the MORSE column. */
+.tagStamp {
+  color: var(--signal);
+}
+
+.rows {
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.glyph {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.legacy .row {
+  color: var(--paper-mid);
+}
+
+.vercel .row {
+  color: var(--paper-dim);
+}
+
+.morse .row {
+  color: var(--paper);
+}
+
+.morse .glyph {
+  color: var(--signal);
+}
+
+/* ── Stacked blocks ≤900px, MORSE first ── */
+@media (max-width: 900px) {
+  .ledger {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .column {
+    border: 1px solid var(--hairline);
+    padding: 24px 20px 28px;
+  }
+
+  .morse {
+    order: -1;
+    border-color: var(--signal);
+  }
+}

@@ -1,0 +1,166 @@
+.grid {
+  display: grid;
+  gap: 56px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(56px, 7vw, 96px);
+    align-items: start;
+  }
+}
+
+/* ── Left: replaceable-layer points ─────────────── */
+
+.points {
+  list-style: none;
+  margin-top: 36px;
+  display: grid;
+  gap: 22px;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.bullet {
+  color: var(--signal);
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+
+.pointText {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--paper-dim);
+}
+
+.pointText strong {
+  color: var(--paper);
+  font-weight: 700;
+}
+
+/* ── Right: the layer stack ─────────────────────── */
+
+.stack {
+  position: relative;
+  padding-left: 28px;
+}
+
+/* Thin amber connector running through the rows, dashed signal flow.
+   The dash pattern lives on an oversized ::before translated by one
+   14px pattern period — compositor-only animation, no repaints. */
+.connector {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  overflow: hidden;
+}
+
+.connector::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -100%;
+  width: 100%;
+  height: 200%;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--signal) 0,
+    var(--signal) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+}
+
+.layers {
+  list-style: none;
+  border-top: 1px solid var(--hairline);
+}
+
+.layer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.layerInfo {
+  min-width: 0;
+}
+
+.layerName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.layerDesc {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--paper-dim);
+}
+
+/* ── Status stamps — color classes on the global .mono-stamp ── */
+
+.stampLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--signal);
+}
+
+.stampProgress {
+  color: var(--paper-dim);
+}
+
+.stampPlanned {
+  color: var(--paper-mid);
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .connector::before {
+    animation: dash-flow 1.5s linear infinite;
+  }
+
+  .liveDot {
+    animation: live-pulse 1.8s var(--ease-out) infinite;
+  }
+}
+
+/* One 14px pattern period per cycle — seamless loop. */
+@keyframes dash-flow {
+  to {
+    transform: translateY(14px);
+  }
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}

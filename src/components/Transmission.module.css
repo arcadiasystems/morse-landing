@@ -1,0 +1,138 @@
+/* ── Signal path — hairline, 4 amber nodes, travelling dash ── */
+
+.path {
+  position: relative;
+  height: 32px;
+  margin: clamp(48px, 7vw, 72px) 0 20px;
+  overflow: hidden;
+}
+
+.path::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.node {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.runner {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .runner {
+    display: block;
+    position: absolute;
+    inset: 0;
+    animation: path-travel 6s linear infinite;
+    will-change: transform;
+  }
+
+  .runner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -72px;
+    width: 72px;
+    height: 2px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, transparent, var(--signal));
+  }
+}
+
+@keyframes path-travel {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100% + 72px));
+  }
+}
+
+/* ── Step grid — gap-as-border, flat ink cells ── */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  list-style: none;
+}
+
+.cellSlot {
+  display: flex;
+  background: var(--ink);
+}
+
+.cell {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 56px 24px 28px;
+  background: var(--ink);
+}
+
+.numeral {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--signal);
+  opacity: 0.12;
+  pointer-events: none;
+  user-select: none;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 14px;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--paper-dim);
+  margin-bottom: 28px;
+}
+
+.tag {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--signal);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

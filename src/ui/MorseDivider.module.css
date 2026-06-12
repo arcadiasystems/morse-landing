@@ -1,0 +1,15 @@
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--signal-dim);
+  padding: 0 var(--gutter);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}

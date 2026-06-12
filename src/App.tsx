@@ -1,31 +1,38 @@
-import { Nav } from './components/Nav'
-import { Hero } from './components/Hero'
-import { LogoMarquee } from './components/LogoMarquee'
-import { HowItWorks } from './components/HowItWorks'
-import { Features } from './components/Features'
-import InfraSection from './components/InfraSection'
-import { Architecture } from './components/Architecture'
-import { CodeSection } from './components/CodeSection'
-import { WhyMorse } from './components/WhyMorse'
-import { CTA } from './components/CTA'
-import { Footer } from './components/Footer'
+import { SiteNav } from './components/SiteNav'
+import { SignalHero } from './components/SignalHero'
+import { SignalTicker } from './components/SignalTicker'
+import { Transmission } from './components/Transmission'
+import { CapabilitiesBento } from './components/CapabilitiesBento'
+import { InfraShift } from './components/InfraShift'
+import { ProtocolStack } from './components/ProtocolStack'
+import { AgentConsole } from './components/AgentConsole'
+import { FailureModes } from './components/FailureModes'
+import { FinalTransmission } from './components/FinalTransmission'
+import { SiteFooter } from './components/SiteFooter'
+import { MorseDivider } from './ui/MorseDivider'
 
 export default function App() {
   return (
     <>
-      <Nav />
-      <main style={{ paddingTop: '104px' }}>
-        <Hero />
-        <LogoMarquee />
-        <HowItWorks />
-        <Features />
-        <InfraSection />
-        <Architecture />
-        <CodeSection />
-        <WhyMorse />
-        <CTA />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <div className="grain" aria-hidden="true" />
+      <SiteNav />
+      <main id="main" style={{ paddingTop: 'var(--nav-offset)' }}>
+        <SignalHero />
+        <SignalTicker />
+        <Transmission />
+        <CapabilitiesBento />
+        <MorseDivider word="VERIFY" />
+        <InfraShift />
+        <ProtocolStack />
+        <AgentConsole />
+        <MorseDivider word="SIGNAL" />
+        <FailureModes />
+        <FinalTransmission />
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   )
 }

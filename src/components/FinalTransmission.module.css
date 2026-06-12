@@ -1,0 +1,128 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(120px, 16vw, 200px);
+  padding-bottom: clamp(120px, 16vw, 200px);
+  text-align: center;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.sub {
+  margin: 28px auto 0;
+  max-width: 44ch;
+  font-size: 18px;
+  color: var(--paper-dim);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+  min-height: 48px;
+  padding: 0 22px;
+  background: var(--ink-raised);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--paper);
+  cursor: pointer;
+  transition: border-color var(--t-state) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--signal);
+}
+
+.chip svg {
+  color: var(--paper-dim);
+  transition: color var(--t-micro) var(--ease-out);
+}
+
+.chip:hover svg {
+  color: var(--signal);
+}
+
+.prompt {
+  color: var(--signal);
+  font-weight: 700;
+}
+
+.chipLabel {
+  min-width: 18ch;
+  text-align: left;
+}
+
+.chipCopied {
+  color: var(--signal);
+  font-weight: 700;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.04;
+  pointer-events: none;
+  /* sit behind the display headline, not the subtitle line */
+  transform: translateY(-22%);
+}
+
+/* Bespoke giant sizing layered onto the shared .morse-glyphs structure. */
+.backdropGlyphs {
+  gap: clamp(6px, 1vw, 14px);
+}
+
+.backdropGlyphs :global(.dot),
+.backdropGlyphs :global(.dash) {
+  height: clamp(12px, 2.4vw, 30px);
+  background: var(--paper);
+}
+
+.backdropGlyphs :global(.dot) {
+  width: clamp(12px, 2.4vw, 30px);
+}
+
+.backdropGlyphs :global(.dash) {
+  width: clamp(36px, 7.2vw, 90px);
+}
+
+/* Letter gap: flex gap on both sides brings this to clamp(14px, 2.4vw, 36px). */
+.backdropGlyphs :global(.gap) {
+  width: clamp(2px, 0.4vw, 8px);
+}
