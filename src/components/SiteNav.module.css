@@ -67,8 +67,10 @@
   position: relative;
   z-index: 2;
   height: 64px;
-  /* The page's single sanctioned backdrop-filter (see brand.md). */
-  background: var(--glass);
+  /* The page's single sanctioned backdrop-filter (see brand.md).
+     Darker than --glass: the fixed bar passes over the amber ticker slab,
+     where a 0.66-alpha surface washes out the dim nav links. */
+  background: rgba(10, 10, 10, 0.82);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
