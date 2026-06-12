@@ -27,10 +27,6 @@
   width: 40px;
   height: 40px;
   border-radius: var(--r-chip);
-  border: 1px solid transparent;
-  background:
-    linear-gradient(var(--ink-raised), var(--ink-raised)) padding-box,
-    var(--border-glow-soft) border-box;
   color: var(--paper-dim);
   transition: color var(--t-micro) var(--ease-out);
 }
@@ -181,7 +177,7 @@
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1023px) {
   .top {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     padding-top: 64px;
@@ -198,7 +194,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

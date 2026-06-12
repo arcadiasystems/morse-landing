@@ -223,7 +223,7 @@ export function CapabilitiesBento() {
           {cells.map(({ chrome, body }, i) => (
             <Reveal key={chrome.slot} variant="scale" delay={i * 60} className={chrome.slot}>
               <article className={cellClass(chrome)}>
-                <span className={styles.iconTile} aria-hidden="true">
+                <span className={`${styles.iconTile} border-glow-soft`} aria-hidden="true">
                   {chrome.icon}
                 </span>
                 {body}

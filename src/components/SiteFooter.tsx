@@ -66,7 +66,7 @@ export function SiteFooter() {
             <div className={styles.social}>
               <a
                 href={GITHUB}
-                className={styles.socialTile}
+                className={`${styles.socialTile} border-glow-soft`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Morse on GitHub"
@@ -75,7 +75,7 @@ export function SiteFooter() {
               </a>
               <a
                 href={TWITTER}
-                className={styles.socialTile}
+                className={`${styles.socialTile} border-glow-soft`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Morse on X"
