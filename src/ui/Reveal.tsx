@@ -48,6 +48,9 @@ export function Reveal({
   useEffect(() => {
     const node = ref.current
     if (!node) return
+    // A clip-path'd element has zero visible area, so ratio thresholds can
+    // never be met for `mask` — observe its border box edge instead.
+    const effectiveThreshold = variant === 'mask' ? 0 : threshold
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -55,11 +58,11 @@ export function Reveal({
           io.disconnect()
         }
       },
-      { threshold },
+      { threshold: effectiveThreshold },
     )
     io.observe(node)
     return () => io.disconnect()
-  }, [threshold])
+  }, [threshold, variant])
 
   const style: CSSProperties = { '--reveal-delay': `${delay}ms` } as CSSProperties
   if (duration !== 600) (style as Record<string, string>)['--reveal-duration'] = `${duration}ms`

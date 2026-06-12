@@ -1,5 +1,42 @@
 .footer {
+  position: relative;
   background: var(--ink);
+}
+
+/* Gradient top hairline — soft, brightest at center. */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hairline-strong) 50%, transparent);
+}
+
+/* ── Social tiles ── */
+.social {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.socialTile {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-chip);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--ink-raised), var(--ink-raised)) padding-box,
+    var(--border-glow-soft) border-box;
+  color: var(--paper-dim);
+  transition: color var(--t-micro) var(--ease-out);
+}
+
+.socialTile:hover {
+  color: var(--signal);
 }
 
 .top {

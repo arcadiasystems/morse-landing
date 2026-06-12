@@ -61,19 +61,33 @@ export function FinalTransmission() {
       className={`${styles.section} hairline-top`}
       aria-labelledby="final-transmission-title"
     >
+      {/* Aurora — the second sanctioned ambient zone. Base field is static;
+          two layers drift slowly. Pure gradient paint, no blur. */}
+      <div className={styles.aurora} aria-hidden="true">
+        <span className={`${styles.auroraLayer} ${styles.driftA}`} />
+        <span className={`${styles.auroraLayer} ${styles.driftB}`} />
+        <span className={styles.horizon} />
+      </div>
       <MorseBackdrop />
       <div className={`container ${styles.inner}`}>
         <Reveal>
           <p className="eyebrow">Final transmission</p>
-          <h2 id="final-transmission-title" className={styles.title}>
+        </Reveal>
+        <h2 id="final-transmission-title" className={styles.title}>
+          <Reveal as="span" variant="mask" className={styles.titleLine}>
             Your content.
-            <br />
+          </Reveal>
+          <Reveal as="span" variant="mask" delay={120} className={styles.titleLine}>
             Your contracts.
-          </h2>
+          </Reveal>
+        </h2>
+        <Reveal delay={200}>
           <p className={styles.sub}>
             Deploy on Sui Testnet in minutes. No signup. No vendor. No lock-in.
           </p>
+        </Reveal>
 
+        <Reveal delay={300}>
           <div className={styles.ctas}>
             <Cta variant="solid" href={`${DOCS}/quick-start.html`}>
               Start building
@@ -82,7 +96,9 @@ export function FinalTransmission() {
               View on GitHub
             </Cta>
           </div>
+        </Reveal>
 
+        <Reveal delay={420}>
           <button
             type="button"
             className={styles.chip}

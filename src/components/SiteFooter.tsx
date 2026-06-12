@@ -1,6 +1,15 @@
 import { DOCS, GITHUB, TWITTER } from '../lib/links'
+import { GitHubIcon } from '../ui/GitHubIcon'
 import { MorseGlyphs } from '../ui/MorseGlyphs'
 import styles from './SiteFooter.module.css'
+
+function XIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z" />
+    </svg>
+  )
+}
 
 interface FooterLink {
   label: string
@@ -42,7 +51,7 @@ const COLUMNS: FooterColumn[] = [
 
 export function SiteFooter() {
   return (
-    <footer className={`${styles.footer} hairline-top`}>
+    <footer className={styles.footer}>
       <div className="container">
         <div className={styles.top}>
           <div className={styles.brand}>
@@ -54,6 +63,26 @@ export function SiteFooter() {
             <span title="FOREVER" aria-hidden="true">
               <MorseGlyphs word="FOREVER" className={styles.forever} />
             </span>
+            <div className={styles.social}>
+              <a
+                href={GITHUB}
+                className={styles.socialTile}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Morse on GitHub"
+              >
+                <GitHubIcon size={16} />
+              </a>
+              <a
+                href={TWITTER}
+                className={styles.socialTile}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Morse on X"
+              >
+                <XIcon />
+              </a>
+            </div>
           </div>
 
           <nav className={styles.columns} aria-label="Footer">

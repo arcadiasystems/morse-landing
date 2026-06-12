@@ -21,6 +21,60 @@
   color: var(--paper);
 }
 
+.titleLine {
+  display: block;
+}
+
+/* ── Aurora — amber light field rising from the horizon ── */
+.aurora {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 75%;
+  pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 112%, var(--signal-wash), transparent 60%);
+}
+
+.auroraLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.driftA {
+  background: radial-gradient(ellipse 42% 48% at 33% 116%, rgba(255, 194, 61, 0.10), transparent 60%);
+}
+
+.driftB {
+  background: radial-gradient(ellipse 52% 52% at 70% 114%, var(--signal-faint), transparent 65%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .driftA {
+    animation: aurora-drift 18s ease-in-out infinite alternate;
+  }
+  .driftB {
+    animation: aurora-drift 26s ease-in-out infinite alternate-reverse;
+  }
+}
+
+@keyframes aurora-drift {
+  from {
+    transform: translateX(-3%) scale(1);
+  }
+  to {
+    transform: translateX(3%) scale(1.06);
+  }
+}
+
+/* Lit horizon line where the aurora meets ink — bookends the hero dome. */
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--signal-dim) 50%, transparent);
+}
+
 .sub {
   margin: 28px auto 0;
   max-width: 44ch;
