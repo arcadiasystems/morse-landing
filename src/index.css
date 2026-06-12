@@ -27,6 +27,8 @@
   /* ─── Depth & lighting (Signal Brutalist v2, see brand.md) ── */
   --signal-faint:   rgba(255, 176, 0, 0.07);
   --signal-wash:    rgba(255, 176, 0, 0.14);
+  /* Warm aurora layer — --signal-bright at faint alpha (aurora only). */
+  --signal-bright-faint: rgba(255, 194, 61, 0.10);
   --verified-faint: rgba(74, 222, 128, 0.07);
   --paper-wash:     rgba(242, 242, 239, 0.05);
   /* Fake glass — rgba surface + gradient border, never backdrop-filter. */
@@ -139,6 +141,18 @@ a { color: inherit; text-decoration: none; }
   background:
     linear-gradient(var(--plate-bg, var(--ink-raised)), var(--plate-bg, var(--ink-raised))) padding-box,
     var(--border-glow-soft) border-box;
+}
+
+/* ── Screen-reader-only content ─────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ── Skip link (first element in App) ──────────── */

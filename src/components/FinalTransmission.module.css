@@ -40,7 +40,7 @@
 }
 
 .driftA {
-  background: radial-gradient(ellipse 42% 48% at 33% 116%, rgba(255, 194, 61, 0.10), transparent 60%);
+  background: radial-gradient(ellipse 42% 48% at 33% 116%, var(--signal-bright-faint), transparent 60%);
 }
 
 .driftB {
@@ -134,15 +134,6 @@
 .chipCopied {
   color: var(--signal);
   font-weight: 700;
-}
-
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  clip-path: inset(50%);
-  overflow: hidden;
-  white-space: nowrap;
 }
 
 .backdrop {
