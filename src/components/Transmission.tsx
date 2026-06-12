@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Reveal } from '../ui/Reveal'
 import styles from './Transmission.module.css'
 
@@ -44,8 +45,13 @@ const nodeLeft = (i: number) => `${(100 / STEPS.length) * (i + 0.5)}%`
  */
 export function Transmission() {
   return (
-    <section id="protocol" className="section-pad" aria-labelledby="protocol-title">
-      <div className="container">
+    <section
+      id="protocol"
+      className="section-pad glow-field"
+      style={{ '--glow-x': '18%' } as CSSProperties}
+      aria-labelledby="protocol-title"
+    >
+      <div className={`container ${styles.inner}`}>
         <Reveal>
           <p className="eyebrow">THE PROTOCOL</p>
           <h2 id="protocol-title" className="display-h2">
@@ -59,11 +65,19 @@ export function Transmission() {
           </p>
         </Reveal>
 
+        {/* Line draws in, nodes light up along it, then the dash loop starts. */}
         <div className={styles.path} aria-hidden="true">
-          {STEPS.map((step, i) => (
-            <span key={step.numeral} className={styles.node} style={{ left: nodeLeft(i) }} />
-          ))}
-          <span className={styles.runner} />
+          <Reveal variant="fade" duration={300} className={styles.pathInner}>
+            <span className={styles.line} />
+            {STEPS.map((step, i) => (
+              <span
+                key={step.numeral}
+                className={styles.node}
+                style={{ left: nodeLeft(i), transitionDelay: `${250 + i * 150}ms` }}
+              />
+            ))}
+            <span className={styles.runner} />
+          </Reveal>
         </div>
 
         <ol className={styles.grid}>

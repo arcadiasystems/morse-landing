@@ -1,4 +1,11 @@
-/* ── Signal path — hairline, 4 amber nodes, travelling dash ── */
+/* ── Signal path — hairline, 4 amber nodes, travelling dash ──
+   Choreography: the line draws left→right, nodes light up along it
+   (per-node transition-delay set inline), then the dash loop starts. */
+
+.inner {
+  position: relative; /* content above the section's glow field */
+  z-index: 1;
+}
 
 .path {
   position: relative;
@@ -7,8 +14,12 @@
   overflow: hidden;
 }
 
-.path::before {
-  content: '';
+.pathInner {
+  position: absolute;
+  inset: 0;
+}
+
+.line {
   position: absolute;
   top: 50%;
   left: 0;
@@ -32,12 +43,34 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .line {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 800ms var(--ease-out);
+  }
+  .pathInner:global(.reveal-in) .line {
+    transform: scaleX(1);
+  }
+
+  .node {
+    opacity: 0;
+    transition: opacity 250ms var(--ease-out);
+    /* transition-delay set inline per node */
+  }
+  .pathInner:global(.reveal-in) .node {
+    opacity: 1;
+  }
+
   .runner {
     display: block;
     position: absolute;
     inset: 0;
-    animation: path-travel 6s linear infinite;
     will-change: transform;
+  }
+  /* Dash loop is gated behind the draw-in. */
+  .pathInner:global(.reveal-in) .runner {
+    animation: path-travel 6s linear infinite;
+    animation-delay: 1s;
   }
 
   .runner::before {
@@ -84,6 +117,7 @@
   flex-direction: column;
   padding: 56px 24px 28px;
   background: var(--ink);
+  overflow: hidden; /* clips the numeral halo to the cell */
 }
 
 .numeral {
@@ -98,6 +132,18 @@
   opacity: 0.12;
   pointer-events: none;
   user-select: none;
+}
+
+/* Faint halo behind the ghost numeral — static gradient paint. */
+.cell::after {
+  content: '';
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--signal-faint), transparent 65%);
 }
 
 .title {

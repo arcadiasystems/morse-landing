@@ -74,10 +74,15 @@ export function InfraShift() {
           </p>
         </Reveal>
 
-        <Reveal delay={80}>
-          <div className={styles.ledger}>
-            {COLUMNS.map(col => (
-              <div key={col.era} className={`${styles.column} ${styles[col.era]}`}>
+        <div className={styles.ledger}>
+          {COLUMNS.map((col, i) => (
+            <Reveal
+              key={col.era}
+              variant="slide"
+              delay={i * 100}
+              className={`${styles.colSlot} ${col.era === 'morse' ? styles.morseSlot : ''}`}
+            >
+              <div className={`${styles.column} ${styles[col.era]}`}>
                 <header className={styles.head}>
                   <h3 className={styles.colTitle}>{col.title}</h3>
                   <span
@@ -99,9 +104,9 @@ export function InfraShift() {
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

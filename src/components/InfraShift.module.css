@@ -1,11 +1,16 @@
-/* ── Ledger table — three flat hairline columns ── */
+/* ── Ledger table — two flat hairline columns + one lit plate ── */
 .ledger {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 48px;
 }
 
+.colSlot {
+  display: flex;
+}
+
 .column {
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 28px 28px 32px;
@@ -13,10 +18,32 @@
   border-right: none;
 }
 
-/* The MORSE column is the only surface allowed --signal-glow. */
+/* The MORSE column is the raised, lit plate — the lighting contrast IS
+   the argument. LEGACY/VERCEL stay flat and dim. */
 .morse {
-  border: 1px solid var(--signal);
-  box-shadow: 0 0 32px var(--signal-glow);
+  border: 1px solid transparent;
+  border-radius: var(--r-plate);
+  background:
+    radial-gradient(ellipse 85% 50% at 50% 0%, var(--signal-faint), transparent 70%) padding-box,
+    linear-gradient(var(--ink-raised), var(--ink-raised)) padding-box,
+    var(--border-glow) border-box;
+  box-shadow: var(--shadow-glow), var(--shadow-plate);
+}
+
+/* MORSE rows cascade in once the column lands. */
+@media (prefers-reduced-motion: no-preference) {
+  .morse .row {
+    opacity: 0;
+    transition: opacity 300ms var(--ease-out);
+  }
+  .colSlot:global(.reveal-in) .morse .row {
+    opacity: 1;
+  }
+  .morse .row:nth-child(1) { transition-delay: 250ms; }
+  .morse .row:nth-child(2) { transition-delay: 280ms; }
+  .morse .row:nth-child(3) { transition-delay: 310ms; }
+  .morse .row:nth-child(4) { transition-delay: 340ms; }
+  .morse .row:nth-child(5) { transition-delay: 370ms; }
 }
 
 .head {
@@ -99,8 +126,11 @@
     padding: 24px 20px 28px;
   }
 
-  .morse {
+  .morseSlot {
     order: -1;
-    border-color: var(--signal);
+  }
+
+  .morse {
+    border-color: transparent; /* the gradient border layer owns it */
   }
 }
