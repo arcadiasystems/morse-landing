@@ -381,3 +381,20 @@ Three static 1px vertical light streaks. <1024px: ring stacks under copy
 Ring travellers/float/pulse → static lit final state. Arc/chip entrances →
 rendered complete. Reveal variants → existing static pattern. Aurora → static
 gradient field. Draw-gated loops → line fully drawn, no dash flow.
+
+### v2 clarifications (post design-review 2026-06-12)
+
+- **Nav surface:** the fixed bar uses `--ink-veil` + `backdrop-filter` (the
+  page's single blur). `--glass` is reserved for unblurred fake-glass chips.
+  A 0.66-alpha bar washes out nav links over the amber ticker slab.
+- **Glow shadow radii are per-element by design** (CTA 28px, traveller 12px,
+  LIVE stamp 24px, index text-shadow 32px, InfraShift plate `--shadow-glow`):
+  glow scales with the lit element's mass. Not a drift bug.
+- **Animation budget excludes the global `.grain` texture** — it is a
+  page-wide film layer (steps(4), transform-only) predating v2 and present in
+  every viewport; the ≤6-in-hero / ≤2-elsewhere caps apply to zone-local loops.
+- **PLANNED stamps use `--paper-mid`** (AA-passing), not the originally spec'd
+  `--paper-faint` (decoration-only, fails AA). Status text is real content.
+- **Breakpoint set:** 640 / 900 / 1023-1024 boundary (max-width: 1023px pairs
+  with min-width: 1024px). SignalHero's 520px headline-measure breakpoint is a
+  documented exception (Unbounded 900 width at small phones).

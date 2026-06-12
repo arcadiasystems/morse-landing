@@ -22,9 +22,15 @@ All variation comes from opacity and glow of ONE accent. Never introduce new hue
 | `--ink-plate` | `#141412` | Code plates. |
 | `--paper` | `#F2F2EF` | Primary text. Warm white. |
 | `--paper-dim` | `#9A9A90` | Secondary text (AA on ink). |
-| `--paper-faint` | `#55554E` | Tertiary/disabled text, ghost numerals. |
+| `--paper-mid` | `#84847C` | De-emphasis that still passes AA (status text, captions). |
+| `--paper-faint` | `#55554E` | Decoration only — ghost numerals, struck rows. Fails AA. |
+| `--hairline-strong` | `rgba(242,242,239,0.18)` | Emphasized rules (timeline base, gradient hairline peaks). |
+| `--ink-veil` | `rgba(10,10,10,0.92)` | Fixed-nav surface (the one blurred layer). |
 | `--signal` | `#FFB000` | THE accent. Radio-dial amber. CTAs, eyebrows, live states, carrier wave. |
+| `--signal-bright` | `#FFC23D` | Hover/lit amber (CTA hover, gradient hairline peaks). |
+| `--signal-dim` | `rgba(255,176,0,0.45)` | De-emphasized amber (eyebrow glyphs, idle wave, dome arc). |
 | `--signal-glow` | `rgba(255,176,0,0.25)` | Glow shadows only. |
+| `--signal-bright-faint` | `rgba(255,194,61,0.10)` | Warm aurora layer only. |
 | `--signal-wash` | `rgba(255,176,0,0.14)` | Glow fields, frame washes, aurora core. |
 | `--signal-faint` | `rgba(255,176,0,0.07)` | Faint glow fields, cell washes, icon tiles. |
 | `--verified` | `#4ADE80` | ONLY for on-chain verified/live status dots and hash strings. |
