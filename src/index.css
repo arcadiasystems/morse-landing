@@ -234,7 +234,10 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translate(0, 0); }
 }
 
-/* ── Reveal (used by src/ui/Reveal.tsx) ────────── */
+/* ── Reveal (used by src/ui/Reveal.tsx) ──────────
+   Variants via data-variant; reduced-motion users get the static block
+   below and never transition. `mask` is paint-cost: one-time
+   headline/slab wipes only. */
 .reveal {
   opacity: 1;
   transform: none;
@@ -242,15 +245,28 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
     transition:
-      opacity 600ms var(--ease-out),
-      transform 600ms var(--ease-out);
+      opacity var(--reveal-duration, 600ms) var(--ease-out),
+      transform var(--reveal-duration, 600ms) var(--ease-out);
     transition-delay: var(--reveal-delay, 0ms);
   }
+  .reveal[data-variant='rise']  { transform: translateY(var(--reveal-distance, 24px)); }
+  .reveal[data-variant='fade']  { transform: none; }
+  .reveal[data-variant='scale'] {
+    transform: translateY(12px) scale(0.97);
+    transition-timing-function: var(--ease-spring);
+  }
+  .reveal[data-variant='slide'] { transform: translateX(calc(-1 * var(--reveal-distance, 24px))); }
+  .reveal[data-variant='mask']  {
+    transform: none;
+    clip-path: inset(0 0 100% 0);
+    transition-property: clip-path, opacity;
+  }
+  .reveal[data-variant='draw']  { transform: scaleX(0); transform-origin: left; }
   .reveal.reveal-in {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    clip-path: inset(0);
   }
 }
 
