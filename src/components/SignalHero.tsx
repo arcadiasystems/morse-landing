@@ -57,7 +57,7 @@ export function SignalHero() {
           <p className="eyebrow">TRANSMISSION 001 — DECENTRALIZED CMS PROTOCOL</p>
 
           <h1 id="hero-title" className={styles.title}>
-            <span className={styles.srOnly}>Content, transmitted forever.</span>
+            <span className="sr-only">Content, transmitted forever.</span>
             <span aria-hidden="true">
               {HEADLINE.map((line, lineIndex) => {
                 const content = done

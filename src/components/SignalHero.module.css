@@ -23,17 +23,6 @@
   }
 }
 
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .title {
   font-family: var(--font-display);
   font-weight: 900;

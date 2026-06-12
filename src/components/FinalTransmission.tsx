@@ -112,7 +112,7 @@ export function FinalTransmission() {
               {copied ? 'COPIED ✓' : COPY_COMMAND}
             </span>
             <CopyIcon />
-            <span role="status" className={styles.srOnly}>
+            <span role="status" className="sr-only">
               {copied ? 'Command copied to clipboard' : ''}
             </span>
           </button>

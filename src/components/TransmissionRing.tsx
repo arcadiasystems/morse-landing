@@ -126,7 +126,7 @@ export function TransmissionRing({ decodeDone }: TransmissionRingProps) {
 
   return (
     <>
-      <p className={styles.srOnly}>
+      <p className="sr-only">
         Diagram: Morse coordinates Sui contracts, Walrus storage, and Seal encryption around one
         protocol core.
       </p>
