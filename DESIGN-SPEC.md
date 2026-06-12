@@ -351,9 +351,11 @@ via `data-variant`; reduced-motion renders final state instantly.
 ≈560×560, `aspect-ratio: 1` (zero CLS), `aria-hidden` + preceding `sr-only`
 description. One SVG: three concentric arcs r≈150/210/270, hairline stroke,
 `stroke-dasharray` derived from `toMorse('MORSE')` (dot→4px, dash→14px) — the
-arcs spell MORSE; outer arc 270° sweep. Two travelling amber dots via
-`offset-path`/`offset-distance` keyframes (14s/22s, opposite), inside
-`@supports`; fallback static lit dots; `will-change: transform` on these only.
+arcs spell MORSE; outer arc 270° sweep. Two travelling amber dots riding
+rotating full-size wrappers (percentage-positioned at the ring tangent —
+scales with the box, transform-only, universal support; 14s/22s, opposite);
+off-viewport/reduced fallback: static lit dots; `will-change: transform` on
+the two spinning wrappers only.
 Center beacon: 96px `--r-plate` plate, `.border-glow`, morse "M" glyphs +
 MORSE Unbounded 700; pulse = gradient-halo element, opacity .5→1 +
 scale .96→1.04, 4s alternate. Orbit chips `SUI`/`WALRUS`/`SEAL` at fixed

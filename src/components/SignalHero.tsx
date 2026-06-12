@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { Cta } from '../ui/Button'
 import { Reveal } from '../ui/Reveal'
 import { charToMorse } from '../lib/morse'
 import { DOCS } from '../lib/links'
 import { usePrefersReducedMotion } from '../lib/usePrefersReducedMotion'
-import { LivingDiff } from './LivingDiff'
+import { TransmissionRing } from './TransmissionRing'
 import styles from './SignalHero.module.css'
 
 const HEADLINE = ['CONTENT,', 'TRANSMITTED', 'FOREVER.'] as const
@@ -47,7 +47,11 @@ export function SignalHero() {
   const done = decoded >= TOTAL_CHARS
 
   return (
-    <section className={styles.hero} aria-labelledby="hero-title">
+    <section
+      className={`${styles.hero} glow-field`}
+      style={{ '--glow-x': '72%', '--glow-y': '30%' } as CSSProperties}
+      aria-labelledby="hero-title"
+    >
       <div className={`container ${styles.grid}`}>
         <div>
           <p className="eyebrow">TRANSMISSION 001 — DECENTRALIZED CMS PROTOCOL</p>
@@ -55,26 +59,36 @@ export function SignalHero() {
           <h1 id="hero-title" className={styles.title}>
             <span className={styles.srOnly}>Content, transmitted forever.</span>
             <span aria-hidden="true">
-              {HEADLINE.map((line, lineIndex) => (
-                <span key={line} className={styles.titleLine}>
-                  {done
-                    ? line
-                    : line.split('').map((char, charIndex) => {
-                        const code = charToMorse(char)
-                        const isDecoded = !code || LINE_OFFSETS[lineIndex] + charIndex < decoded
-                        return (
-                          <span key={charIndex} className={styles.char}>
-                            <span className={isDecoded ? undefined : styles.charPending}>
-                              {char}
-                            </span>
-                            {!isDecoded && (
-                              <span className={styles.charMorse}>{toGlyphs(code)}</span>
-                            )}
+              {HEADLINE.map((line, lineIndex) => {
+                const content = done
+                  ? line
+                  : line.split('').map((char, charIndex) => {
+                      const code = charToMorse(char)
+                      const isDecoded = !code || LINE_OFFSETS[lineIndex] + charIndex < decoded
+                      return (
+                        <span key={charIndex} className={styles.char}>
+                          <span className={isDecoded ? undefined : styles.charPending}>
+                            {char}
                           </span>
-                        )
-                      })}
-                </span>
-              ))}
+                          {!isDecoded && (
+                            <span className={styles.charMorse}>{toGlyphs(code)}</span>
+                          )}
+                        </span>
+                      )
+                    })
+                return (
+                  <span key={line} className={styles.titleLine}>
+                    {/* The boxed word lights up once its decode completes. */}
+                    {lineIndex === 1 ? (
+                      <span className={`${styles.boxedWord} ${done ? styles.boxedWordLit : ''}`}>
+                        {content}
+                      </span>
+                    ) : (
+                      content
+                    )}
+                  </span>
+                )
+              })}
             </span>
           </h1>
 
@@ -109,8 +123,8 @@ export function SignalHero() {
           </p>
         </div>
 
-        <Reveal delay={150}>
-          <LivingDiff />
+        <Reveal variant="scale" delay={150}>
+          <TransmissionRing decodeDone={done} />
         </Reveal>
       </div>
     </section>
