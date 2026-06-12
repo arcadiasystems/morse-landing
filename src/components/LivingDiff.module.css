@@ -37,7 +37,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .revValue {
-    animation: rev-roll 150ms var(--ease-out);
+    animation: rev-roll var(--t-state) var(--ease-out);
   }
 }
 
@@ -71,7 +71,7 @@
 .line {
   min-height: 1.7em;
   color: var(--paper-dim);
-  transition: color 150ms var(--ease-out);
+  transition: color var(--t-state) var(--ease-out);
 }
 
 .struck {

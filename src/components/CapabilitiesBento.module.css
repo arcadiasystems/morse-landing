@@ -44,7 +44,7 @@
   background: var(--ink);
   padding: 28px;
   overflow: hidden; /* clips the wash to the cell */
-  transition: background-color 150ms var(--ease-out);
+  transition: background-color var(--t-state) var(--ease-out);
 }
 
 /* Amber line slides in along the top edge on hover. */
@@ -58,7 +58,7 @@
   background: var(--signal);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 150ms var(--ease-out);
+  transition: transform var(--t-state) var(--ease-out);
   z-index: 1;
 }
 
@@ -79,7 +79,7 @@
   pointer-events: none;
   background: radial-gradient(ellipse 80% 60% at 20% 0%, var(--cell-wash, transparent), transparent 70%);
   opacity: 0.65;
-  transition: opacity 150ms var(--ease-out);
+  transition: opacity var(--t-state) var(--ease-out);
 }
 
 .cell:hover::after {
@@ -90,7 +90,7 @@
 .washVerified { --cell-wash: var(--verified-faint); }
 .washPaper    { --cell-wash: var(--paper-wash); }
 
-/* ── Icon tiles ── */
+/* ── Icon tiles — gradient border via the global .border-glow-soft ── */
 .iconTile {
   display: grid;
   place-items: center;
@@ -98,10 +98,6 @@
   height: 40px;
   margin-bottom: 18px;
   border-radius: var(--r-chip);
-  border: 1px solid transparent;
-  background:
-    linear-gradient(var(--ink-raised), var(--ink-raised)) padding-box,
-    var(--border-glow-soft) border-box;
   color: var(--signal);
 }
 
@@ -273,7 +269,7 @@
   text-transform: uppercase;
   color: var(--paper-dim);
   white-space: nowrap;
-  transition: color 120ms var(--ease-out);
+  transition: color var(--t-micro) var(--ease-out);
 }
 
 .entriesLink:hover {
@@ -282,7 +278,7 @@
 
 .arrow {
   display: inline-block;
-  transition: transform 120ms var(--ease-out);
+  transition: transform var(--t-micro) var(--ease-out);
 }
 
 .entriesLink:hover .arrow {
@@ -290,7 +286,7 @@
 }
 
 /* ── Collapse: 2-col ≤1024, 1-col ≤640 ── */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
