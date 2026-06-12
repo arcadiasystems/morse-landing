@@ -1,7 +1,7 @@
 .plate {
-  max-width: 600px;
-  background: var(--ink-raised);
-  border: 1px solid var(--hairline);
+  /* Border and width constraints belong to the hosting frame (FramePlate
+     in LiveSignal) — the diff is bare code-plate content. */
+  background: var(--ink-plate);
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.7;

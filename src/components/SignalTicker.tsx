@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { MorseGlyphs } from '../ui/MorseGlyphs'
+import { Reveal } from '../ui/Reveal'
 import styles from './SignalTicker.module.css'
 
 const ITEMS = [
@@ -35,31 +36,34 @@ export function SignalTicker() {
   const [paused, setPaused] = useState(false)
 
   return (
-    <section className={styles.slab} aria-label="Protocol capabilities">
-      <div className={styles.marquee}>
-        <div className={paused ? `${styles.track} ${styles.trackPaused}` : styles.track}>
-          <TickerRow />
-          <TickerRow decorative />
+    // One-time mask wipe — sanctioned slab use of the paint-cost variant.
+    <Reveal variant="mask" duration={700}>
+      <section className={styles.slab} aria-label="Protocol capabilities">
+        <div className={styles.marquee}>
+          <div className={paused ? `${styles.track} ${styles.trackPaused}` : styles.track}>
+            <TickerRow />
+            <TickerRow decorative />
+          </div>
         </div>
-      </div>
-      <button
-        type="button"
-        className={styles.pauseButton}
-        aria-label={paused ? 'Play ticker' : 'Pause ticker'}
-        aria-pressed={paused}
-        onClick={() => setPaused(prev => !prev)}
-      >
-        {paused ? (
-          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-            <path d="M3 1.5v9l8-4.5z" fill="currentColor" />
-          </svg>
-        ) : (
-          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-            <rect x="2" y="1.5" width="3" height="9" fill="currentColor" />
-            <rect x="7" y="1.5" width="3" height="9" fill="currentColor" />
-          </svg>
-        )}
-      </button>
-    </section>
+        <button
+          type="button"
+          className={styles.pauseButton}
+          aria-label={paused ? 'Play ticker' : 'Pause ticker'}
+          aria-pressed={paused}
+          onClick={() => setPaused(prev => !prev)}
+        >
+          {paused ? (
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M3 1.5v9l8-4.5z" fill="currentColor" />
+            </svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <rect x="2" y="1.5" width="3" height="9" fill="currentColor" />
+              <rect x="7" y="1.5" width="3" height="9" fill="currentColor" />
+            </svg>
+          )}
+        </button>
+      </section>
+    </Reveal>
   )
 }

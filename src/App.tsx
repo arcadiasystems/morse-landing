@@ -2,6 +2,7 @@ import { SiteNav } from './components/SiteNav'
 import { SignalHero } from './components/SignalHero'
 import { SignalTicker } from './components/SignalTicker'
 import { Transmission } from './components/Transmission'
+import { LiveSignal } from './components/LiveSignal'
 import { CapabilitiesBento } from './components/CapabilitiesBento'
 import { InfraShift } from './components/InfraShift'
 import { ProtocolStack } from './components/ProtocolStack'
@@ -23,6 +24,7 @@ export default function App() {
         <SignalHero />
         <SignalTicker />
         <Transmission />
+        <LiveSignal />
         <CapabilitiesBento />
         <MorseDivider word="VERIFY" />
         <InfraShift />

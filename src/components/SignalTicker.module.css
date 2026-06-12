@@ -6,10 +6,21 @@
   padding: 26px 0;
   background: var(--signal);
   color: var(--ink);
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
   overflow: hidden;
 }
+
+/* Gradient hairlines — brightest at center, echoing the lit horizon. */
+.slab::before,
+.slab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--signal-bright) 50%, transparent);
+}
+.slab::before { top: 0; }
+.slab::after { bottom: 0; }
 
 .marquee {
   width: 100%;
