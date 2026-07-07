@@ -8,7 +8,7 @@ import styles from './SiteNav.module.css'
 const NAV_LINKS = [
   { label: 'PROTOCOL', href: `${DOCS}/core-concepts.html` },
   { label: 'ARCHITECTURE', href: '#architecture' },
-  { label: 'CONTRACTS', href: `${DOCS}/contracts.html` },
+  { label: 'CONTRACTS', href: `${DOCS}/contracts-overview.html` },
   { label: 'DOCS', href: `${DOCS}/index.html` },
 ]
 

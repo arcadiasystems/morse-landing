@@ -28,15 +28,15 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { label: 'Overview', href: `${DOCS}/index.html` },
       { label: 'How it works', href: `${DOCS}/core-concepts.html` },
-      { label: 'Architecture', href: `${DOCS}/architecture.html` },
-      { label: 'Security', href: `${DOCS}/security.html` },
+      { label: 'Architecture', href: `${DOCS}/index.html#architecture` },
+      { label: 'Security', href: `${DOCS}/access-control.html` },
     ],
   },
   {
     title: 'Build',
     links: [
       { label: 'Quick start', href: `${DOCS}/quick-start.html` },
-      { label: 'Contracts', href: `${DOCS}/contracts.html` },
+      { label: 'Contracts', href: `${DOCS}/contracts-overview.html` },
       { label: 'Entries', href: `${DOCS}/entries.html` },
     ],
   },
