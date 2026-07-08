@@ -110,6 +110,11 @@ export function SignalHero() {
             </Cta>
           </div>
 
+          <p className={styles.testnetNote}>
+            Storage is epoch-funded &amp; renewable. Testnet data may reset — mainnet is the
+            forever part.
+          </p>
+
           <p className={styles.stackLine}>
             MOVE CONTRACTS
             <span className={styles.middot} aria-hidden="true">
