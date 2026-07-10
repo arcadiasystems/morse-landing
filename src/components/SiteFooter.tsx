@@ -1,4 +1,4 @@
-import { DOCS, GITHUB, TWITTER } from '../lib/links'
+import { DEMO_BLOG, DOCS, GITHUB, TWITTER } from '../lib/links'
 import { GitHubIcon } from '../ui/GitHubIcon'
 import { MorseGlyphs } from '../ui/MorseGlyphs'
 import styles from './SiteFooter.module.css'
@@ -38,6 +38,7 @@ const COLUMNS: FooterColumn[] = [
       { label: 'Quick start', href: `${DOCS}/quick-start.html` },
       { label: 'Contracts', href: `${DOCS}/contracts-overview.html` },
       { label: 'Entries', href: `${DOCS}/entries.html` },
+      { label: 'Demo blog', href: DEMO_BLOG, external: true },
     ],
   },
   {
