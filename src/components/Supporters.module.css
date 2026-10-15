@@ -37,7 +37,7 @@
 }
 
 /* Heights balance optical weight across differently proportioned marks. */
-.foundation { height: 38px; width: auto; }
+.mysten     { height: 21px; width: auto; }
 .walrus     { height: 24px; width: auto; }
 .sui        { height: 34px; width: auto; }
 .seal       { height: 26px; width: auto; }
@@ -55,4 +55,7 @@
     border-top: 1px solid var(--line);
   }
   .cell:nth-child(even) { border-left: 1px solid var(--line); }
+
+  /* The widest mark; keeps it inside a half-width cell. */
+  .mysten { height: 16px; }
 }

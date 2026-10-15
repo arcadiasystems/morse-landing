@@ -34,9 +34,8 @@ Every section component is a named export in `src/components/` with one
 - `src/ui/Button.tsx`: `<Cta tone size hint external>`. Tones: `bone`, `ink`,
   `ultra`, `outline-light`, `outline-dark`, `outline-white`.
 - `src/ui/MorseMark.tsx`: the mark in `currentColor`.
-- `src/ui/PartnerLogos.tsx`: official Walrus, Sui and Seal marks plus the
-  Walrus "W" symbol, in `currentColor`. Walrus Foundation is a raster in
-  `src/assets/partners/`.
+- `src/ui/PartnerLogos.tsx`: official Mysten Labs, Walrus, Sui and Seal
+  marks plus the Walrus "W" symbol, all in `currentColor`.
 - `src/ui/TravellingPulse.tsx`: one pulse sliding along a wire (SMIL).
 - `src/lib/pulse.ts`: `pulsePath()` and `MARK_PATH`.
 - `src/lib/useSmilPlayback.ts`: ref for any SVG with SMIL animation; pauses
