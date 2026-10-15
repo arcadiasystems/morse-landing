@@ -1,0 +1,19 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: var(--section-pad);
+  padding-bottom: 40px;
+}
+
+.eyebrow { color: var(--ultra); }
+
+.body {
+  max-width: 1000px;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.6vw, 46px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: pretty;
+}

@@ -1,0 +1,40 @@
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.plate {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+}
+
+.outline {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wire { stroke: var(--line); stroke-width: 1.5; }
+.fan  { fill: none; stroke: var(--line); stroke-width: 1.6; }
+
+.pulse  { stroke: var(--ultra); stroke-width: 3; }
+.anchor { fill: var(--ultra); }
+.leader { stroke: var(--ultra); stroke-width: 1.6; stroke-dasharray: 3 4; }
+.ring   { fill: none; stroke: var(--ultra); stroke-width: 1.2; }
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--stone);
+}
+.accent { fill: var(--ultra); }
+
+.command {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: var(--ink);
+}

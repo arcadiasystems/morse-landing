@@ -1,0 +1,110 @@
+.road {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.eyebrow { color: var(--ultra-lift); }
+
+.title { margin-top: 14px; }
+
+.headNote {
+  max-width: 360px;
+  font-size: 14px;
+  color: var(--on-ink-3);
+}
+
+.inlineLink {
+  color: var(--on-ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--ink-line);
+  text-underline-offset: 3px;
+  transition:
+    color var(--t-micro) ease,
+    text-decoration-color var(--t-micro) ease;
+}
+.inlineLink:hover {
+  color: var(--on-ink);
+  text-decoration-color: currentColor;
+}
+
+.list {
+  border-top: 1px solid var(--ink-line);
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 130px;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.when {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-ink-3);
+}
+.now {
+  font-weight: 500;
+  color: var(--ultra-lift);
+}
+
+.rowTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+
+.rowDetail {
+  font-size: 14px;
+  color: var(--on-ink-3);
+}
+
+.status {
+  justify-self: end;
+  padding: 6px 12px;
+  border: 1px solid var(--ink-soft);
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--on-ink-2);
+}
+.statusLive {
+  border-color: var(--ultra-lift);
+  background: var(--ultra-lift);
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .status { justify-self: start; }
+}

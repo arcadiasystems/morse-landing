@@ -1,71 +1,49 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* ─── Signal Brutalist tokens (see brand.md) ── */
-  --ink:         #0A0A0A;
-  --ink-raised:  #121210;
-  --ink-plate:   #141412;
+  /* ─── Colour (see brand.md) ── */
+  --bone:       #F2EFE8; /* page ground */
+  --paper:      #FFFFFF; /* cards and plates on bone */
+  --ink:        #121418; /* dark sections, primary text on bone */
+  --ink-line:   #2A2C33; /* rules on ink */
+  --ink-grid:   #23262E; /* hero signal-field grid */
+  --ultra:      #2B3BE0; /* the accent, on bone */
+  --ultra-lift: #7D8BFF; /* the accent, on ink */
 
-  --paper:       #F2F2EF;
-  --paper-dim:   #9A9A90;
-  /* De-emphasis that still passes AA (5.3:1 on ink) — for secondary content. */
-  --paper-mid:   #84847C;
-  /* Decoration only: ghost numerals, struck rows, aria-hidden texture. Fails AA. */
-  --paper-faint: #55554E;
+  --stone:    #5F6168; /* captions and labels on bone */
+  --ink-soft: #45474E; /* body copy on bone */
+  --line:     #DAD6CC; /* rules and card borders on bone */
 
-  --signal:        #FFB000;
-  --signal-bright: #FFC23D;
-  --signal-glow:   rgba(255, 176, 0, 0.25);
-  --signal-dim:    rgba(255, 176, 0, 0.45);
-  --verified:      #4ADE80;
+  --on-ink:   #F2EFE8;
+  --on-ink-2: #C9CBD2;
+  --on-ink-3: #A3A5AE;
+  --on-ink-4: #80828B; /* smallest text on ink; 4.8:1, holds AA */
 
-  --ink-veil: rgba(10, 10, 10, 0.92);
+  /* ─── Type ── */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body:    'Instrument Sans', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --hairline:        rgba(242, 242, 239, 0.10);
-  --hairline-strong: rgba(242, 242, 239, 0.18);
+  /* ─── Layout (single breakpoint: 860px) ── */
+  --container-max: 1200px;
+  --gutter:        32px;
+  --section-pad:   clamp(88px, 10vw, 120px);
+  --nav-clearance: 96px; /* floating nav height + its top offset */
 
-  /* ─── Depth & lighting (Signal Brutalist v2, see brand.md) ── */
-  --signal-faint:   rgba(255, 176, 0, 0.07);
-  --signal-wash:    rgba(255, 176, 0, 0.14);
-  /* Warm aurora layer — --signal-bright at faint alpha (aurora only). */
-  --signal-bright-faint: rgba(255, 194, 61, 0.10);
-  --verified-faint: rgba(74, 222, 128, 0.07);
-  --paper-wash:     rgba(242, 242, 239, 0.05);
-  /* Fake glass — rgba surface + gradient border, never backdrop-filter. */
-  --glass:          rgba(18, 18, 16, 0.66);
+  --r-pill: 999px;
+  --r-card: 22px;
 
-  --border-glow: linear-gradient(180deg,
-      rgba(255, 176, 0, 0.40),
-      rgba(242, 242, 239, 0.10) 45%,
-      rgba(242, 242, 239, 0.04));
-  --border-glow-soft: linear-gradient(180deg,
-      rgba(242, 242, 239, 0.18),
-      rgba(242, 242, 239, 0.04));
+  /* ─── Motion ── */
+  --ease-out:  cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-micro:   150ms;
+  --t-surface: 200ms;
 
-  --shadow-plate: 0 24px 48px -24px rgba(0, 0, 0, 0.65);
-  --shadow-glow:  0 0 48px -8px var(--signal-glow);
+  /* Focus ring colour; dark and accent sections override it. */
+  --focus-ring: var(--ultra);
+}
 
-  /* ─── Typography ────────────────────────────── */
-  --font-display: 'Unbounded', system-ui, sans-serif;
-  --font-body:    'Space Grotesk', system-ui, sans-serif;
-  --font-mono:    'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-
-  /* ─── Layout ────────────────────────────────── */
-  --container-max: 1280px;
-  --gutter:        clamp(20px, 4vw, 40px);
-  --section-pad:   clamp(96px, 12vw, 160px);
-  --nav-offset:    92px; /* banner 28px + nav bar 64px (SiteNav is fixed) */
-
-  /* ─── Radii — brutalist: square grids, soft framed plates, pill CTAs ── */
-  --r-pill:  999px;
-  --r-plate: 12px; /* framed plates only — grids/ledgers stay square */
-  --r-chip:  8px;
-
-  /* ─── Motion ────────────────────────────────── */
-  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1); /* scale-in settles */
-  --t-micro:  120ms; /* text/color hover feedback */
-  --t-state:  150ms; /* surface/background state shifts */
+@media (max-width: 860px) {
+  :root { --gutter: 20px; }
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -75,24 +53,25 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: var(--font-body);
-  background: var(--ink);
-  color: var(--paper);
-  line-height: 1.6;
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
-
-#root { width: 100%; text-align: left; }
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: var(--signal); color: var(--ink); }
+h1, h2, h3 { text-wrap: balance; }
 
-/* Amber focus ring on every interactive element — never remove. */
+::selection { background: var(--ultra); color: #fff; }
+
 :focus-visible {
-  outline: 2px solid var(--signal);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
+
+/* Anchor targets clear the fixed floating nav. */
+[id] { scroll-margin-top: var(--nav-clearance); }
 
 /* ════════════════════════════════════════════════
    GLOBAL UTILITIES
@@ -105,45 +84,27 @@ a { color: inherit; text-decoration: none; }
   padding-right: var(--gutter);
 }
 
-.section-pad {
-  padding-top: var(--section-pad);
-  padding-bottom: var(--section-pad);
+/* Ink-ground sections: lifts the focus ring off the dark surface. */
+.on-ink { --focus-ring: var(--ultra-lift); }
+
+/* Mono eyebrow label. Colour comes from the section. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
-.hairline-top { border-top: 1px solid var(--hairline); }
-
-/* ── Glow field — one static radial light source per section ──
-   Pure gradient paint, zero runtime cost. Position the lamp per section:
-   <section class="glow-field" style="--glow-x: 20%">. Section content must
-   sit in its own stacking context (position: relative) to paint above it. */
-.glow-field { position: relative; }
-.glow-field::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(
-    ellipse var(--glow-w, 64%) var(--glow-h, 42%) at var(--glow-x, 50%) var(--glow-y, 0%),
-    var(--glow-color, var(--signal-faint)),
-    transparent 70%);
+/* Shared section headline (How, Developers, Live, Roadmap). */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.2vw, 52px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-/* ── Gradient hairline border (radius-safe two-layer trick) ── */
-.border-glow,
-.border-glow-soft {
-  border: 1px solid transparent;
-  background:
-    linear-gradient(var(--plate-bg, var(--ink-raised)), var(--plate-bg, var(--ink-raised))) padding-box,
-    var(--border-glow) border-box;
-}
-.border-glow-soft {
-  background:
-    linear-gradient(var(--plate-bg, var(--ink-raised)), var(--plate-bg, var(--ink-raised))) padding-box,
-    var(--border-glow-soft) border-box;
-}
-
-/* ── Screen-reader-only content ─────────────────── */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -155,148 +116,17 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
 }
 
-/* ── Skip link (first element in App) ──────────── */
 .skip-link {
   position: fixed;
   top: 12px;
   left: 12px;
-  z-index: 3000;
-  background: var(--signal);
-  color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-weight: 600;
+  font-size: 14px;
   padding: 10px 16px;
+  border-radius: var(--r-pill);
   transform: translateY(calc(-100% - 16px));
 }
 .skip-link:focus-visible { transform: translateY(0); }
-
-/* ── Bordered mono stamp (LIVE / NOW / ON-CHAIN…) ─ */
-.mono-stamp {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border: 1px solid currentColor;
-  white-space: nowrap;
-}
-
-/* ── Eyebrow — mono, amber, telegraphic ────────── */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--signal);
-  margin-bottom: 20px;
-}
-.eyebrow::before {
-  /* Alt-text syntax marks the telegraph glyphs decorative for screen readers. */
-  content: '· — ·' / '';
-  letter-spacing: 0.05em;
-  color: var(--signal-dim);
-}
-
-/* ── Display headings ──────────────────────────── */
-.display-h2 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(30px, 4.6vw, 56px);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--paper);
-  margin-bottom: 20px;
-}
-
-.section-lead {
-  font-size: 17px;
-  color: var(--paper-dim);
-  line-height: 1.65;
-  max-width: 56ch;
-}
-
-/* ── Film grain overlay (mount once in App) ────── */
-.grain {
-  position: fixed;
-  inset: -100%;
-  width: 300%;
-  height: 300%;
-  pointer-events: none;
-  z-index: 2000;
-  opacity: 0.07;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-@media (prefers-reduced-motion: no-preference) {
-  .grain { animation: grain-shift 1.2s steps(4) infinite; }
-}
-@keyframes grain-shift {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-1.2%, 0.8%); }
-  50%  { transform: translate(0.9%, -1.1%); }
-  75%  { transform: translate(-0.7%, -0.6%); }
-  100% { transform: translate(0, 0); }
-}
-
-/* ── Reveal (used by src/ui/Reveal.tsx) ──────────
-   Variants via data-variant; reduced-motion users get the static block
-   below and never transition. `mask` is paint-cost: one-time
-   headline/slab wipes only. */
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    opacity: 0;
-    transition:
-      opacity var(--reveal-duration, 600ms) var(--ease-out),
-      transform var(--reveal-duration, 600ms) var(--ease-out);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-  .reveal[data-variant='rise']  { transform: translateY(var(--reveal-distance, 24px)); }
-  .reveal[data-variant='fade']  { transform: none; }
-  .reveal[data-variant='scale'] {
-    transform: translateY(12px) scale(0.97);
-    transition-timing-function: var(--ease-spring);
-  }
-  .reveal[data-variant='slide'] { transform: translateX(calc(-1 * var(--reveal-distance, 24px))); }
-  .reveal[data-variant='mask']  {
-    transform: none;
-    clip-path: inset(0 0 100% 0);
-    transition-property: clip-path, opacity;
-  }
-  .reveal[data-variant='draw']  { transform: scaleX(0); transform-origin: left; }
-  .reveal.reveal-in {
-    opacity: 1;
-    transform: none;
-    clip-path: inset(0);
-  }
-}
-
-/* ── Morse glyph rendering (dots & dashes) ─────── */
-.morse-glyphs {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.morse-glyphs .dot,
-.morse-glyphs .dash {
-  display: inline-block;
-  height: 3px;
-  background: currentColor;
-  flex-shrink: 0;
-}
-.morse-glyphs .dot  { width: 3px; border-radius: 50%; }
-.morse-glyphs .dash { width: 10px; }
-.morse-glyphs .gap  { display: inline-block; width: 6px; height: 1px; }

@@ -1,23 +1,30 @@
 import type { ReactNode } from 'react'
 import styles from './Button.module.css'
 
-interface CtaProps {
-  variant?: 'solid' | 'ghost'
-  size?: 'md' | 'sm'
-  href: string
-  external?: boolean
-  children: ReactNode
-  icon?: ReactNode
+export type CtaTone = 'bone' | 'ink' | 'ultra' | 'outline-light' | 'outline-dark' | 'outline-white'
+
+const TONE_CLASS: Record<CtaTone, string> = {
+  bone: styles.bone,
+  ink: styles.ink,
+  ultra: styles.ultra,
+  'outline-light': styles.outlineLight,
+  'outline-dark': styles.outlineDark,
+  'outline-white': styles.outlineWhite,
 }
 
-export function Cta({ variant = 'solid', size = 'md', href, external, children, icon }: CtaProps) {
-  const cls = [
-    styles.cta,
-    variant === 'solid' ? styles.solid : styles.ghost,
-    size === 'sm' ? styles.sm : '',
-  ]
-    .filter(Boolean)
-    .join(' ')
+interface CtaProps {
+  tone: CtaTone
+  size?: 'lg' | 'md'
+  href: string
+  /** Opens in a new tab. */
+  external?: boolean
+  /** Secondary qualifier shown after the label, e.g. "5 min, CLI". */
+  hint?: string
+  children: ReactNode
+}
+
+export function Cta({ tone, size = 'lg', href, external, hint, children }: CtaProps) {
+  const cls = [styles.cta, TONE_CLASS[tone], size === 'md' ? styles.md : ''].filter(Boolean).join(' ')
 
   return (
     <a
@@ -25,8 +32,8 @@ export function Cta({ variant = 'solid', size = 'md', href, external, children, 
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
-      <span className={styles.label}>{children}</span>
-      {icon}
+      {children}
+      {hint && <small className={styles.hint}>{hint}</small>}
     </a>
   )
 }

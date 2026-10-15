@@ -1,91 +1,70 @@
-import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
-import { DOCS, GITHUB } from '../lib/links'
-import { Cta } from '../ui/Button'
-import { GitHubIcon } from '../ui/GitHubIcon'
-import { MorseGlyphs } from '../ui/MorseGlyphs'
+import { useEffect, useId, useRef, useState } from 'react'
+import { DOCS, GITHUB, QUICK_START } from '../lib/links'
+import { MorseMark } from '../ui/MorseMark'
 import styles from './SiteNav.module.css'
 
-const NAV_LINKS = [
-  { label: 'PROTOCOL', href: `${DOCS}/core-concepts.html` },
-  { label: 'ARCHITECTURE', href: '#architecture' },
-  { label: 'CONTRACTS', href: `${DOCS}/contracts-overview.html` },
-  { label: 'DOCS', href: `${DOCS}/index.html` },
+const SECTION_LINKS = [
+  { label: 'Use cases', href: '#use-cases' },
+  { label: 'How it works', href: '#how' },
+  { label: 'Roadmap', href: '#roadmap' },
+  { label: 'Docs', href: `${DOCS}/` },
 ]
 
-const MENU_STAGGER_MS = 40
+/** Matches the CSS breakpoint: above 860px the sheet does not exist. */
+const DESKTOP_QUERY = '(min-width: 861px)'
 
 export function SiteNav() {
   const [open, setOpen] = useState(false)
-  const toggleRef = useRef<HTMLButtonElement>(null)
-  const menuId = useId()
+  const headerRef = useRef<HTMLElement>(null)
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const sheetId = useId()
 
-  /* Body scroll lock + focus containment while the mobile menu is open:
-     the page content behind the overlay is made inert. */
+  /* While open: Escape closes and returns focus to the toggle; a pointer
+     press anywhere outside the nav closes. */
   useEffect(() => {
     if (!open) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    const main = document.getElementById('main')
-    const footer = document.querySelector('footer')
-    main?.toggleAttribute('inert', true)
-    footer?.toggleAttribute('inert', true)
-    return () => {
-      document.body.style.overflow = prev
-      main?.removeAttribute('inert')
-      footer?.removeAttribute('inert')
-    }
-  }, [open])
-
-  /* Escape closes the menu and returns focus to the toggle. */
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
         setOpen(false)
-        toggleRef.current?.focus()
+        burgerRef.current?.focus()
       }
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('pointerdown', onPointerDown)
+    }
   }, [open])
 
-  /* Crossing to desktop dismisses the overlay (and releases the scroll lock). */
+  /* Crossing to desktop dismisses the sheet. */
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 900px)')
-    const onChange = (e: MediaQueryListEvent) => {
-      if (e.matches) setOpen(false)
+    const query = window.matchMedia(DESKTOP_QUERY)
+    const onChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false)
     }
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
   }, [])
 
   const close = () => setOpen(false)
 
   return (
-    <header className={styles.header}>
-      <div className={styles.banner}>
-        <div className={`container ${styles.bannerInner}`}>
-          <p className={styles.bannerMsg}>MORSE PROTOCOL V1 — LIVE ON SUI TESTNET</p>
-          <div className={styles.bannerLinks}>
-            <a className={styles.bannerLink} href={`${DOCS}/index.html`}>
-              DOCS
-            </a>
-            <a className={styles.bannerLink} href={GITHUB} target="_blank" rel="noopener noreferrer">
-              GITHUB
-            </a>
-          </div>
-        </div>
-      </div>
+    <header ref={headerRef} className={`${styles.header} on-ink`}>
+      <div className={styles.pill}>
+        <a className={styles.brand} href="#top" aria-label="Morse home">
+          <MorseMark size={26} />
+          <span className={styles.wordmark} aria-hidden="true">
+            morse
+          </span>
+        </a>
 
-      <nav className={styles.bar} aria-label="Primary">
-        <div className={`container ${styles.barInner}`}>
-          <a className={styles.logo} href="/" aria-label="Morse — home">
-            <span className={styles.wordmark}>MORSE</span>
-            <MorseGlyphs word="MORSE" className={styles.logoCode} />
-          </a>
-
+        <nav aria-label="Primary">
           <ul className={styles.links}>
-            {NAV_LINKS.map(link => (
+            {SECTION_LINKS.map(link => (
               <li key={link.label}>
                 <a className={styles.link} href={link.href}>
                   {link.label}
@@ -93,77 +72,57 @@ export function SiteNav() {
               </li>
             ))}
           </ul>
+        </nav>
 
-          <div className={styles.actions}>
-            <a
-              className={styles.github}
-              href={GITHUB}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Morse on GitHub"
-            >
-              <GitHubIcon size={18} />
-            </a>
-            <Cta variant="solid" size="sm" href={`${DOCS}/quick-start.html`}>
-              START BUILDING
-            </Cta>
-          </div>
+        <a className={styles.cta} href={QUICK_START}>
+          Start building
+        </a>
 
-          <button
-            ref={toggleRef}
-            type="button"
-            className={`${styles.burger} ${open ? styles.burgerOpen : ''}`}
-            aria-expanded={open}
-            aria-controls={menuId}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            onClick={() => setOpen(o => !o)}
+        <button
+          ref={burgerRef}
+          type="button"
+          className={styles.burger}
+          aria-expanded={open}
+          aria-controls={sheetId}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          onClick={() => setOpen(o => !o)}
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            aria-hidden="true"
           >
-            <span className={styles.burgerBar} />
-            <span className={styles.burgerBar} />
-            <span className={styles.burgerBar} />
-          </button>
-        </div>
-      </nav>
+            <path d={open ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16'} />
+          </svg>
+        </button>
+      </div>
 
-      <div id={menuId} className={`${styles.overlay} ${open ? styles.overlayOpen : ''}`}>
-        <nav aria-label="Mobile">
-          <ul className={styles.menuList}>
-            {NAV_LINKS.map((link, i) => (
-              <li
-                key={link.label}
-                className={styles.menuItem}
-                style={{ '--stagger': `${i * MENU_STAGGER_MS}ms` } as CSSProperties}
-              >
-                <a className={styles.menuLink} href={link.href} onClick={close}>
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            <li
-              className={styles.menuItem}
-              style={{ '--stagger': `${NAV_LINKS.length * MENU_STAGGER_MS}ms` } as CSSProperties}
-            >
-              <a
-                className={styles.menuLink}
-                href={GITHUB}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={close}
-              >
-                GITHUB
+      <nav id={sheetId} className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`} aria-label="Mobile">
+        <ul className={styles.sheetList}>
+          {SECTION_LINKS.map(link => (
+            <li key={link.label}>
+              <a className={styles.sheetLink} href={link.href} onClick={close}>
+                {link.label}
               </a>
             </li>
-          </ul>
-        </nav>
-        <div
-          className={`${styles.menuItem} ${styles.menuFoot}`}
-          style={{ '--stagger': `${(NAV_LINKS.length + 1) * MENU_STAGGER_MS}ms` } as CSSProperties}
-        >
-          <Cta variant="solid" href={`${DOCS}/quick-start.html`}>
-            START BUILDING
-          </Cta>
-        </div>
-      </div>
+          ))}
+          <li>
+            <a className={styles.sheetLink} href={GITHUB} target="_blank" rel="noopener noreferrer" onClick={close}>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a className={`${styles.sheetLink} ${styles.sheetCta}`} href={QUICK_START} onClick={close}>
+              Start building
+            </a>
+          </li>
+        </ul>
+      </nav>
     </header>
   )
 }

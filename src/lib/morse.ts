@@ -28,8 +28,3 @@ export function toMorse(text: string): string {
 
 /** 'MORSE' encoded: '-- --- .-. ... .' */
 export const MORSE_WORDMARK = toMorse('MORSE')
-
-/** Morse code for a single character, or '' if unmapped. */
-export function charToMorse(ch: string): string {
-  return CODE[ch.toUpperCase()] ?? ''
-}
