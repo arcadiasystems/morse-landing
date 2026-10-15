@@ -29,6 +29,7 @@
   --gutter:        32px;
   --section-pad:   clamp(88px, 10vw, 120px);
   --nav-clearance: 96px; /* floating nav height + its top offset */
+  --shelf-overlap: 60px; /* how far the supporters shelf rises into the hero */
 
   --r-pill: 999px;
   --r-card: 22px;
@@ -43,7 +44,10 @@
 }
 
 @media (max-width: 860px) {
-  :root { --gutter: 20px; }
+  :root {
+    --gutter: 20px;
+    --shelf-overlap: 40px;
+  }
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }

@@ -1,5 +1,6 @@
 import { SiteNav } from './components/SiteNav'
 import { Hero } from './components/Hero'
+import { Supporters } from './components/Supporters'
 import { Statement } from './components/Statement'
 import { UseCases } from './components/UseCases'
 import { HowItWorks } from './components/HowItWorks'
@@ -18,6 +19,7 @@ export default function App() {
       <SiteNav />
       <main id="main">
         <Hero />
+        <Supporters />
         <Statement />
         <UseCases />
         <HowItWorks />

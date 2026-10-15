@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100svh;
+  /* Short of a full screen so the supporters shelf, which overlaps the
+     hero's bottom edge, lands inside the first viewport. */
+  min-height: calc(100svh - 80px);
   overflow: hidden;
   background: var(--ink);
   color: var(--on-ink);
@@ -31,11 +33,10 @@
   align-items: center;
   gap: 30px;
   width: 100%;
-  padding-top: 160px;
-  padding-bottom: 72px;
+  padding-top: 140px;
+  padding-bottom: calc(var(--shelf-overlap) + 48px);
   text-align: center;
 }
-
 
 .title {
   max-width: 1080px;
@@ -63,52 +64,12 @@
   gap: 14px;
 }
 
-/* ── Built-with strip ── */
-.strip {
-  position: relative;
-  border-top: 1px solid rgba(242, 239, 232, 0.1);
-}
-.stripInner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 18px 48px;
-  padding-top: 26px;
-  padding-bottom: 26px;
-}
-.stripLabel {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--on-ink-4);
-}
-.license {
-  padding: 6px 0;
-  transition: color var(--t-micro) ease;
-}
-.license:hover { color: var(--on-ink-2); }
-.partner {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--on-ink-2);
-}
-
 @media (max-width: 860px) {
   .content { padding-top: 120px; }
   .ctas > * {
     width: 100%;
     justify-content: center;
   }
-  .stripInner {
-    gap: 14px 22px;
-    justify-content: flex-start;
-  }
-  .stripLabel { width: 100%; }
-  .partner { font-size: 16px; }
 }
 
 /* ── Entrance: copy rises in sequence ── */

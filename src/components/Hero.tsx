@@ -1,11 +1,9 @@
-import { DEMO_BLOG, LICENSE, QUICK_START } from '../lib/links'
+import { DEMO_BLOG, QUICK_START } from '../lib/links'
 import { useSmilPlayback } from '../lib/useSmilPlayback'
 import { Cta } from '../ui/Button'
 import { TravellingPulse } from '../ui/TravellingPulse'
 import { WalrusBadge } from './WalrusBadge'
 import styles from './Hero.module.css'
-
-const PARTNERS = ['Walrus Foundation', 'Sui', 'Walrus', 'Seal']
 
 /* Signal field, drawn on a 1440×900 canvas that covers the hero. */
 const PULSE_SIZES = {
@@ -148,20 +146,6 @@ export function Hero() {
           <Cta tone="outline-light" href={DEMO_BLOG} hint="testnet wallet" external>
             See it live
           </Cta>
-        </div>
-      </div>
-
-      <div className={styles.strip}>
-        <div className={`container ${styles.stripInner}`}>
-          <span className={styles.stripLabel}>Built with</span>
-          {PARTNERS.map(name => (
-            <span key={name} className={styles.partner}>
-              {name}
-            </span>
-          ))}
-          <a className={`${styles.stripLabel} ${styles.license}`} href={LICENSE} target="_blank" rel="noopener noreferrer">
-            Open source · MIT
-          </a>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { DEMO_BLOG, DOCS, GITHUB, QUICK_START, TWITTER } from '../lib/links'
+import { DEMO_BLOG, DOCS, GITHUB, LICENSE, QUICK_START, TWITTER } from '../lib/links'
 import { MORSE_WORDMARK } from '../lib/morse'
 import { MorseMark } from '../ui/MorseMark'
 import styles from './SiteFooter.module.css'
@@ -83,7 +83,10 @@ export function SiteFooter() {
       </div>
 
       <div className={`container ${styles.legal}`}>
-        © {new Date().getFullYear()} Morse Protocol · Arcadia Systems · Open source
+        © {new Date().getFullYear()} Morse Protocol · Arcadia Systems ·{' '}
+        <a className={styles.link} href={LICENSE} target="_blank" rel="noopener noreferrer">
+          Open source, MIT licence
+        </a>
       </div>
     </footer>
   )
