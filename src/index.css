@@ -50,7 +50,15 @@
   }
 }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+/* The canvas is ink, so over-scroll bounce and browser chrome that tints
+   from the page continue the ink hero and footer at both ends. The body
+   paints the bone ground for everything in between. Pairs with the
+   theme-color meta in index.html. */
+html {
+  background: var(--ink);
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
