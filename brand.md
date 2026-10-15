@@ -1,114 +1,84 @@
 # Brand — Morse Protocol
 
 _Status: active_
-_Direction: Signal Brutalist v2 ("Carrier Wave") — brutalist skeleton, lit atmosphere_
+_Direction: Bone & Ultramarine (October 2026 redesign; replaces Signal Brutalist)_
 
-## Concept
+## Mark
 
-Morse code is the brand, taken literally and industrially: the protocol as a
-transmission system. Dots and dashes are a complete visual grammar — dividers,
-texture, motion rhythm. Telegraph heritage (amber dial light on black iron)
-reframes "content on chain" as "content, transmitted forever". This identity is
-non-derivative: no competitor named anything else can use it.
+One SVG path on a 100-unit viewBox, stroke 16, round caps and joins:
 
-## Palette (single owned color)
+```
+M8 72 V30 H36 V72 H64 V30 H92 V72
+```
 
-All variation comes from opacity and glow of ONE accent. Never introduce new hues.
+Two square humps: the morse pulse, closed into a letterform. It is drawn in
+`currentColor` by `src/ui/MorseMark.tsx` and exported as `MARK_PATH` from
+`src/lib/pulse.ts`. The favicon (`public/favicon.svg`) is the mark in bone on
+an ink rounded square.
+
+The **pulse** is the same shape laid on a wire (`pulsePath()` in
+`src/lib/pulse.ts`). It is the page's only motif: the hero signal field, the
+How-it-works wire, the use-case illustrations and the closing band all use it.
+
+## Colour
+
+Tokens live on `:root` in `src/index.css`. Change the brand there and
+nowhere else; SVG illustrations read the same tokens through CSS classes.
 
 | Token | Value | Role |
 |---|---|---|
-| `--ink` | `#0A0A0A` | Page background. True near-black, no blue cast. |
-| `--ink-raised` | `#121210` | Raised surfaces (cards, terminal chrome). |
-| `--ink-plate` | `#141412` | Code plates. |
-| `--paper` | `#F2F2EF` | Primary text. Warm white. |
-| `--paper-dim` | `#9A9A90` | Secondary text (AA on ink). |
-| `--paper-mid` | `#84847C` | De-emphasis that still passes AA (status text, captions). |
-| `--paper-faint` | `#55554E` | Decoration only — ghost numerals, struck rows. Fails AA. |
-| `--hairline-strong` | `rgba(242,242,239,0.18)` | Emphasized rules (timeline base, gradient hairline peaks). |
-| `--ink-veil` | `rgba(10,10,10,0.92)` | Fixed-nav surface (the one blurred layer). |
-| `--signal` | `#FFB000` | THE accent. Radio-dial amber. CTAs, eyebrows, live states, carrier wave. |
-| `--signal-bright` | `#FFC23D` | Hover/lit amber (CTA hover, gradient hairline peaks). |
-| `--signal-dim` | `rgba(255,176,0,0.45)` | De-emphasized amber (eyebrow glyphs, idle wave, dome arc). |
-| `--signal-glow` | `rgba(255,176,0,0.25)` | Glow shadows only. |
-| `--signal-bright-faint` | `rgba(255,194,61,0.10)` | Warm aurora layer only. |
-| `--signal-wash` | `rgba(255,176,0,0.14)` | Glow fields, frame washes, aurora core. |
-| `--signal-faint` | `rgba(255,176,0,0.07)` | Faint glow fields, cell washes, icon tiles. |
-| `--verified` | `#4ADE80` | ONLY for on-chain verified/live status dots and hash strings. |
-| `--verified-faint` | `rgba(74,222,128,0.07)` | Wash on verification-themed surfaces only. |
-| `--paper-wash` | `rgba(242,242,239,0.05)` | Neutral surface wash. |
-| `--glass` | `rgba(18,18,16,0.66)` | Fake-glass chip surfaces (no backdrop-filter). |
-| `--hairline` | `rgba(242,242,239,0.10)` | All rules and borders. |
-| `--border-glow(-soft)` | gradient | Gradient hairline borders on lit plates/chips. |
+| `--bone` | `#F2EFE8` | Page ground; text on ink |
+| `--paper` | `#FFFFFF` | Cards and plates on bone |
+| `--ink` | `#121418` | Dark sections; primary text on bone |
+| `--ultra` | `#2B3BE0` | The accent on bone; the closing band |
+| `--ultra-lift` | `#7D8BFF` | The accent on ink |
+| `--stone` | `#5F6168` | Captions and labels on bone |
+| `--ink-soft` | `#45474E` | Body copy on bone |
+| `--line` | `#DAD6CC` | Rules and card borders on bone |
+| `--ink-line` | `#2A2C33` | Rules on ink |
+| `--ink-grid` | `#23262E` | Hero signal-field grid |
+| `--on-ink-2…4` | `#C9CBD2` / `#A3A5AE` / `#80828B` | Secondary text on ink, descending |
 
-Amber slab sections (marquee, stamps) invert: `--ink` text on `--signal` background.
+`--on-ink-4` is the floor for text on ink (4.8:1). The handover's `#7A7C85`
+measured 4.4:1 and failed AA for the 11–12px labels it carries.
 
-## Typography
+## Type
 
-Single Google Fonts request. Display blocks, body swaps.
+- **Display:** Bricolage Grotesque 800 for headlines (700 for card, step and
+  roadmap titles). Tight tracking, `-0.03em` to `-0.045em`.
+- **Body:** Instrument Sans 400–600.
+- **Mono:** IBM Plex Mono 400/500 for code, hashes, dates and eyebrow labels.
 
-- **Display:** Unbounded 500/700/900 — wide geometric caps, web3 provenance
-  (funded on-chain by Polkadot treasury). H1 `clamp(3rem, 8.5vw, 8rem)`,
-  tracking `-0.04em`, line-height `0.95`, always uppercase.
-- **Body/UI:** Space Grotesk 400/500/700 — 16–18px, line-height 1.6.
-- **Mono:** Space Mono 400/700 — all hashes, object IDs, code, tags, tickers,
-  eyebrows. 12–14px. Hash strings tinted `--verified`.
-- CTA labels: Unbounded 500, 13–15px, uppercase, `+0.08em` tracking.
+Single Google Fonts request in `index.html`.
+
+## Layout
+
+- Grounds alternate: ink hero, bone, ink (How it works), bone (Developers,
+  See it live), ink (Roadmap), ultramarine band, ink footer.
+- Container 1200px, gutter 32px (20px under 860px). One breakpoint: 860px.
+- Cards radius 22px; buttons and nav are pills.
+
+## Motion
+
+- All ambient motion is SVG SMIL: no animation library and no JS timers.
+  Every animated SVG goes through `useSmilPlayback`, which pauses it
+  off-screen and holds it on its opening frame under `prefers-reduced-motion`
+  (SMIL ignores CSS `animation` rules, so CSS alone cannot stop it).
+- Hero copy rises in sequence on load (CSS, motion-safe only).
+- Hover: buttons lift 1px, cards 3px with a soft shadow, on hover-capable
+  devices only.
 
 ## Voice
 
-Terse, declarative, transmission-style. All-caps headlines read like telegrams:
-"CONTENT, TRANSMITTED FOREVER." / "WRITE ONCE. VERIFY ALWAYS." No adjective
-stacks, no "revolutionary", no "next-generation". Every claim concrete and
-verifiable. CTAs: "Start building" (primary), "Read the protocol" (secondary) —
-never "Get started".
+Plain, specific, declarative, sentence case. Every product claim must match
+the `arcadiasystems/morse-dcms` repository: real package names
+(`@arcadiasystems/morse-sdk`, `@arcadiasystems/morse-cli`), real commands,
+real feature status. Roadmap statuses: LIVE, BUILDING, PLANNED, PROPOSED.
 
-## Depth & lighting (v2)
+## Rules
 
-Light is the carrier signal. The page reads as a sequence of lit scenes —
-brutalist iron under amber dial light — never as flat plates.
-
-- **Glow fields.** A section may carry ONE static radial amber glow field
-  (`--signal-faint`/`--signal-wash`, alpha ≤ 0.14), positioned per section via
-  `--glow-x/y` so each scene has its own light source. Glow is gradient paint.
-  `filter: blur()` is banned page-wide.
-- **Accent temperature, not new hues.** Variation comes from amber at three
-  intensities (`--signal-faint` 0.07 / `--signal-wash` 0.14 / `--signal-glow`
-  0.25), plus two sanctioned shifts: `--verified-faint` ONLY on
-  verification-themed surfaces, `--paper-wash` as a neutral. Never a new hue.
-- **Radius.** Structural grids, ledgers, and bento skeletons stay radius 0.
-  Raised "framed plates" (product frames, beacon, floating chips) may use
-  `--r-plate: 12px` / `--r-chip: 8px`. The square-grid-vs-soft-plate contrast
-  IS the hybrid signature.
-- **Shadows.** `--shadow-plate` on framed plates, `--shadow-glow` on lit
-  elements. Animated shadows are banned — a pulse is a pre-rendered gradient
-  halo element animating opacity/scale.
-- **Glass.** Fake glass only: `--glass` rgba surface + gradient hairline border
-  (`--border-glow`). `backdrop-filter` budget: exactly one, on the fixed nav.
-
-## Texture & motion signature
-
-- Film grain: SVG feTurbulence data-URI overlay, opacity ~0.08, soft-light.
-- Morse-encoded dot-dash dividers and patterns (real encodings, e.g.
-  MORSE = `-- --- ·-· ··· ·`).
-- **Choreography system (v2):** entrances use Reveal variants
-  (`rise / fade / scale / slide / mask / draw`) with staggered delays per
-  section. `mask` (clip-path) is one-time, headlines and slabs only.
-  Micro-interactions stay 100–150ms.
-- **Ambient (infinite) motion is allowed in exactly TWO zones:** the hero
-  Transmission Ring and the FinalTransmission aurora. Budget: ≤ 6 concurrent
-  infinite animations in the hero viewport, ≤ 2 elsewhere; transform/opacity
-  only; loops pause off-viewport.
-- Marquees pause on hover; `prefers-reduced-motion` gets static final-state
-  layouts (lit, complete, motionless).
-
-## Anti-patterns (hard bans)
-
-Indigo/violet gradients. Multi-hue palettes. Generic node-network hero art —
-connected-dots globes, particle meshes, abstract "blockchain" decoration. (The
-Transmission Ring is NOT this: a radial telegraph-dial diagram of the real
-stack — Sui contracts, Walrus storage, Seal encryption — whose arcs carry real
-morse dash rhythm. Named parts only; never decorative dots.) Glowing-coin
-3D renders. "Get started" CTAs. Fake stats, fake logos, fake star counts. Emoji
-icons. Uniform 3-col icon-card grids as first section. `transition: all`.
-Pure `#000` backgrounds. `filter: blur()` anywhere; `backdrop-filter` beyond
-the nav.
+- Partner names render as text until official logos are cleared for use.
+- No live counters (entries, publications, revisions) until they are read
+  from chain. Never placeholders, fake stats or fake logos.
+- Keep "storage is funded per epoch and renewable" visible near any
+  permanence claim.
