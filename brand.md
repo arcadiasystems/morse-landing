@@ -77,7 +77,13 @@ real feature status. Roadmap statuses: LIVE, BUILDING, PLANNED, PROPOSED.
 
 ## Rules
 
-- Partner names render as text until official logos are cleared for use.
+- Partner marks are official artwork only. Walrus, Sui and Seal come from
+  the SVGs on walrus.xyz (`src/ui/PartnerLogos.tsx`), recoloured only
+  through `currentColor`. The Walrus Foundation mark is the supplied colour
+  raster (`src/assets/partners/`); it has a white ground, so it sits on
+  `--paper` and is never recoloured.
+- Network status reads "Live on Walrus Mainnet", in the hero badge and the
+  roadmap.
 - No live counters (entries, publications, revisions) until they are read
   from chain. Never placeholders, fake stats or fake logos.
 - Keep "storage is funded per epoch and renewable" visible near any

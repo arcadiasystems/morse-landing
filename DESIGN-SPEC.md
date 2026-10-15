@@ -13,7 +13,8 @@ see "Verified facts" below.
 | Order | Component | Ground | Anchor |
 |---|---|---|---|
 | — | `SiteNav` | floating ink pill | — |
-| 1 | `Hero` (+ signal field) | ink | `#top` |
+| 1 | `Hero` (+ signal field, `WalrusBadge`) | ink | `#top` |
+| — | `Supporters` (paper shelf straddling the hero edge) | paper | — |
 | 2 | `Statement` | bone | — |
 | 3 | `UseCases` (+ `UseCaseArt`) | bone | `#use-cases` |
 | 4 | `HowItWorks` | ink | `#how` |
@@ -33,6 +34,9 @@ Every section component is a named export in `src/components/` with one
 - `src/ui/Button.tsx`: `<Cta tone size hint external>`. Tones: `bone`, `ink`,
   `ultra`, `outline-light`, `outline-dark`, `outline-white`.
 - `src/ui/MorseMark.tsx`: the mark in `currentColor`.
+- `src/ui/PartnerLogos.tsx`: official Walrus, Sui and Seal marks plus the
+  Walrus "W" symbol, in `currentColor`. Walrus Foundation is a raster in
+  `src/assets/partners/`.
 - `src/ui/TravellingPulse.tsx`: one pulse sliding along a wire (SMIL).
 - `src/lib/pulse.ts`: `pulsePath()` and `MARK_PATH`.
 - `src/lib/useSmilPlayback.ts`: ref for any SVG with SMIL animation; pauses
@@ -55,7 +59,8 @@ Every section component is a named export in `src/components/` with one
 
 ## Verified facts (checked against morse-dcms, 2026-10-15)
 
-- Morse is live on Sui mainnet and testnet; contracts are unaudited.
+- Network status on the page is "Live on Walrus mainnet" (product owner's
+  call, 2026-10-15). Contracts are unaudited.
 - Packages: `@arcadiasystems/morse-sdk`, `@arcadiasystems/morse-cli`. Licence MIT.
 - SDK flow: `morseConfig` → `createPublication` → `createCollection` →
   `addEntryFromBytes` (`upload: { epochs, deletable: true }` is required;
@@ -70,11 +75,9 @@ Every section component is a named export in `src/components/` with one
 ## Open items from the handover
 
 1. Roadmap dates (Q4 2026, Nov 2026, Q1 2027) are proposals; confirm them.
-2. Partner names in the hero strip are text; swap for official SVGs only
-   with permission.
-3. `og:image`: add a 1200×630 export of the social card design and its
+2. `og:image`: add a 1200×630 export of the social card design and its
    `<meta property="og:image">` once the asset exists.
-4. Apple touch icon: export a 180×180 PNG of the favicon.
+3. Apple touch icon: export a 180×180 PNG of the favicon.
 
 ## Verification
 
