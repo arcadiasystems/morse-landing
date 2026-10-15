@@ -2,6 +2,7 @@ import { DEMO_BLOG, LICENSE, QUICK_START } from '../lib/links'
 import { useSmilPlayback } from '../lib/useSmilPlayback'
 import { Cta } from '../ui/Button'
 import { TravellingPulse } from '../ui/TravellingPulse'
+import { WalrusBadge } from './WalrusBadge'
 import styles from './Hero.module.css'
 
 const PARTNERS = ['Walrus Foundation', 'Sui', 'Walrus', 'Seal']
@@ -130,10 +131,7 @@ export function Hero() {
       <SignalField />
 
       <div className={`container ${styles.content}`}>
-        <p className={styles.tag}>
-          <span className={styles.tagDot} aria-hidden="true" />
-          <span className={styles.tagLong}>Open CMS protocol · </span>Live on Sui mainnet
-        </p>
+        <WalrusBadge />
         <h1 id="hero-title" className={styles.title}>
           Content no one can take&nbsp;down.
           <br />

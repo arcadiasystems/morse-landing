@@ -36,25 +36,6 @@
   text-align: center;
 }
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
-  border: 1px solid rgba(242, 239, 232, 0.14);
-  border-radius: var(--r-pill);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--on-ink-3);
-}
-.tagDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--ultra-lift);
-}
 
 .title {
   max-width: 1080px;
@@ -117,7 +98,6 @@
 }
 
 @media (max-width: 860px) {
-  .tagLong { display: none; }
   .content { padding-top: 120px; }
   .ctas > * {
     width: 100%;
