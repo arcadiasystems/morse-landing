@@ -1,8 +1,9 @@
-import { useId } from 'react'
+import { useId, type ReactNode } from 'react'
 import { DOCS, ECOSYSTEM_LISTING, MORSE_PRESS } from '../lib/links'
 import { MORSE_WORDMARK } from '../lib/morse'
 import { MARK_PATH } from '../lib/pulse'
 import { CtaLabel } from '../ui/Button'
+import { SealWordmark, SuiSymbol, WalrusSymbol } from '../ui/PartnerLogos'
 import styles from './Ecosystem.module.css'
 
 type Status = 'live' | 'exploring' | 'core'
@@ -26,7 +27,8 @@ const TILE_CLASS: Record<TileTone, string> = {
 }
 
 interface StackRow {
-  mark: string
+  /** Partner mark, or one or two characters for our own tools. */
+  mark: ReactNode
   tone: TileTone
   name: string
   detail: string
@@ -34,10 +36,35 @@ interface StackRow {
 }
 
 const RUNS_ON: StackRow[] = [
-  { mark: 'W', tone: 'stone', name: 'Walrus', detail: 'Content storage, blob and quilt', status: 'live' },
-  { mark: 'S', tone: 'ultra', name: 'Sui', detail: 'Publications, entries, caps as Move objects', status: 'live' },
-  { mark: 'Se', tone: 'ink', name: 'Seal', detail: 'Client-side encryption, on-chain access policy', status: 'live' },
-  { mark: 'M', tone: 'outline', name: 'Walrus Memory', detail: 'Agent memory anchored to records', status: 'exploring' },
+  {
+    mark: <WalrusSymbol className={styles.logoWalrus} />,
+    tone: 'stone',
+    name: 'Walrus',
+    detail: 'Content storage, blob and quilt',
+    status: 'live',
+  },
+  {
+    mark: <SuiSymbol className={styles.logoSui} />,
+    tone: 'ultra',
+    name: 'Sui',
+    detail: 'Publications, entries, caps as Move objects',
+    status: 'live',
+  },
+  {
+    mark: <SealWordmark className={styles.logoSeal} />,
+    tone: 'ink',
+    name: 'Seal',
+    detail: 'Client-side encryption, on-chain access policy',
+    status: 'live',
+  },
+  /* Walrus Memory has no mark of its own; as a Walrus product it carries the Walrus symbol. */
+  {
+    mark: <WalrusSymbol className={styles.logoWalrus} />,
+    tone: 'outline',
+    name: 'Walrus Memory',
+    detail: 'Agent memory anchored to records',
+    status: 'exploring',
+  },
 ]
 
 const BUILD_ON: StackRow[] = [
@@ -97,7 +124,7 @@ const ENTRIES: EcosystemEntry[] = [
 const PRESS_CATEGORY = 'Publishing'
 const PRESS_TAGS = ['Testnet', 'Open source', 'By Arcadia Systems']
 
-function Tile({ mark, tone, size }: { mark: string; tone: TileTone; size: 'sm' | 'md' }) {
+function Tile({ mark, tone, size }: { mark: ReactNode; tone: TileTone; size: 'sm' | 'md' }) {
   const cls = [styles.tile, size === 'md' ? styles.tileMd : '', TILE_CLASS[tone]].filter(Boolean).join(' ')
   return (
     <span className={cls} aria-hidden="true">

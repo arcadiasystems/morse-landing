@@ -82,9 +82,11 @@ real feature status. Roadmap statuses: LIVE, BUILDING, PLANNED, PROPOSED.
 
 - Partner marks are official artwork only, kept in
   `src/ui/PartnerLogos.tsx` and recoloured only through `currentColor`.
-  Walrus, Sui and Seal come from the SVGs on walrus.xyz; the Mysten Labs
+  Walrus, Sui and Seal come from the SVGs on walrus.xyz (the Sui drop is
+  also used alone, framed to its own bounds); the Mysten Labs
   lockup is the logomark and wordmark from mystenlabs.com, spaced as in
-  that site's header.
+  that site's header. Walrus Memory has no mark of its own, so it carries
+  the Walrus symbol.
 - Network status reads "Live on Walrus Mainnet", in the hero badge and the
   roadmap.
 - No live counters (entries, publications, revisions) until they are read
