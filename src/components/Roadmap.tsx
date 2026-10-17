@@ -12,9 +12,9 @@ interface Milestone {
 
 const MILESTONES: Milestone[] = [
   {
-    when: 'Now',
-    title: 'Protocol live on Walrus mainnet',
-    detail: 'Move contracts, Walrus storage, Seal policies, CLI, SDK beta, demo blog on testnet',
+    when: '9 Sep 2026',
+    title: 'Protocol live on Walrus Mainnet',
+    detail: 'Move contracts on testnet and mainnet, Walrus storage, Seal policies, CLI, SDK beta, demo blog on testnet',
     status: 'live',
   },
   {
