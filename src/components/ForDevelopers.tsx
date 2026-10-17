@@ -1,5 +1,5 @@
 import { useId, useRef, useState, type KeyboardEvent } from 'react'
-import { DOCS, QUICK_START } from '../lib/links'
+import { DOCS, LLMS_TXT, QUICK_START } from '../lib/links'
 import { Cta } from '../ui/Button'
 import styles from './ForDevelopers.module.css'
 
@@ -143,7 +143,11 @@ export function ForDevelopers() {
           </h2>
           <p className={styles.lead}>
             A coding agent can define collections, provision publications, publish entries and operate the
-            entire backend through the CLI or SDK. No dashboard required.
+            entire backend through the CLI or SDK. No dashboard required. Point yours at{' '}
+            <a className={styles.inlineLink} href={LLMS_TXT}>
+              llms.txt
+            </a>
+            , the docs index written for agents.
           </p>
           <div className={styles.buttons}>
             <Cta tone="ink" size="md" href={QUICK_START}>

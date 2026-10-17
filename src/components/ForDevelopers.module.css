@@ -23,6 +23,17 @@
   color: var(--ink-soft);
 }
 
+.inlineLink {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--ultra);
+  text-decoration: underline;
+  text-decoration-color: rgba(43, 59, 224, 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--t-micro) ease;
+}
+.inlineLink:hover { text-decoration-color: currentColor; }
+
 .buttons {
   display: flex;
   flex-wrap: wrap;
