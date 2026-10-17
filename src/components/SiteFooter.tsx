@@ -82,7 +82,9 @@ export function SiteFooter() {
         </nav>
       </div>
 
-      <div className={`container ${styles.legal}`}>
+      {/* The year is prerendered at build time; a visit in a later year keeps
+          the build's year rather than failing hydration. */}
+      <div className={`container ${styles.legal}`} suppressHydrationWarning>
         © {new Date().getFullYear()} Morse Protocol · Arcadia Systems ·{' '}
         <a className={styles.link} href={LICENSE} target="_blank" rel="noopener noreferrer">
           Open source, MIT licence

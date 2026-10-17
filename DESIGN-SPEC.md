@@ -42,6 +42,14 @@ Every section component is a named export in `src/components/` with one
   off-screen and under reduced motion. Every animated SVG must use it.
 - `src/lib/links.ts`: every external URL. Do not hard-code URLs in components.
 
+## Build
+
+- `vite build` prerenders the page into `dist/index.html` (the `prerender`
+  plugin in `vite.config.ts` renders `src/entry-server.tsx`), and
+  `src/main.tsx` hydrates it. Render output must not depend on the browser:
+  read `window`, `document` or media queries in effects or through
+  `useSyncExternalStore` with a server snapshot, never during render.
+
 ## Rules
 
 1. Semantic HTML: each `<section>` is `aria-labelledby` its heading; lists
@@ -87,3 +95,5 @@ npm run lint
 
 Check 1440px and 390px: no horizontal scroll, mobile sheet opens and closes
 (toggle, Escape, outside tap, link tap), code tabs respond to arrow keys.
+`dist/index.html` must contain the page text, and a `NODE_ENV=development`
+build must hydrate with no warnings in the console.

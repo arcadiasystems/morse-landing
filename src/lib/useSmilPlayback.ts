@@ -15,7 +15,10 @@ export function useSmilPlayback() {
     const svg = ref.current
     if (!svg) return
     if (reducedMotion) {
+      /* Prerendered SVGs start their timeline before hydration, so rewind
+         to the opening frame rather than freezing wherever it got to. */
       svg.pauseAnimations()
+      svg.setCurrentTime(0)
       return
     }
     const io = new IntersectionObserver(([entry]) => {

@@ -22,7 +22,7 @@ in `src/components/`.
 ```sh
 npm install
 npm run dev      # vite dev server
-npm run build    # tsc + production build
+npm run build    # tsc + production build, prerendered to static HTML
 npm run lint     # eslint
 ```
 
