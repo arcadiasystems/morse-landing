@@ -137,7 +137,7 @@ export function Hero() {
         </h1>
         <p className={styles.lead}>
           Morse is an open CMS protocol on Sui and Walrus. Publish from the CLI, the SDK or your agent.
-          Every entry is anchored on-chain, stored permanently, and gated by keys you hold.
+          Every entry is anchored on-chain, stored on Walrus, and gated by keys you hold.
         </p>
         <div className={styles.ctas}>
           <Cta tone="bone" href={QUICK_START} hint="5 min, CLI">
