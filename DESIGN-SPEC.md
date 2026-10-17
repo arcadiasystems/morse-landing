@@ -95,6 +95,7 @@ npm run lint
 ```
 
 Check 1440px and 390px: no horizontal scroll, mobile sheet opens and closes
-(toggle, Escape, outside tap, link tap), code tabs respond to arrow keys.
-`dist/index.html` must contain the page text, and a `NODE_ENV=development`
-build must hydrate with no warnings in the console.
+(toggle, Escape, outside tap, link tap), code tabs respond to arrow keys, the
+CLI tab's copy button copies the install command. `dist/index.html` must
+contain the page text, and a `NODE_ENV=development` build must hydrate with
+no warnings in the console.

@@ -104,23 +104,110 @@
    height and does not jump when switching tabs. */
 .panels { display: grid; }
 
-.pre {
+.panel {
   grid-area: 1 / 1;
-  padding: 26px;
+  min-width: 0;
   overflow-x: auto;
+}
+.panel[hidden] {
+  display: block;
+  visibility: hidden;
+}
+.panel:focus-visible { outline-offset: -3px; }
+
+/* Sized to its longest line so the right padding survives a sideways scroll. */
+.pre {
+  width: max-content;
+  min-width: 100%;
+  padding: 26px;
   font-family: var(--font-mono);
   font-size: 13.5px;
   line-height: 1.7;
   white-space: pre;
 }
-.pre[hidden] {
-  display: block;
-  visibility: hidden;
-}
-.pre:focus-visible { outline-offset: -3px; }
 
 .comment { color: var(--on-ink-3); }
 
+/* ── Install command ── */
+/* Sticky so it stays in view while long snippet lines scroll sideways;
+   the command wraps instead of scrolling, so the button never leaves view. */
+.install {
+  position: sticky;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px 12px 26px;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.command {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--on-ink);
+  overflow-wrap: anywhere;
+}
+
+.prompt {
+  color: var(--on-ink-4);
+  user-select: none;
+}
+
+.copy {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 8em; /* fits "Selected", the longest label, so the pill never resizes */
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--on-ink-3);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    color var(--t-micro) ease,
+    border-color var(--t-micro) ease;
+}
+/* Grows the touch target to 44px without changing the pill. */
+.copy::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+.copy:hover {
+  color: var(--on-ink);
+  border-color: var(--on-ink-4);
+}
+.copy[data-result='copied'] {
+  color: var(--ultra-lift);
+  border-color: currentColor;
+}
+
+.copyIcon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
 @media (max-width: 480px) {
   .caption { display: none; }
+
+  /* Icon only, so the command keeps enough width to wrap at its space. */
+  .copyLabel { display: none; }
+  .copy {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
 }

@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { DOCS, LLMS_TXT, QUICK_START } from '../lib/links'
 import { Cta } from '../ui/Button'
 import styles from './ForDevelopers.module.css'
@@ -36,10 +36,9 @@ await addEntryFromBytes(adapter, config, {
   upload: { epochs: 3, deletable: true },
 })`
 
-const CLI_SNIPPET = `# install
-bun add -g @arcadiasystems/morse-cli
+const CLI_INSTALL = 'bun add -g @arcadiasystems/morse-cli'
 
-# a testnet profile and your key
+const CLI_SNIPPET = `# a testnet profile and your key
 morse config add testnet --network testnet
 morse account import
 
@@ -56,10 +55,125 @@ morse cap issue 0x9a02…
 # list what is published
 morse entry list`
 
-const TABS = [
-  { key: 'sdk', label: 'TypeScript', caption: 'morse-sdk · testnet', code: SDK_SNIPPET, commentPrefix: '//' },
-  { key: 'cli', label: 'CLI', caption: 'morse-cli · testnet', code: CLI_SNIPPET, commentPrefix: '#' },
+interface CodeTab {
+  key: string
+  label: string
+  caption: string
+  code: string
+  commentPrefix: string
+  /** Shown above the code with a copy button. */
+  install?: string
+}
+
+const TABS: CodeTab[] = [
+  {
+    key: 'sdk',
+    label: 'TypeScript',
+    caption: 'morse-sdk · testnet',
+    code: SDK_SNIPPET,
+    commentPrefix: '//',
+  },
+  {
+    key: 'cli',
+    label: 'CLI',
+    caption: 'morse-cli · testnet',
+    code: CLI_SNIPPET,
+    commentPrefix: '#',
+    install: CLI_INSTALL,
+  },
 ]
+
+type CopyResult = 'idle' | 'copied' | 'selected'
+
+const COPY_LABEL: Record<CopyResult, string> = { idle: 'Copy', copied: 'Copied', selected: 'Selected' }
+
+const COPY_ANNOUNCEMENT: Record<CopyResult, string> = {
+  idle: '',
+  copied: 'Install command copied.',
+  selected: 'Copying is blocked here, so the install command is selected. Copy it with your keyboard.',
+}
+
+/** How long the button shows a result before it resets. */
+const COPY_RESULT_MS = 2000
+
+/** 14px stroke icon for the copy button, drawn in currentColor. */
+function ButtonIcon({ children }: { children: ReactNode }) {
+  return (
+    <svg
+      className={styles.copyIcon}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  )
+}
+
+const COPY_ICON = (
+  <ButtonIcon>
+    <rect x="9" y="9" width="12" height="12" rx="2" />
+    <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
+  </ButtonIcon>
+)
+
+const CHECK_ICON = (
+  <ButtonIcon>
+    <path d="M4 12.5l5 5L20 6.5" />
+  </ButtonIcon>
+)
+
+/** The install command with a copy button, pinned above a snippet. */
+function InstallCommand({ command }: { command: string }) {
+  const [result, setResult] = useState<CopyResult>('idle')
+  const commandRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    if (result === 'idle') return
+    const timer = window.setTimeout(() => setResult('idle'), COPY_RESULT_MS)
+    return () => window.clearTimeout(timer)
+  }, [result])
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(command)
+      setResult('copied')
+    } catch {
+      /* No clipboard access (insecure context or denied permission):
+         select the command so a keyboard copy picks it up. */
+      if (commandRef.current) window.getSelection()?.selectAllChildren(commandRef.current)
+      setResult('selected')
+    }
+  }
+
+  return (
+    <div className={styles.install}>
+      <code className={styles.command}>
+        <span className={styles.prompt} aria-hidden="true">
+          {'$ '}
+        </span>
+        <span ref={commandRef}>{command}</span>
+      </code>
+      <button
+        type="button"
+        className={styles.copy}
+        data-result={result}
+        aria-label="Copy install command"
+        onClick={copy}
+      >
+        {result === 'copied' ? CHECK_ICON : COPY_ICON}
+        <span className={styles.copyLabel}>{COPY_LABEL[result]}</span>
+      </button>
+      <span role="status" className="sr-only">
+        {COPY_ANNOUNCEMENT[result]}
+      </span>
+    </div>
+  )
+}
 
 /** Splits a snippet into lines, dimming whole-line comments. */
 function CodeLines({ code, commentPrefix }: { code: string; commentPrefix: string }) {
@@ -115,17 +229,20 @@ function CodePanel() {
       </div>
       <div className={styles.panels}>
         {TABS.map((tab, i) => (
-          <pre
+          <div
             key={tab.key}
             role="tabpanel"
             id={`${baseId}-panel-${tab.key}`}
             aria-labelledby={`${baseId}-tab-${tab.key}`}
             tabIndex={0}
             hidden={i !== active}
-            className={styles.pre}
+            className={styles.panel}
           >
-            <CodeLines code={tab.code} commentPrefix={tab.commentPrefix} />
-          </pre>
+            {tab.install && <InstallCommand command={tab.install} />}
+            <pre className={styles.pre}>
+              <CodeLines code={tab.code} commentPrefix={tab.commentPrefix} />
+            </pre>
+          </div>
         ))}
       </div>
     </div>
