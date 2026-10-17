@@ -6,6 +6,7 @@ import styles from './SiteNav.module.css'
 const SECTION_LINKS = [
   { label: 'Use cases', href: '#use-cases' },
   { label: 'How it works', href: '#how' },
+  { label: 'Ecosystem', href: '#ecosystem' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Docs', href: `${DOCS}/` },
 ]

@@ -57,7 +57,7 @@ Single Google Fonts request in `index.html`.
 ## Layout
 
 - Grounds alternate: ink hero, bone, ink (How it works), bone (Developers,
-  See it live), ink (Roadmap), ultramarine band, ink footer.
+  See it live, Ecosystem), ink (Roadmap), ultramarine band, ink footer.
 - Container 1200px, gutter 32px (20px under 860px). One breakpoint: 860px.
 - Cards radius 22px; buttons and nav are pills.
 

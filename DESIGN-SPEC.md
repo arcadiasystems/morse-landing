@@ -20,8 +20,9 @@ see "Verified facts" below.
 | 4 | `HowItWorks` | ink | `#how` |
 | 5 | `ForDevelopers` | bone | — |
 | 6 | `LiveDemo` | bone | — |
-| 7 | `Roadmap` | ink | `#roadmap` |
-| 8 | `FinalCta` | ultramarine | — |
+| 7 | `Ecosystem` | bone | `#ecosystem` |
+| 8 | `Roadmap` | ink | `#roadmap` |
+| 9 | `FinalCta` | ultramarine | — |
 | — | `SiteFooter` | ink | — |
 
 Every section component is a named export in `src/components/` with one
@@ -83,6 +84,10 @@ Every section component is a named export in `src/components/` with one
 - Seal policies today: public and publisher. The subscription policy is
   reserved, not shipped, so copy must not promise subscriber gating.
 - Indexer and content API are planned.
+- Morse Press (`press.morsecms.xyz`) is not live yet; the Ecosystem card
+  links the demo blog until it is (`MORSE_PRESS` in `src/lib/links.ts`).
+  "Your product here" opens an issue with the `ecosystem` label on
+  morse-dcms.
 
 ## Open items from the handover
 

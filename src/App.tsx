@@ -6,6 +6,7 @@ import { UseCases } from './components/UseCases'
 import { HowItWorks } from './components/HowItWorks'
 import { ForDevelopers } from './components/ForDevelopers'
 import { LiveDemo } from './components/LiveDemo'
+import { Ecosystem } from './components/Ecosystem'
 import { Roadmap } from './components/Roadmap'
 import { FinalCta } from './components/FinalCta'
 import { SiteFooter } from './components/SiteFooter'
@@ -25,6 +26,7 @@ export default function App() {
         <HowItWorks />
         <ForDevelopers />
         <LiveDemo />
+        <Ecosystem />
         <Roadmap />
         <FinalCta />
       </main>
