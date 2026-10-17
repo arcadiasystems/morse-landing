@@ -1,9 +1,7 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
-import { DOCS, LLMS_TXT, QUICK_START } from '../lib/links'
+import { DOCS, LLMS_TXT, QUICK_START, UPLOADER_NPM } from '../lib/links'
 import { Cta } from '../ui/Button'
 import styles from './ForDevelopers.module.css'
-
-const UPLOADER_NPM = 'https://www.npmjs.com/package/@arcadiasystems/morse-uploader'
 
 /* Both snippets follow the published @arcadiasystems/morse-sdk and
    @arcadiasystems/morse-cli quick starts. `adapter`, `walrus` and `markdown`
