@@ -32,7 +32,8 @@ Every section component is a named export in `src/components/` with one
 - `src/index.css`: tokens and global utilities (`.container`, `.eyebrow`,
   `.section-title`, `.on-ink`, `.sr-only`, `.skip-link`).
 - `src/ui/Button.tsx`: `<Cta tone size hint external>`. Tones: `bone`, `ink`,
-  `ultra`, `outline-light`, `outline-dark`, `outline-white`.
+  `ultra`, `outline-light`, `outline-dark`, `outline-white`. `<CtaLabel>` is
+  the same look on a span, for a button inside a card that is itself a link.
 - `src/ui/MorseMark.tsx`: the mark in `currentColor`.
 - `src/ui/PartnerLogos.tsx`: official Mysten Labs, Walrus, Sui and Seal
   marks plus the Walrus "W" symbol, all in `currentColor`.

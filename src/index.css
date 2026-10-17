@@ -13,6 +13,10 @@
   --stone:    #5F6168; /* captions and labels on bone */
   --ink-soft: #45474E; /* body copy on bone */
   --line:     #DAD6CC; /* rules and card borders on bone */
+  --line-2:   #BDB8AC; /* dashed and outlined borders on bone */
+  --ultra-tint: #EEF0FF; /* ground for ultramarine labels on paper */
+  --live:       #0F7A5C; /* "Live" status text and tiles */
+  --live-tint:  #EAF6F0; /* ground for the "Live" status pill */
 
   --on-ink:   #F2EFE8;
   --on-ink-2: #C9CBD2;

@@ -35,6 +35,9 @@ nowhere else; SVG illustrations read the same tokens through CSS classes.
 | `--stone` | `#5F6168` | Captions and labels on bone |
 | `--ink-soft` | `#45474E` | Body copy on bone |
 | `--line` | `#DAD6CC` | Rules and card borders on bone |
+| `--line-2` | `#BDB8AC` | Dashed and outlined borders on bone |
+| `--ultra-tint` | `#EEF0FF` | Ground for ultramarine labels on paper |
+| `--live` / `--live-tint` | `#0F7A5C` / `#EAF6F0` | "Live" status pill and tile only |
 | `--ink-line` | `#2A2C33` | Rules on ink |
 | `--ink-grid` | `#23262E` | Hero signal-field grid |
 | `--on-ink-2…4` | `#C9CBD2` / `#A3A5AE` / `#80828B` | Secondary text on ink, descending |
