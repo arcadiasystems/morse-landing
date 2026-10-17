@@ -3,6 +3,8 @@ import { DOCS, LLMS_TXT, QUICK_START } from '../lib/links'
 import { Cta } from '../ui/Button'
 import styles from './ForDevelopers.module.css'
 
+const UPLOADER_NPM = 'https://www.npmjs.com/package/@arcadiasystems/morse-uploader'
+
 /* Both snippets follow the published @arcadiasystems/morse-sdk and
    @arcadiasystems/morse-cli quick starts. `adapter`, `walrus` and `markdown`
    come from the SDK quick start's setup step. */
@@ -11,6 +13,7 @@ const SDK_SNIPPET = `import {
   createPublication, morseConfig, StorageMode,
 } from '@arcadiasystems/morse-sdk'
 
+// Walrus Mainnet: morseConfig({ network: 'mainnet' })
 const config = morseConfig({ network: 'testnet' })
 
 // create a publication on-chain
@@ -39,6 +42,7 @@ await addEntryFromBytes(adapter, config, {
 const CLI_INSTALL = 'bun add -g @arcadiasystems/morse-cli'
 
 const CLI_SNIPPET = `# a testnet profile and your key
+# Walrus Mainnet: morse config add mainnet --network mainnet
 morse config add testnet --network testnet
 morse account import
 
@@ -264,7 +268,11 @@ export function ForDevelopers() {
             <a className={styles.inlineLink} href={LLMS_TXT}>
               llms.txt
             </a>
-            , the docs index written for agents.
+            , the docs index written for agents. For web apps,{' '}
+            <a className={styles.inlineLink} href={UPLOADER_NPM} target="_blank" rel="noopener noreferrer">
+              @arcadiasystems/morse-uploader
+            </a>{' '}
+            adds drop-in React upload components.
           </p>
           <div className={styles.buttons}>
             <Cta tone="ink" size="md" href={QUICK_START}>
@@ -276,7 +284,8 @@ export function ForDevelopers() {
           </div>
           <p className={styles.note}>
             Needs Node 18+ or Bun, and a Sui address with SUI for gas and WAL for storage. Both are free on
-            testnet; the quick start links the faucet.
+            testnet; the quick start links the faucet. On Walrus Mainnet they cost real money, and the
+            contracts are unaudited.
           </p>
         </div>
         <CodePanel />
