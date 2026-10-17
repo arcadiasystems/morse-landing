@@ -51,6 +51,8 @@ Every section component is a named export in `src/components/` with one
   `useSyncExternalStore` with a server snapshot, never during render.
 - `public/og.png`, the 1200×630 link preview, is exported from
   `design/og-card.html`. Re-export it after a brand change.
+- `public/apple-touch-icon.png` (180×180) is exported from
+  `design/apple-touch-icon.svg`. Re-export it after a brand change.
 
 ## Rules
 
@@ -84,7 +86,6 @@ Every section component is a named export in `src/components/` with one
 ## Open items from the handover
 
 1. Roadmap dates (Q4 2026, Nov 2026, Q1 2027) are proposals; confirm them.
-2. Apple touch icon: export a 180×180 PNG of the favicon.
 
 ## Verification
 
