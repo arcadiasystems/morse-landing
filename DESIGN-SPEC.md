@@ -42,13 +42,15 @@ Every section component is a named export in `src/components/` with one
   off-screen and under reduced motion. Every animated SVG must use it.
 - `src/lib/links.ts`: every external URL. Do not hard-code URLs in components.
 
-## Build
+## Build and assets
 
 - `vite build` prerenders the page into `dist/index.html` (the `prerender`
   plugin in `vite.config.ts` renders `src/entry-server.tsx`), and
   `src/main.tsx` hydrates it. Render output must not depend on the browser:
   read `window`, `document` or media queries in effects or through
   `useSyncExternalStore` with a server snapshot, never during render.
+- `public/og.png`, the 1200×630 link preview, is exported from
+  `design/og-card.html`. Re-export it after a brand change.
 
 ## Rules
 
@@ -82,9 +84,7 @@ Every section component is a named export in `src/components/` with one
 ## Open items from the handover
 
 1. Roadmap dates (Q4 2026, Nov 2026, Q1 2027) are proposals; confirm them.
-2. `og:image`: add a 1200×630 export of the social card design and its
-   `<meta property="og:image">` once the asset exists.
-3. Apple touch icon: export a 180×180 PNG of the favicon.
+2. Apple touch icon: export a 180×180 PNG of the favicon.
 
 ## Verification
 

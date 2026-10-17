@@ -1,0 +1,147 @@
+<!doctype html>
+<!--
+  Source for public/og.png, the 1200×630 link-preview card.
+  Re-export: open at a 1200×630 viewport, wait for fonts, screenshot the
+  viewport at 1× scale. Colours and sizes follow brand.md and the hero.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Morse social card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bone: #F2EFE8;
+        --ink: #121418;
+        --ink-grid: #23262E;
+        --ultra: #2B3BE0;
+        --ultra-lift: #7D8BFF;
+        --on-ink-2: #C9CBD2;
+        --on-ink-3: #A3A5AE;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--ink); }
+      body { -webkit-font-smoothing: antialiased; }
+
+      .card {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        padding: 64px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: var(--bone);
+      }
+      .field { position: absolute; inset: 0; }
+      .row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand { display: flex; align-items: center; gap: 14px; }
+      .brand svg { width: 44px; height: 44px; }
+      .wordmark {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+      .status {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 16px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--on-ink-3);
+      }
+      .status strong { font-weight: 500; color: var(--bone); }
+
+      h1 {
+        position: relative;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 104px;
+        font-weight: 800;
+        line-height: 0.94;
+        letter-spacing: -0.045em;
+      }
+      h1 em { font-style: normal; color: var(--ultra-lift); }
+
+      .tagline {
+        font-family: 'Instrument Sans', sans-serif;
+        font-size: 28px;
+        color: var(--on-ink-2);
+      }
+      .domain {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--on-ink-3);
+      }
+
+      .grid { stroke: var(--ink-grid); stroke-width: 1; }
+      .pulse { fill: none; stroke: var(--ultra); stroke-linecap: round; stroke-linejoin: round; }
+      .lg { stroke-width: 3; }
+      .sm { stroke-width: 2.2; }
+      .node { fill: var(--ultra); opacity: 0.55; }
+      .fade-stop { stop-color: var(--ink); }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <svg class="field" viewBox="0 0 1200 630" aria-hidden="true">
+        <defs>
+          <filter id="glow" x="-20%" y="-200%" width="140%" height="500%">
+            <feGaussianBlur stdDeviation="6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <!-- Keeps the headline side quiet; the field lives on the right. -->
+          <linearGradient id="fade" x1="0" x2="1">
+            <stop offset="0" class="fade-stop" stop-opacity="1" />
+            <stop offset="0.42" class="fade-stop" stop-opacity="0.85" />
+            <stop offset="0.7" class="fade-stop" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+
+        <path class="grid" d="M0 35H1200M0 115H1200M0 195H1200M0 275H1200M0 355H1200M0 435H1200M0 515H1200M0 595H1200" />
+
+        <g filter="url(#glow)">
+          <path class="pulse lg" transform="translate(860 195)" d="M0 0 H54 V-44 H108 V0 H162 V-44 H216 V0 H270" />
+          <path class="pulse sm" transform="translate(1010 275)" opacity="0.7" d="M0 0 H34 V-26 H68 V0 H102 V-26 H136 V0 H170" />
+          <path class="pulse lg" transform="translate(780 435)" opacity="0.85" d="M0 0 H54 V-44 H108 V0 H162 V-44 H216 V0 H270" />
+          <path class="pulse sm" transform="translate(960 515)" opacity="0.6" d="M0 0 H34 V-26 H68 V0 H102 V-26 H136 V0 H170" />
+          <path class="pulse sm" transform="translate(700 115)" opacity="0.6" d="M0 0 H34 V-26 H68 V0 H102 V-26 H136 V0 H170" />
+        </g>
+
+        <circle class="node" cx="1150" cy="355" r="3" />
+        <circle class="node" cx="1090" cy="115" r="3" />
+        <circle class="node" cx="740" cy="595" r="3" />
+
+        <rect width="1200" height="630" fill="url(#fade)" />
+      </svg>
+
+      <div class="row">
+        <div class="brand">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M8 72 V30 H36 V72 H64 V30 H92 V72" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="wordmark">morse</span>
+        </div>
+        <p class="status">Live on <strong>Walrus Mainnet</strong></p>
+      </div>
+
+      <h1>Content no one<br />can take down.<br /><em>Not even us.</em></h1>
+
+      <div class="row">
+        <p class="tagline">An open CMS protocol on Sui and Walrus</p>
+        <p class="domain">morsecms.xyz</p>
+      </div>
+    </div>
+  </body>
+</html>
