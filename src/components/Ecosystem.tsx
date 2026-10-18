@@ -1,8 +1,9 @@
 import { useId, type ReactNode } from 'react'
-import { DOCS, ECOSYSTEM_LISTING, MORSE_PRESS } from '../lib/links'
+import { DOCS, ECOSYSTEM_LISTING, MORSE_PRESS, UPLOADER_NPM } from '../lib/links'
 import { MORSE_WORDMARK } from '../lib/morse'
 import { MARK_PATH } from '../lib/pulse'
 import { CtaLabel } from '../ui/Button'
+import { MorseMark } from '../ui/MorseMark'
 import { SealWordmark, SuiSymbol, WalrusSymbol } from '../ui/PartnerLogos'
 import { MoveSymbol, TypeScriptLogo } from '../ui/ToolLogos'
 import styles from './Ecosystem.module.css'
@@ -145,8 +146,55 @@ const ENTRIES: EcosystemEntry[] = [
   },
 ]
 
-const PRESS_CATEGORY = 'Publishing'
-const PRESS_TAGS = ['Testnet', 'Open source', 'By Arcadia Systems']
+/** The Morse Press symbol: the mark lifted over a press bar. */
+function PressMark() {
+  return (
+    <svg className={styles.productMark} viewBox="0 0 100 100" aria-hidden="true">
+      <path
+        d={MARK_PATH}
+        transform="translate(0 -12)"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={16}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <rect className={styles.pressBar} x={8} y={80} width={84} height={14} rx={7} />
+    </svg>
+  )
+}
+
+interface FeaturedApp {
+  /** The word set under "morse" in the lockup. */
+  name: string
+  mark: ReactNode
+  title: string
+  description: string
+  /** Highlighted category first, then plain tags. Shown on the lead card only. */
+  tags?: { category: string; others: string[] }
+  cta: string
+  link: string
+}
+
+const MORSE_PRESS_APP: FeaturedApp = {
+  name: 'press',
+  mark: <PressMark />,
+  title: 'A newsletter nobody can take down. Not even us.',
+  description:
+    'The reference app on Morse: write, publish, add members and let agents post, with every post stored on Walrus and recorded on Sui. Open source, so anyone can run their own front end against the same objects.',
+  tags: { category: 'Publishing', others: ['Testnet', 'Open source', 'By Arcadia Systems'] },
+  cta: 'Open Morse Press',
+  link: MORSE_PRESS,
+}
+
+const MORSE_UPLOADER_APP: FeaturedApp = {
+  name: 'uploader',
+  mark: <MorseMark size={40} />,
+  title: 'Encrypted file sharing, as React components.',
+  description: 'Upload files to Walrus, encrypt them with Seal for the wallets you choose, and share a link.',
+  cta: 'View on npm',
+  link: UPLOADER_NPM,
+}
 
 function Tile({ mark, tone, size }: { mark: ReactNode; tone: TileTone; size: 'sm' | 'md' }) {
   const cls = [styles.tile, size === 'md' ? styles.tileMd : '', TILE_CLASS[tone]].filter(Boolean).join(' ')
@@ -161,54 +209,48 @@ function StatusPill({ status }: { status: Status }) {
   return <span className={`${styles.status} ${STATUS_CLASS[status]}`}>{STATUS_LABEL[status]}</span>
 }
 
-/** Morse Press, the reference app: the whole card is the link. */
-function FeaturedProduct() {
+/**
+ * An Arcadia Systems app built on Morse; the whole card is the link. The
+ * lead card carries the morse-code signature, tags and the ultramarine
+ * button; the others are slimmer, with the button beside the text.
+ */
+function FeaturedProduct({ app, lead }: { app: FeaturedApp; lead?: boolean }) {
   const ctaId = useId()
 
   return (
     <a
-      className={`${styles.feat} on-ink`}
-      href={MORSE_PRESS}
+      className={`${styles.feat} ${lead ? '' : styles.featCompact} on-ink`}
+      href={app.link}
       target="_blank"
       rel="noopener noreferrer"
       aria-labelledby={ctaId}
     >
-      <span className={styles.signal} aria-hidden="true">
-        {MORSE_WORDMARK}
-      </span>
+      {lead && (
+        <span className={styles.signal} aria-hidden="true">
+          {MORSE_WORDMARK}
+        </span>
+      )}
       <span className={styles.lockup}>
-        <svg className={styles.pressMark} viewBox="0 0 100 100" aria-hidden="true">
-          <path
-            d={MARK_PATH}
-            transform="translate(0 -12)"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={16}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <rect className={styles.pressBar} x={8} y={80} width={84} height={14} rx={7} />
-        </svg>
+        {app.mark}
         <span className={styles.lockupWords}>
           <span>morse</span>
-          <em>press</em>
+          <em>{app.name}</em>
         </span>
       </span>
-      <h3 className={styles.featTitle}>A newsletter nobody can take down. Not even us.</h3>
-      <p className={styles.featBody}>
-        The reference app on Morse: write, publish, add members and let agents post, with every post stored on
-        Walrus and recorded on Sui. Open source, so anyone can run their own front end against the same objects.
-      </p>
-      <span className={styles.tags}>
-        <span className={`${styles.tag} ${styles.tagOn}`}>{PRESS_CATEGORY}</span>
-        {PRESS_TAGS.map(tag => (
-          <span key={tag} className={styles.tag}>
-            {tag}
-          </span>
-        ))}
-      </span>
-      <CtaLabel tone="ultra" size="md" id={ctaId} className={styles.featCta}>
-        Open Morse Press
+      <h3 className={styles.featTitle}>{app.title}</h3>
+      <p className={styles.featBody}>{app.description}</p>
+      {app.tags && (
+        <span className={styles.tags}>
+          <span className={`${styles.tag} ${styles.tagOn}`}>{app.tags.category}</span>
+          {app.tags.others.map(tag => (
+            <span key={tag} className={styles.tag}>
+              {tag}
+            </span>
+          ))}
+        </span>
+      )}
+      <CtaLabel tone={lead ? 'ultra' : 'outline-light'} size="md" id={ctaId} className={styles.featCta}>
+        {app.cta}
       </CtaLabel>
     </a>
   )
@@ -298,7 +340,10 @@ export function Ecosystem() {
         </div>
 
         <div className={styles.grid}>
-          <FeaturedProduct />
+          <div className={styles.col}>
+            <FeaturedProduct app={MORSE_PRESS_APP} lead />
+            <FeaturedProduct app={MORSE_UPLOADER_APP} />
+          </div>
           <div className={styles.col}>
             <StackCard title="Morse runs on" rows={RUNS_ON} />
             <StackCard title="Build on Morse" rows={BUILD_ON} />

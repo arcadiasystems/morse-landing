@@ -90,6 +90,10 @@ Every section component is a named export in `src/components/` with one
   links the demo blog until it is (`MORSE_PRESS` in `src/lib/links.ts`).
   "Your product here" opens an issue with the `ecosystem` label on
   morse-dcms.
+- Morse Uploader is `@arcadiasystems/morse-uploader` (MIT, public repo
+  arcadiasystems/morse-uploader): React hooks and optional components that
+  upload to Walrus, encrypt with Seal for chosen wallets and share a link.
+  Its Ecosystem card links the npm page.
 
 ## Open items from the handover
 

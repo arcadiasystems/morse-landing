@@ -38,6 +38,7 @@
 /* ── Featured product: the whole card is the link ── */
 .feat {
   position: relative;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -79,7 +80,7 @@
   color: var(--ultra-lift);
 }
 
-.pressMark {
+.productMark {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
@@ -126,6 +127,29 @@
   align-self: flex-start;
   margin-top: auto;
 }
+
+/* A further app under the lead card: text on the left, button on the right. */
+.featCompact {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 24px;
+  row-gap: 10px;
+  padding: 26px 36px;
+}
+.featCompact > * { grid-column: 1; }
+.featCompact .featTitle {
+  max-width: none;
+  font-size: clamp(20px, 1.9vw, 24px);
+}
+.featCompact .featBody { font-size: 15px; }
+.featCompact .featCta {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  margin-top: 0;
+}
 @media (hover: hover) {
   .feat:hover .featCta { transform: translateY(-1px); }
 }
@@ -139,6 +163,7 @@
 }
 
 .stack {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -343,8 +368,13 @@
   .entries { grid-template-columns: 1fr; }
 
   .feat { padding: 26px 22px; }
+  .featCompact {
+    display: flex;
+    align-items: stretch;
+  }
   .signal { display: none; }
-  .featCta {
+  .featCta,
+  .featCompact .featCta {
     align-self: stretch;
     justify-content: center;
   }
