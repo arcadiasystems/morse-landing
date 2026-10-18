@@ -84,8 +84,8 @@ Every section component is a named export in `src/components/` with one
 - CLI flow: `config add`, `account import`, `publication create`,
   `collection create`, `entry add`, `cap issue`, `entry list`. There is no
   `morse publish` or `morse cap grant`.
-- Seal policies today: public and publisher. The subscription policy is
-  reserved, not shipped, so copy must not promise subscriber gating.
+- Seal gates content today, subscriber gating included (product owner's
+  call, 2026-10-18).
 - Indexer and content API are planned.
 - Morse Press (`press.morsecms.xyz`) is not live yet; the Ecosystem card
   links the demo blog until it is (`MORSE_PRESS` in `src/lib/links.ts`).
