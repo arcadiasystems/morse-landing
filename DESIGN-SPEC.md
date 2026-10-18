@@ -75,7 +75,8 @@ Every section component is a named export in `src/components/` with one
 ## Verified facts (checked against morse-dcms, 2026-10-15)
 
 - Network status on the page is "Live on Walrus mainnet" (product owner's
-  call, 2026-10-15). Contracts are unaudited.
+  call, 2026-10-15). The site does not mention audit status (product owner's
+  call, 2026-10-18).
 - Packages: `@arcadiasystems/morse-sdk`, `@arcadiasystems/morse-cli`. Licence MIT.
 - SDK flow: `morseConfig` → `createPublication` → `createCollection` →
   `addEntryFromBytes` (`upload: { epochs, deletable: true }` is required;

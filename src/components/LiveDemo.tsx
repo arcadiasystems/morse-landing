@@ -27,7 +27,7 @@ export function LiveDemo() {
             </Cta>
           </div>
           <p className={styles.note}>
-            Testnet data may reset. For content you mean to keep, publish on mainnet, where Walrus storage is
+            Testnet data may reset. For content you mean to keep, publish on Walrus Mainnet, where storage is
             funded per epoch and renewable.
           </p>
         </div>

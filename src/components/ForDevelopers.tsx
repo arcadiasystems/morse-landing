@@ -11,8 +11,8 @@ const SDK_SNIPPET = `import {
   createPublication, morseConfig, StorageMode,
 } from '@arcadiasystems/morse-sdk'
 
-// Walrus Mainnet: morseConfig({ network: 'mainnet' })
-const config = morseConfig({ network: 'testnet' })
+// Walrus Mainnet; use 'testnet' to try it free
+const config = morseConfig({ network: 'mainnet' })
 
 // create a publication on-chain
 const { publicationId, publisherCapId } =
@@ -39,9 +39,9 @@ await addEntryFromBytes(adapter, config, {
 
 const CLI_INSTALL = 'bun add -g @arcadiasystems/morse-cli'
 
-const CLI_SNIPPET = `# a testnet profile and your key
-# Walrus Mainnet: morse config add mainnet --network mainnet
-morse config add testnet --network testnet
+const CLI_SNIPPET = `# a Walrus Mainnet profile and your key
+# try it free first: morse config add testnet --network testnet
+morse config add mainnet --network mainnet
 morse account import
 
 # create a publication and a collection on Sui
@@ -71,14 +71,14 @@ const TABS: CodeTab[] = [
   {
     key: 'sdk',
     label: 'TypeScript',
-    caption: 'morse-sdk · testnet',
+    caption: 'morse-sdk · mainnet',
     code: SDK_SNIPPET,
     commentPrefix: '//',
   },
   {
     key: 'cli',
     label: 'CLI',
-    caption: 'morse-cli · testnet',
+    caption: 'morse-cli · mainnet',
     code: CLI_SNIPPET,
     commentPrefix: '#',
     install: CLI_INSTALL,
@@ -281,9 +281,8 @@ export function ForDevelopers() {
             </Cta>
           </div>
           <p className={styles.note}>
-            Needs Node 18+ or Bun, and a Sui address with SUI for gas and WAL for storage. Both are free on
-            testnet; the quick start links the faucet. On Walrus Mainnet they cost real money, and the
-            contracts are unaudited.
+            Runs on Walrus Mainnet with Node 18+ or Bun and a Sui address holding SUI for gas and WAL for
+            storage. To try it free first, use testnet; the quick start links the faucet.
           </p>
         </div>
         <CodePanel />
