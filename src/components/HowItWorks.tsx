@@ -15,7 +15,7 @@ const STEPS = [
   },
   {
     title: 'Record',
-    body: 'A Move contract on Sui records every blob reference and every capability change. Permissions are objects.',
+    body: 'A Move contract on Sui records every blob reference and every permission change. Permissions are objects.',
     detail: 'Sui Move contracts',
   },
   {
@@ -26,7 +26,7 @@ const STEPS = [
 ]
 
 const CAPABILITIES = [
-  { title: 'On-chain governance', body: 'Editor and admin rights are Sui objects. Grant, revoke, prove.' },
+  { title: 'On-chain governance', body: 'Editor and admin permissions are Sui objects. Grant, revoke, prove.' },
   { title: 'Verifiable revisions', body: 'Every edit has an on-chain proof. No hidden changes.' },
   { title: 'Seal-gated access', body: 'Policies enforced by keys, not by promises.' },
   { title: 'AI-readable', body: 'Structured content any agent can query and operate.' },
