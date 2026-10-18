@@ -34,6 +34,8 @@ interface StackRow {
   name: string
   detail: string
   status: Status
+  /** Docs page the row opens; rows without one are plain text. */
+  link?: string
 }
 
 const RUNS_ON: StackRow[] = [
@@ -69,13 +71,21 @@ const RUNS_ON: StackRow[] = [
 ]
 
 const BUILD_ON: StackRow[] = [
-  { mark: '>_', tone: 'ink', name: 'morse-cli', detail: 'Publish from a terminal or CI', status: 'core' },
+  {
+    mark: '>_',
+    tone: 'ink',
+    name: 'morse-cli',
+    detail: 'Publish from a terminal or CI',
+    status: 'core',
+    link: `${DOCS}/cli-overview.html`,
+  },
   {
     mark: <TypeScriptLogo className={styles.logoTypeScript} />,
     tone: 'ink',
     name: 'morse-sdk',
     detail: 'TypeScript, browser and server',
     status: 'core',
+    link: `${DOCS}/sdk-overview.html`,
   },
   {
     mark: <MoveSymbol className={styles.logoMove} />,
@@ -83,6 +93,7 @@ const BUILD_ON: StackRow[] = [
     name: 'Contracts',
     detail: 'Call the Move package directly',
     status: 'core',
+    link: `${DOCS}/contracts-overview.html`,
   },
 ]
 
@@ -208,16 +219,29 @@ function StackCard({ title, rows }: { title: string; rows: StackRow[] }) {
     <div className={styles.stack}>
       <h3 className={styles.stackTitle}>{title}</h3>
       <ul className={styles.stackList}>
-        {rows.map(row => (
-          <li key={row.name} className={styles.stackRow}>
-            <Tile mark={row.mark} tone={row.tone} size="sm" />
-            <div>
-              <strong className={styles.stackName}>{row.name}</strong>
-              <span className={styles.stackDetail}>{row.detail}</span>
-            </div>
-            <StatusPill status={row.status} />
-          </li>
-        ))}
+        {rows.map(row => {
+          const body = (
+            <>
+              <Tile mark={row.mark} tone={row.tone} size="sm" />
+              <span>
+                <strong className={styles.stackName}>{row.name}</strong>
+                <span className={styles.stackDetail}>{row.detail}</span>
+              </span>
+              <StatusPill status={row.status} />
+            </>
+          )
+          return (
+            <li key={row.name} className={styles.stackRow}>
+              {row.link ? (
+                <a className={`${styles.stackBody} ${styles.stackLink}`} href={row.link}>
+                  {body}
+                </a>
+              ) : (
+                <div className={styles.stackBody}>{body}</div>
+              )}
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

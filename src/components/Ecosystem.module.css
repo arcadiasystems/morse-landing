@@ -165,10 +165,6 @@
 }
 
 .stackRow {
-  display: grid;
-  grid-template-columns: 36px 1fr auto;
-  align-items: center;
-  gap: 12px;
   padding: 11px 0;
   border-top: 1px solid var(--line);
   font-size: 14.5px;
@@ -177,6 +173,27 @@
   padding-top: 0;
   border-top: 0;
 }
+
+.stackBody {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.stackLink .stackName {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition:
+    color var(--t-micro) ease,
+    text-decoration-color var(--t-micro) ease;
+}
+.stackLink:hover .stackName {
+  color: var(--ultra);
+  text-decoration-color: currentColor;
+}
+.stackLink:focus-visible { border-radius: 12px; }
 
 .stackName {
   display: block;
