@@ -4,6 +4,7 @@ import { MORSE_WORDMARK } from '../lib/morse'
 import { MARK_PATH } from '../lib/pulse'
 import { CtaLabel } from '../ui/Button'
 import { SealWordmark, SuiSymbol, WalrusSymbol } from '../ui/PartnerLogos'
+import { MoveSymbol, TypeScriptLogo } from '../ui/ToolLogos'
 import styles from './Ecosystem.module.css'
 
 type Status = 'live' | 'exploring' | 'core'
@@ -69,8 +70,20 @@ const RUNS_ON: StackRow[] = [
 
 const BUILD_ON: StackRow[] = [
   { mark: '>_', tone: 'ink', name: 'morse-cli', detail: 'Publish from a terminal or CI', status: 'core' },
-  { mark: 'TS', tone: 'ink', name: 'morse-sdk', detail: 'TypeScript, browser and server', status: 'core' },
-  { mark: 'Mv', tone: 'ink', name: 'Contracts', detail: 'Call the Move package directly', status: 'core' },
+  {
+    mark: <TypeScriptLogo className={styles.logoTypeScript} />,
+    tone: 'ink',
+    name: 'morse-sdk',
+    detail: 'TypeScript, browser and server',
+    status: 'core',
+  },
+  {
+    mark: <MoveSymbol className={styles.logoMove} />,
+    tone: 'ink',
+    name: 'Contracts',
+    detail: 'Call the Move package directly',
+    status: 'core',
+  },
 ]
 
 interface EntryBase {

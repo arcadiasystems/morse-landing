@@ -87,6 +87,10 @@ real feature status. Roadmap statuses: LIVE, BUILDING, PLANNED, PROPOSED.
   lockup is the logomark and wordmark from mystenlabs.com, spaced as in
   that site's header. Walrus Memory has no mark of its own, so it carries
   the Walrus symbol.
+- Language marks (TypeScript, Move) live in `src/ui/ToolLogos.tsx` and keep
+  their own colours, as their guidelines ask: the TypeScript mark from the
+  typescriptlang.org/branding pack, the Move symbol from the
+  move-language/move repository. They sit unaltered inside an ink tile.
 - Network status reads "Live on Walrus Mainnet", in the hero badge and the
   roadmap.
 - No live counters (entries, publications, revisions) until they are read
