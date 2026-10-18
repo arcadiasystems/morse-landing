@@ -46,7 +46,7 @@ export function FinalCta() {
         <h2 id="final-title" className={styles.title}>
           Your content.
           <br />
-          Your contracts.
+          Your keys.
         </h2>
         <div className={styles.buttons}>
           <Cta tone="ink" href={QUICK_START}>
