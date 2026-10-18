@@ -252,7 +252,6 @@
 }
 .tileUltra { background: var(--ultra); }
 .tileStone { background: var(--stone); }
-.tileLive  { background: var(--live); }
 .tileOutline {
   background: var(--paper);
   border: 1px solid var(--line-2);
@@ -280,9 +279,10 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
+/* Filled accent means live, as on the Roadmap; every other status is lighter. */
 .statusLive {
-  background: var(--live-tint);
-  color: var(--live);
+  background: var(--ultra);
+  color: #fff;
 }
 .statusExploring {
   border: 1px dashed var(--line-2);

@@ -17,8 +17,14 @@ Two square humps: the morse pulse, closed into a letterform. It is drawn in
 an ink rounded square.
 
 The **pulse** is the same shape laid on a wire (`pulsePath()` in
-`src/lib/pulse.ts`). It is the page's only motif: the hero signal field, the
-How-it-works wire, the use-case illustrations and the closing band all use it.
+`src/lib/pulse.ts`). It is the page's motif: the hero signal field and badge
+trace, the How-it-works wire, the publish and gate use-case illustrations,
+the closing band and the link-preview card all use it. The word MORSE in
+dot-dash (`MORSE_WORDMARK`) is its typographic echo, used in the footer and
+on the Morse Press card.
+
+A filled accent pill means LIVE, on the Roadmap and in the Ecosystem
+section alike; every other status is an outline or a tint.
 
 ## Colour
 
@@ -37,7 +43,6 @@ nowhere else; SVG illustrations read the same tokens through CSS classes.
 | `--line` | `#DAD6CC` | Rules and card borders on bone |
 | `--line-2` | `#BDB8AC` | Dashed and outlined borders on bone |
 | `--ultra-tint` | `#EEF0FF` | Ground for ultramarine labels on paper |
-| `--live` / `--live-tint` | `#0F7A5C` / `#EAF6F0` | "Live" status pill and tile only |
 | `--ink-line` | `#2A2C33` | Rules on ink |
 | `--ink-grid` | `#23262E` | Hero signal-field grid |
 | `--on-ink-2…4` | `#C9CBD2` / `#A3A5AE` / `#80828B` | Secondary text on ink, descending |

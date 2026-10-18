@@ -17,14 +17,13 @@ const STATUS_CLASS: Record<Status, string> = {
   core: styles.statusCore,
 }
 
-type TileTone = 'ink' | 'ultra' | 'stone' | 'outline' | 'live' | 'open'
+type TileTone = 'ink' | 'ultra' | 'stone' | 'outline' | 'open'
 
 const TILE_CLASS: Record<TileTone, string> = {
   ink: '',
   ultra: styles.tileUltra,
   stone: styles.tileStone,
   outline: styles.tileOutline,
-  live: styles.tileLive,
   open: styles.tileOpen,
 }
 
@@ -111,7 +110,7 @@ interface EntryBase {
 }
 
 /** A listed product, or the open slot that invites the next one. */
-type EcosystemEntry = (EntryBase & { status: 'live'; tone: 'ultra' | 'live' }) | (EntryBase & { status: 'open' })
+type EcosystemEntry = (EntryBase & { status: 'live'; tone: 'ultra' | 'ink' }) | (EntryBase & { status: 'open' })
 
 /* Adding a product to the bottom row is one entry here, before the open slot. */
 const ENTRIES: EcosystemEntry[] = [
@@ -132,7 +131,7 @@ const ENTRIES: EcosystemEntry[] = [
     description: 'Bring a Hugo, Astro or Markdown site in as one entry per post, re-runnable, with CI publishing on push.',
     link: `${DOCS}/import-a-site.html`,
     mark: '↗',
-    tone: 'live',
+    tone: 'ink',
   },
   {
     name: 'Your product here',
