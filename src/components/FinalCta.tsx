@@ -1,4 +1,4 @@
-import { DEMO_BLOG, QUICK_START } from '../lib/links'
+import { DEMO_BLOG, QUICK_START_CLI } from '../lib/links'
 import { useSmilPlayback } from '../lib/useSmilPlayback'
 import { Cta } from '../ui/Button'
 import { TravellingPulse } from '../ui/TravellingPulse'
@@ -49,7 +49,7 @@ export function FinalCta() {
           Your keys.
         </h2>
         <div className={styles.buttons}>
-          <Cta tone="ink" href={QUICK_START}>
+          <Cta tone="ink" href={QUICK_START_CLI}>
             Start building
           </Cta>
           <Cta tone="outline-white" href={DEMO_BLOG} external>

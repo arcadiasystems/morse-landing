@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { DOCS, GITHUB, QUICK_START } from '../lib/links'
+import { DOCS, GITHUB, QUICK_START_CLI } from '../lib/links'
 import { MorseMark } from '../ui/MorseMark'
 import styles from './SiteNav.module.css'
 
@@ -75,7 +75,7 @@ export function SiteNav() {
           </ul>
         </nav>
 
-        <a className={styles.cta} href={QUICK_START}>
+        <a className={styles.cta} href={QUICK_START_CLI}>
           Start building
         </a>
 
@@ -118,7 +118,7 @@ export function SiteNav() {
             </a>
           </li>
           <li>
-            <a className={`${styles.sheetLink} ${styles.sheetCta}`} href={QUICK_START} onClick={close}>
+            <a className={`${styles.sheetLink} ${styles.sheetCta}`} href={QUICK_START_CLI} onClick={close}>
               Start building
             </a>
           </li>

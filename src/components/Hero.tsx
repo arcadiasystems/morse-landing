@@ -1,4 +1,4 @@
-import { DEMO_BLOG, QUICK_START } from '../lib/links'
+import { DEMO_BLOG, QUICK_START_CLI } from '../lib/links'
 import { useSmilPlayback } from '../lib/useSmilPlayback'
 import { Cta } from '../ui/Button'
 import { TravellingPulse } from '../ui/TravellingPulse'
@@ -140,7 +140,7 @@ export function Hero() {
           Every entry is anchored on-chain, stored on Walrus, and gated by keys you hold.
         </p>
         <div className={styles.ctas}>
-          <Cta tone="bone" href={QUICK_START} hint="5 min, CLI">
+          <Cta tone="bone" href={QUICK_START_CLI} hint="5 min, CLI">
             Start building
           </Cta>
           <Cta tone="outline-light" href={DEMO_BLOG} hint="testnet wallet" external>
