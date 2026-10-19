@@ -181,7 +181,7 @@ const MORSE_PRESS_APP: FeaturedApp = {
   title: 'A newsletter nobody can take down. Not even us.',
   description:
     'The reference app on Morse: write, publish, add members and let agents post, with every post stored on Walrus and recorded on Sui. Open source, so anyone can run their own front end against the same objects.',
-  tags: { category: 'Publishing', others: ['Testnet', 'Open source', 'By Arcadia Systems'] },
+  tags: { category: 'Publishing', others: ['Open source', 'By Arcadia Systems'] },
   cta: 'Open Morse Press',
   link: MORSE_PRESS,
 }

@@ -87,8 +87,9 @@ Every section component is a named export in `src/components/` with one
 - Seal gates content today, subscriber gating included (product owner's
   call, 2026-10-18).
 - Indexer and content API are planned.
-- Morse Press (`press.morsecms.xyz`) is not live yet; the Ecosystem card
-  links the demo blog until it is (`MORSE_PRESS` in `src/lib/links.ts`).
+- Morse Press (`press.morsecms.xyz`) is not live yet and launches on Walrus
+  Mainnet; the Ecosystem card links the demo blog until it is (`MORSE_PRESS`
+  in `src/lib/links.ts`) and carries no network tag.
   "Your product here" opens an issue with the `ecosystem` label on
   morse-dcms.
 - Morse Uploader is `@arcadiasystems/morse-uploader` (MIT, public repo
