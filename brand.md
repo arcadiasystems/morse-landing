@@ -1,7 +1,7 @@
 # Brand — Morse Protocol
 
 _Status: active_
-_Direction: Bone & Ultramarine (October 2026 redesign; replaces Signal Brutalist)_
+_Direction: Bone & Ultramarine (October 2026 redesign; site v3 "one kit, two products", November 2026)_
 
 ## Mark
 
@@ -17,14 +17,25 @@ Two square humps: the morse pulse, closed into a letterform. It is drawn in
 an ink rounded square.
 
 The **pulse** is the same shape laid on a wire (`pulsePath()` in
-`src/lib/pulse.ts`). It is the page's motif: the hero signal field and badge
-trace, the How-it-works wire, the publish and gate use-case illustrations,
-the closing band and the link-preview card all use it. The word MORSE in
-dot-dash (`MORSE_WORDMARK`) is its typographic echo, used in the footer and
-on the Morse Press card.
+`src/lib/pulse.ts`). It is the page's motif: the hero signal field, the
+How-it-works wire, the plug on the Morse Agents card, the closing band and
+the link-preview card all use it. The word MORSE in dot-dash
+(`MORSE_WORDMARK`) is its typographic echo, used in the footer and on the
+Morse Uploader card.
 
-A filled accent pill means LIVE, on the Roadmap and in the Ecosystem
-section alike; every other status is an outline or a tint.
+**Morse glyphs** are the icon system: rows of dots and dashes in
+`currentColor`, rendered by `src/ui/Morse.tsx` from the text they key out, so
+they are always real Morse. KIT sits under the headline and in the manifest
+header, each kit job carries its initial, and each numbered section eyebrow
+carries its number. They are decorative and `aria-hidden`.
+
+**Product lockups** stack "morse" over the product word in the accent
+(`src/ui/Lockup.tsx`). Morse Agent Publisher and Morse Site Importer raise
+the mark over one accent in the bottom band (`src/ui/ProductMarks.tsx`).
+
+A filled accent pill means LIVE on the Roadmap; every other status there is
+an outline. Elsewhere a chip says what is true: green for live, an
+ultramarine tint for dated and next, a dashed outline for not live.
 
 ## Colour
 
@@ -40,15 +51,21 @@ nowhere else; SVG illustrations read the same tokens through CSS classes.
 | `--ultra-lift` | `#7D8BFF` | The accent on ink |
 | `--stone` | `#5F6168` | Captions and labels on bone |
 | `--ink-soft` | `#45474E` | Body copy on bone |
+| `--struck` | `#6F6B62` | Struck-through display text on bone (4.6:1) |
 | `--line` | `#DAD6CC` | Rules and card borders on bone |
 | `--line-2` | `#BDB8AC` | Dashed and outlined borders on bone |
 | `--ultra-tint` | `#EEF0FF` | Ground for ultramarine labels on paper |
+| `--ink-2` | `#1B1D24` | Raised plates on ink |
 | `--ink-line` | `#2A2C33` | Rules on ink |
 | `--ink-grid` | `#23262E` | Hero signal-field grid |
-| `--on-ink-2…4` | `#C9CBD2` / `#A3A5AE` / `#80828B` | Secondary text on ink, descending |
+| `--on-ink-2…4` | `#C9CBD2` / `#A3A5AE` / `#8E909A` | Secondary text on ink, descending |
+| `--code` | `#E9E7E0` | Code on ink |
+| `--ok`, `--ok-bg`, `--ok-line` | `#0F7A5C` / `#EAF6F0` / `#A9DCC5` | Live status on bone |
+| `--ok-lift` | `#6FD3A6` | Live status on ink |
+| `--warn`, `--warn-bg`, `--warn-line` | `#8A5A00` / `#FFF6E0` / `#F0D48A` | Caution status; used by the product pages |
 
-`--on-ink-4` is the floor for text on ink (4.8:1). The handover's `#7A7C85`
-measured 4.4:1 and failed AA for the 11–12px labels it carries.
+`--on-ink-4` is the floor for text on ink (5.8:1). Nothing on the page is set
+under 11px.
 
 ## Type
 
@@ -61,18 +78,23 @@ Single Google Fonts request in `index.html`.
 
 ## Layout
 
-- Grounds alternate: ink hero, bone, ink (How it works), bone (Developers,
-  See it live, Ecosystem), ink (Roadmap), ultramarine band, ink footer.
-- Container 1200px, gutter 32px (20px under 860px). One breakpoint: 860px.
+- Grounds alternate: ink hero, bone (statement, kit), ink (How it works),
+  bone (built on the kit), ink (Roadmap), ultramarine band, ink footer.
+- Container 1200px, gutter 32px (20px under 860px). One breakpoint, 860px,
+  with one exception: the hero stacks at 1000px.
 - Cards radius 22px; buttons and nav are pills.
 
 ## Motion
 
-- All ambient motion is SVG SMIL: no animation library and no JS timers.
-  Every animated SVG goes through `useSmilPlayback`, which pauses it
+- No animation library and no JS timers. The travelling pulses are SVG SMIL:
+  every animated SVG goes through `useSmilPlayback`, which pauses it
   off-screen and holds it on its opening frame under `prefers-reduced-motion`
   (SMIL ignores CSS `animation` rules, so CSS alone cannot stop it).
-- Hero copy rises in sequence on load (CSS, motion-safe only).
+- The hero devices are CSS animations, all inside
+  `prefers-reduced-motion: no-preference`: copy rises in sequence, KIT keys
+  in, the signal board lights one row at a time on a 5 second loop, and the
+  status label pings, scrolls its tape and sends a light round its frame.
+  The switchboard sends a pulse down each cord.
 - Hover: buttons lift 1px, cards 3px with a soft shadow, on hover-capable
   devices only.
 
@@ -80,24 +102,29 @@ Single Google Fonts request in `index.html`.
 
 Plain, specific, declarative, sentence case. Every product claim must match
 the `arcadiasystems/morse-dcms` repository: real package names
-(`@arcadiasystems/morse-sdk`, `@arcadiasystems/morse-cli`), real commands,
-real feature status. Roadmap statuses: LIVE, BUILDING, PLANNED, PROPOSED.
+(`@arcadiasystems/morse-sdk`, `@arcadiasystems/morse-cli`,
+`@arcadiasystems/morse-uploader`), real commands, real feature status.
+Roadmap statuses: LIVE, BUILDING, PLANNED, PROPOSED.
+
+Copy rules for every string:
+
+- Not used anywhere: "one click", "plug and play", "immutable", "cannot be
+  taken down", and the old line "Content no one can take down. Not even us."
+- No em dashes.
+- The network is "Walrus Mainnet", never "Sui mainnet".
+- Nothing labelled Next, Planned, In design, Proposed or Concept is described
+  as live.
+- Morse's own fee is "$0 today". Keep the word "today" until a fee exists.
 
 ## Rules
 
 - Partner marks are official artwork only, kept in
   `src/ui/PartnerLogos.tsx` and recoloured only through `currentColor`.
-  Walrus, Sui and Seal come from the SVGs on walrus.xyz (the Sui drop is
-  also used alone, framed to its own bounds); the Mysten Labs
+  Walrus, Sui and Seal come from the SVGs on walrus.xyz; the Mysten Labs
   lockup is the logomark and wordmark from mystenlabs.com, spaced as in
-  that site's header. Walrus Memory has no mark of its own, so it carries
-  the Walrus symbol.
-- Language marks (TypeScript, Move) live in `src/ui/ToolLogos.tsx` and keep
-  their own colours, as their guidelines ask: the TypeScript mark from the
-  typescriptlang.org/branding pack, the Move symbol from the
-  move-language/move repository. They sit unaltered inside an ink tile.
-- Network status reads "Live on Walrus Mainnet", in the hero badge and the
-  roadmap.
+  that site's header. They appear only in the supporters shelf.
+- Network status reads LIVE, WALRUS MAINNET in the hero status label and
+  "Protocol live on Walrus Mainnet" in the roadmap.
 - No live counters (entries, publications, revisions) until they are read
   from chain. Never placeholders, fake stats or fake logos.
 - Keep "storage is funded per epoch and renewable" visible near any
