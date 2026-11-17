@@ -1,11 +1,12 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { DOCS, GITHUB, QUICK_START_CLI } from '../lib/links'
+import { AGENTS, DOCS, GITHUB, QUICK_START_CLI, RECEIPTS } from '../lib/links'
 import { MorseMark } from '../ui/MorseMark'
-import styles from './SiteNav.module.css'
 
 const SECTION_LINKS = [
-  { label: 'Use cases', href: '#use-cases' },
+  { label: 'The kit', href: '#kit' },
   { label: 'How it works', href: '#how' },
+  { label: 'Receipts', href: RECEIPTS },
+  { label: 'Agents', href: AGENTS },
   { label: 'Ecosystem', href: '#ecosystem' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Docs', href: `${DOCS}/` },
@@ -54,35 +55,31 @@ export function SiteNav() {
   const close = () => setOpen(false)
 
   return (
-    <header ref={headerRef} className={`${styles.header} on-ink`}>
-      <div className={styles.pill}>
-        <a className={styles.brand} href="#top" aria-label="Morse home">
+    <header ref={headerRef} className="nav on-ink">
+      <div className="nav__pill">
+        <a className="nav__brand" href="#top" aria-label="Morse home">
           <MorseMark size={26} />
-          <span className={styles.wordmark} aria-hidden="true">
-            morse
-          </span>
+          <span aria-hidden="true">morse</span>
         </a>
 
         <nav aria-label="Primary">
-          <ul className={styles.links}>
+          <ul className="nav__links">
             {SECTION_LINKS.map(link => (
               <li key={link.label}>
-                <a className={styles.link} href={link.href}>
-                  {link.label}
-                </a>
+                <a href={link.href}>{link.label}</a>
               </li>
             ))}
           </ul>
         </nav>
 
-        <a className={styles.cta} href={QUICK_START_CLI}>
+        <a className="nav__cta" href={QUICK_START_CLI}>
           Start building
         </a>
 
         <button
           ref={burgerRef}
           type="button"
-          className={styles.burger}
+          className="nav__burger"
           aria-expanded={open}
           aria-controls={sheetId}
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -103,22 +100,22 @@ export function SiteNav() {
         </button>
       </div>
 
-      <nav id={sheetId} className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`} aria-label="Mobile">
-        <ul className={styles.sheetList}>
+      <nav id={sheetId} className={open ? 'nav__sheet is-open' : 'nav__sheet'} aria-label="Mobile">
+        <ul>
           {SECTION_LINKS.map(link => (
             <li key={link.label}>
-              <a className={styles.sheetLink} href={link.href} onClick={close}>
+              <a href={link.href} onClick={close}>
                 {link.label}
               </a>
             </li>
           ))}
           <li>
-            <a className={styles.sheetLink} href={GITHUB} target="_blank" rel="noopener noreferrer" onClick={close}>
+            <a href={GITHUB} target="_blank" rel="noopener noreferrer" onClick={close}>
               GitHub
             </a>
           </li>
           <li>
-            <a className={`${styles.sheetLink} ${styles.sheetCta}`} href={QUICK_START_CLI} onClick={close}>
+            <a className="cta" href={QUICK_START_CLI} onClick={close}>
               Start building
             </a>
           </li>

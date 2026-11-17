@@ -1,27 +1,27 @@
 import { MystenLabsLogo, SealWordmark, SuiLogo, WalrusWordmark } from '../ui/PartnerLogos'
-import styles from './Supporters.module.css'
 
-/** Partner shelf: a paper card that straddles the hero's bottom edge. */
+/** Partner shelf: a paper card that straddles the hero's bottom edge. Cells stay unlinked. */
 export function Supporters() {
   return (
-    <section className={styles.supporters} aria-labelledby="supporters-title">
+    <section className="shelf-sec" aria-labelledby="supporters-title">
       <div className="container">
-        <div className={styles.shelf}>
-          <h2 id="supporters-title" className={`eyebrow ${styles.label}`}>
-            Supported by
-          </h2>
-          <ul className={styles.logos}>
-            <li className={styles.cell}>
-              <MystenLabsLogo className={styles.mysten} />
+        <div className="shelf">
+          <div className="shelf__label">
+            <h2 id="supporters-title">Supported by</h2>
+            <span>Walrus Foundation grant · open source, MIT</span>
+          </div>
+          <ul className="shelf__logos">
+            <li>
+              <MystenLabsLogo className="mysten" />
             </li>
-            <li className={styles.cell}>
-              <WalrusWordmark className={styles.walrus} />
+            <li>
+              <WalrusWordmark className="walrus" />
             </li>
-            <li className={styles.cell}>
-              <SuiLogo className={styles.sui} />
+            <li>
+              <SuiLogo className="sui" />
             </li>
-            <li className={styles.cell}>
-              <SealWordmark className={styles.seal} />
+            <li>
+              <SealWordmark className="seal" />
             </li>
           </ul>
         </div>

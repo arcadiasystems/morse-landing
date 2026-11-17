@@ -1,14 +1,14 @@
-import { DEMO_BLOG, QUICK_START_CLI } from '../lib/links'
+import { AGENTS, QUICK_START_CLI, RECEIPTS } from '../lib/links'
+import { useDaysSince } from '../lib/useDaysSince'
 import { useSmilPlayback } from '../lib/useSmilPlayback'
 import { Cta } from '../ui/Button'
+import { Morse, MorseMarks } from '../ui/Morse'
 import { TravellingPulse } from '../ui/TravellingPulse'
-import { WalrusBadge } from './WalrusBadge'
-import styles from './Hero.module.css'
 
 /* Signal field, drawn on a 1440×900 canvas that covers the hero. */
 const PULSE_SIZES = {
-  lg: { unit: 54, height: 44, from: -300, to: 1740, className: styles.pulseLg },
-  sm: { unit: 34, height: 26, from: -200, to: 1700, className: styles.pulseSm },
+  lg: { unit: 54, height: 44, from: -300, to: 1740, className: 'pulse-lg' },
+  sm: { unit: 34, height: 26, from: -200, to: 1700, className: 'pulse-sm' },
 }
 
 const LANES: { y: number; size: keyof typeof PULSE_SIZES; duration: number; begin: number; opacity?: number }[] = [
@@ -42,7 +42,7 @@ function SignalField() {
   return (
     <svg
       ref={svgRef}
-      className={styles.field}
+      className="hero__field"
       viewBox="0 0 1440 900"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
@@ -56,21 +56,21 @@ function SignalField() {
           </feMerge>
         </filter>
         <radialGradient id="hero-vignette" cx="50%" cy="48%" r="70%">
-          <stop offset="0" className={styles.inkStop} stopOpacity="0" />
-          <stop offset="0.65" className={styles.inkStop} stopOpacity="0.35" />
-          <stop offset="1" className={styles.inkStop} stopOpacity="0.95" />
+          <stop offset="0" stopOpacity="0" />
+          <stop offset="0.65" stopOpacity="0.35" />
+          <stop offset="1" stopOpacity="0.95" />
         </radialGradient>
         <linearGradient id="hero-fade-x" x1="0" x2="1">
-          <stop offset="0" className={styles.inkStop} />
-          <stop offset="0.12" className={styles.inkStop} stopOpacity="0" />
-          <stop offset="0.88" className={styles.inkStop} stopOpacity="0" />
-          <stop offset="1" className={styles.inkStop} />
+          <stop offset="0" />
+          <stop offset="0.12" stopOpacity="0" />
+          <stop offset="0.88" stopOpacity="0" />
+          <stop offset="1" />
         </linearGradient>
       </defs>
 
-      <path className={styles.gridLines} d={LANES.map(lane => `M0 ${lane.y}H1440`).join('')} />
+      <path className="grid" d={LANES.map(lane => `M0 ${lane.y}H1440`).join('')} />
 
-      <g className={styles.nodes}>
+      <g className="nodes">
         {NODES.map(([x, y]) => (
           <circle key={`${x}-${y}`} cx={x} cy={y} r={3} />
         ))}
@@ -96,7 +96,7 @@ function SignalField() {
         })}
       </g>
 
-      <g className={styles.ripples}>
+      <g className="ripples">
         {RIPPLES.map(ripple => (
           <circle key={`${ripple.x}-${ripple.y}`} cx={ripple.x} cy={ripple.y} r={6}>
             <animate
@@ -123,30 +123,136 @@ function SignalField() {
   )
 }
 
+/** Mainnet launch day. The status label counts days from it, so it is public and exact. */
+const MAINNET_SINCE = '2026-09-09'
+
+/** One pass of the telegraph tape; two passes make the seamless loop. */
+function TapeWord() {
+  return (
+    <>
+      <MorseMarks word="MORSE" />
+      <i className="w" />
+    </>
+  )
+}
+
+/**
+ * Hero status label: LIVE with a lamp, the network, days since mainnet, and
+ * MORSE scrolling past as telegraph tape. Status only; the headline carries
+ * the message.
+ */
+function StatusLabel() {
+  const days = useDaysSince(MAINNET_SINCE)
+
+  return (
+    <p className="hstat r1">
+      <span className="hstat__live">
+        <i aria-hidden="true" />
+        LIVE
+      </span>
+      <span className="hstat__net">WALRUS MAINNET</span>
+      <span className="hstat__day" data-since={MAINNET_SINCE}>
+        {days === null ? 'SINCE 9 SEP' : `DAY ${days}`}
+      </span>
+      <span className="hstat__tape" aria-hidden="true">
+        <span className="hstat__run">
+          <TapeWord />
+          <TapeWord />
+        </span>
+      </span>
+    </p>
+  )
+}
+
+/* The five jobs the kit covers. Each row is marked with its initial in Morse. */
+const JOBS = [
+  { name: 'Store', detail: 'blobs and quilts on Walrus' },
+  { name: 'Version', detail: 'append-only revisions' },
+  { name: 'Encrypt', detail: 'Seal, in the client' },
+  { name: 'Gate', detail: 'rights as objects on Sui' },
+  { name: 'Prove', detail: 'a digest for every write' },
+]
+
+const UNDERNEATH = ['Walrus', 'Sui', 'Seal']
+
+/**
+ * The signal board: one square-wave line runs from "Your app" through the
+ * five jobs down to the base plate, and a node on each row lights in turn.
+ */
+function SignalBoard() {
+  return (
+    <aside
+      className="board r3"
+      aria-label="What the Morse kit covers: your app on top, five jobs handled by the kit, Walrus, Sui and Seal underneath"
+    >
+      <div className="board__app">
+        <b>YOUR APP</b>
+        <span>a publication · an agent · a file app</span>
+      </div>
+      <ol className="board__rows">
+        {JOBS.map(job => (
+          <li key={job.name}>
+            <div>
+              <b>{job.name}</b>
+              <small>{job.detail}</small>
+            </div>
+            <Morse word={job.name[0]} size="lg" />
+          </li>
+        ))}
+      </ol>
+      <div className="board__base">
+        <b>UNDERNEATH</b>
+        {UNDERNEATH.map(layer => (
+          <span key={layer}>
+            <i aria-hidden="true" />
+            {layer}
+          </span>
+        ))}
+      </div>
+      <div className="board__ft">
+        <span>npm i @arcadiasystems/morse-sdk</span>
+        <span aria-hidden="true">MARKS: INITIALS IN MORSE</span>
+      </div>
+    </aside>
+  )
+}
+
 export function Hero() {
   return (
-    <section className={`${styles.hero} on-ink`} id="top" aria-labelledby="hero-title">
+    <section className="hero on-ink" id="top" aria-labelledby="hero-title">
       <SignalField />
 
-      <div className={`container ${styles.content}`}>
-        <WalrusBadge />
-        <h1 id="hero-title" className={styles.title}>
-          Content no one can take&nbsp;down.
-          <br />
-          <em>Not even us.</em>
-        </h1>
-        <p className={styles.lead}>
-          Morse is an open CMS protocol on Sui and Walrus. Publish from the CLI, the SDK or your agent.
-          Every entry is anchored on-chain, stored on Walrus, and gated by keys you hold.
-        </p>
-        <div className={styles.ctas}>
-          <Cta tone="bone" href={QUICK_START_CLI} hint="5 min, CLI">
-            Start building
-          </Cta>
-          <Cta tone="outline-light" href={DEMO_BLOG} hint="testnet wallet" external>
-            See it live
-          </Cta>
+      <div className="container hero__content">
+        <div className="hero__left">
+          <StatusLabel />
+          <h1 id="hero-title" className="r2">
+            The storage side
+            <br />
+            of your app.{' '}
+            <em>One&nbsp;kit. First&nbsp;write in five&nbsp;minutes.</em>
+          </h1>
+          <div className="hero__code r3" aria-hidden="true">
+            <Morse word="KIT" size="lg" />
+            <span>KIT, IN MORSE</span>
+          </div>
+          <p className="hero__lead r3">
+            Store, version, encrypt and gate content on Walrus and Sui with one SDK, one CLI and a set of
+            contracts. You build the product, not the plumbing.
+          </p>
+          <div className="hero__cta r4">
+            <Cta tone="bone" href={QUICK_START_CLI} hint="5 min, CLI">
+              Start building
+            </Cta>
+            <Cta tone="outline-light" href="#kit">
+              See what is in the kit
+            </Cta>
+          </div>
+          <p className="hero__kit r4">
+            Built on the kit: <a href={RECEIPTS}>Morse Receipts</a> and <a href={AGENTS}>Morse Agents</a>.
+          </p>
         </div>
+
+        <SignalBoard />
       </div>
     </section>
   )
