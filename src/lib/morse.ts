@@ -28,3 +28,12 @@ export function toMorse(text: string): string {
 
 /** 'MORSE' encoded: '-- --- .-. ... .' */
 export const MORSE_WORDMARK = toMorse('MORSE')
+
+export type MorseMarkKind = 'dot' | 'dash' | 'gap'
+
+const MARK_KIND: Record<string, MorseMarkKind> = { '.': 'dot', '-': 'dash', ' ': 'gap' }
+
+/** One word as a row of marks: dots, dashes, and a gap between letters. */
+export function morseMarks(word: string): MorseMarkKind[] {
+  return [...toMorse(word)].map(symbol => MARK_KIND[symbol])
+}
