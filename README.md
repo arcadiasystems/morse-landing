@@ -20,6 +20,9 @@ components in `src/components/`.
 
 ## Develop
 
+Node 26 (`engines.node` in `package.json`; CI and the Vercel build use the
+same major).
+
 ```sh
 npm install
 npm run dev      # vite dev server
