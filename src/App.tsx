@@ -2,10 +2,9 @@ import { SiteNav } from './components/SiteNav'
 import { Hero } from './components/Hero'
 import { Supporters } from './components/Supporters'
 import { Statement } from './components/Statement'
-import { UseCases } from './components/UseCases'
+import { Kit } from './components/Kit'
 import { HowItWorks } from './components/HowItWorks'
-import { ForDevelopers } from './components/ForDevelopers'
-import { LiveDemo } from './components/LiveDemo'
+import { Products } from './components/Products'
 import { Ecosystem } from './components/Ecosystem'
 import { Roadmap } from './components/Roadmap'
 import { FinalCta } from './components/FinalCta'
@@ -22,10 +21,9 @@ export default function App() {
         <Hero />
         <Supporters />
         <Statement />
-        <UseCases />
+        <Kit />
         <HowItWorks />
-        <ForDevelopers />
-        <LiveDemo />
+        <Products />
         <Ecosystem />
         <Roadmap />
         <FinalCta />

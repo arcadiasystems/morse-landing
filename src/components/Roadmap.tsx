@@ -1,5 +1,4 @@
-import { GITHUB } from '../lib/links'
-import styles from './Roadmap.module.css'
+import { SectionEyebrow } from '../ui/SectionEyebrow'
 
 type Status = 'live' | 'building' | 'planned' | 'proposed'
 
@@ -10,78 +9,82 @@ interface Milestone {
   status: Status
 }
 
+/* Only the first row is live. Nothing below it may be described as shipped. */
 const MILESTONES: Milestone[] = [
   {
     when: '9 Sep 2026',
     title: 'Protocol live on Walrus Mainnet',
-    detail: 'Move contracts on testnet and mainnet, Walrus storage, Seal policies, CLI, SDK beta, demo blog on testnet',
+    detail:
+      'Contracts, SDK and CLI on mainnet and testnet. Append-only revisions, Seal-gated drafts, recipient files',
     status: 'live',
   },
   {
-    when: 'Q4 2026',
-    title: 'SDK 1.0 and stable CLI',
-    detail: 'Typed client, documented contracts, agent-ready command surface',
+    when: 'Next 60 days',
+    title: 'Morse Agents: the official template, with a Morse MCP or skill',
+    detail:
+      'A fixed skeleton and a swappable brain in the SDK. Publish, version, gate, and return a receipt from one call',
     status: 'building',
   },
   {
     when: 'Q4 2026',
-    title: 'Receipts: a public verify page for any entry',
-    detail: 'Open a link, see the record, the revision history and the Sui and Walrus proofs. No account, no wallet',
+    title: 'Morse Receipts: a public page for any revision',
+    detail:
+      'Open a link, see the record, the revision history and the Sui and Walrus proofs. No account, no wallet. A one-line embed for any post',
     status: 'planned',
+  },
+  {
+    when: 'Q4 2026',
+    title: 'SDK 1.0 and stable CLI, with sign-in and on-ramps',
+    detail:
+      'Typed client and documented contracts. Social and zkLogin sign-in and card on-ramps are being pulled forward into this release',
+    status: 'building',
   },
   {
     when: 'Nov 2026',
     title: 'Walrus Sessions 9, built on Morse',
-    detail: 'An online hackathon with the Walrus Foundation: agents that remember with Walrus Memory and prove with Morse',
+    detail:
+      'An online hackathon with the Walrus Foundation: agents that remember with Walrus Memory and prove with Morse',
     status: 'proposed',
   },
   {
-    when: 'Q1 2027',
-    title: 'Indexer and hosted content API',
-    detail: 'Event-driven read layer anyone can run, REST surface for apps and agents',
+    when: 'Planned',
+    title: 'Subscription and token access',
+    detail: 'Reserved in the contract, not built. Required before paid content or a marketplace',
     status: 'planned',
   },
   {
     when: 'Q1 2027',
-    title: 'Publish without a wallet',
-    detail: 'Hosted path with sponsored gas and email or GitHub sign-in. Ownership transfers to your wallet when you connect one',
+    title: 'Indexer and hosted content API',
+    detail:
+      'An event-driven read layer anyone can run, with a REST surface for apps, listings and newsroom tools',
     status: 'planned',
   },
 ]
 
 export function Roadmap() {
   return (
-    <section id="roadmap" className={`${styles.road} on-ink`} aria-labelledby="roadmap-title">
-      <div className={`container ${styles.inner}`}>
-        <div className={styles.head}>
+    <section id="roadmap" className="road on-ink" aria-labelledby="roadmap-title">
+      <div className="container">
+        <div className="road__head">
           <div>
-            <p className={`eyebrow ${styles.eyebrow}`}>Upcoming</p>
-            <h2 id="roadmap-title" className={`section-title ${styles.title}`}>
-              What ships next, and when.
-            </h2>
+            <SectionEyebrow number={4}>Roadmap</SectionEyebrow>
+            <h2 id="roadmap-title">What ships next, and when.</h2>
           </div>
-          <p className={styles.headNote}>
-            Dates are targets, updated as they move. The{' '}
-            <a className={styles.inlineLink} href={GITHUB} target="_blank" rel="noopener noreferrer">
-              GitHub repository
-            </a>{' '}
-            is the source of truth for what is shipped.
+          <p className="road__note">
+            Dates are targets, updated as they move. The GitHub repository is the source of truth for what
+            has shipped.
           </p>
         </div>
 
-        <ol className={styles.list}>
+        <ol className="road__list">
           {MILESTONES.map(item => (
-            <li key={item.title} className={styles.row}>
-              <span className={item.status === 'live' ? `${styles.when} ${styles.now}` : styles.when}>
-                {item.when}
-              </span>
+            <li key={item.title} className="row">
+              <span className={item.status === 'live' ? 'when now' : 'when'}>{item.when}</span>
               <div>
-                <strong className={styles.rowTitle}>{item.title}</strong>
-                <span className={styles.rowDetail}>{item.detail}</span>
+                <b>{item.title}</b>
+                <span className="d">{item.detail}</span>
               </div>
-              <span className={item.status === 'live' ? `${styles.status} ${styles.statusLive}` : styles.status}>
-                {item.status}
-              </span>
+              <span className={item.status === 'live' ? 'pill live' : 'pill soon'}>{item.status}</span>
             </li>
           ))}
         </ol>

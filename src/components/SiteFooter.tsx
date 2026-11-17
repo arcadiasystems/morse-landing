@@ -1,7 +1,17 @@
-import { DEMO_BLOG, DOCS, GITHUB, LICENSE, QUICK_START, TWITTER } from '../lib/links'
+import {
+  AGENTS,
+  DOCS_AGENT_COOKBOOK,
+  DOCS_CONTRACTS,
+  DOCS_SDK,
+  GITHUB,
+  LICENSE,
+  QUICK_START,
+  RECEIPTS,
+  TWITTER,
+  UPLOADER_APP,
+} from '../lib/links'
 import { MORSE_WORDMARK } from '../lib/morse'
 import { MorseMark } from '../ui/MorseMark'
-import styles from './SiteFooter.module.css'
 
 interface FooterLink {
   label: string
@@ -11,21 +21,21 @@ interface FooterLink {
 
 const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
-    title: 'Protocol',
+    title: 'Products',
     links: [
-      { label: 'Overview', href: `${DOCS}/index.html` },
-      { label: 'How it works', href: `${DOCS}/core-concepts.html` },
-      { label: 'Security', href: `${DOCS}/access-control.html` },
-      { label: 'Roadmap', href: '#roadmap' },
+      { label: 'The Morse kit', href: '#kit' },
+      { label: 'Morse Receipts', href: RECEIPTS },
+      { label: 'Morse Agents', href: AGENTS },
+      { label: 'Morse Uploader', href: UPLOADER_APP, external: true },
     ],
   },
   {
     title: 'Build',
     links: [
       { label: 'Quick start', href: QUICK_START },
-      { label: 'Contracts', href: `${DOCS}/contracts-overview.html` },
-      { label: 'Entries', href: `${DOCS}/entries.html` },
-      { label: 'Demo blog', href: DEMO_BLOG, external: true },
+      { label: 'Contracts', href: DOCS_CONTRACTS },
+      { label: 'SDK', href: DOCS_SDK },
+      { label: 'Agent cookbook', href: DOCS_AGENT_COOKBOOK },
     ],
   },
   {
@@ -33,44 +43,39 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: 'GitHub', href: GITHUB, external: true },
       { label: 'X', href: TWITTER, external: true },
+      { label: 'Roadmap', href: '#roadmap' },
     ],
   },
 ]
 
 export function SiteFooter() {
   return (
-    <footer className={`${styles.footer} on-ink`}>
-      <div className={`container ${styles.top}`}>
-        <div className={styles.brand}>
-          <div className={styles.lockup}>
+    <footer className="foot on-ink">
+      <div className="container foot__top">
+        <div className="foot__brand">
+          <div className="lock">
             <MorseMark size={28} />
-            <span className={styles.wordmark}>morse</span>
+            <span>morse</span>
           </div>
-          <p className={styles.blurb}>
-            Decentralized CMS protocol. Built on Sui and Walrus by Arcadia Systems with a grant from the
-            Walrus Foundation.
+          <p>
+            The app kit for content on Walrus and Sui. Built by Arcadia Systems with a grant from the Walrus
+            Foundation.
           </p>
-          <span className={styles.signature} aria-hidden="true">
+          <span className="sig" aria-hidden="true">
             {MORSE_WORDMARK}
           </span>
         </div>
 
-        <nav className={styles.columns} aria-label="Footer">
+        <nav className="foot__cols" aria-label="Footer">
           {COLUMNS.map(col => {
             const titleId = `footer-${col.title.toLowerCase()}`
             return (
-              <div key={col.title} className={styles.column}>
-                <p id={titleId} className={styles.columnTitle}>
-                  {col.title}
-                </p>
-                <ul className={styles.columnList} aria-labelledby={titleId}>
+              <div key={col.title} className="foot__col">
+                <p id={titleId}>{col.title}</p>
+                <ul aria-labelledby={titleId}>
                   {col.links.map(link => (
                     <li key={link.label}>
-                      <a
-                        className={styles.link}
-                        href={link.href}
-                        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      >
+                      <a href={link.href} {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
                         {link.label}
                       </a>
                     </li>
@@ -84,9 +89,9 @@ export function SiteFooter() {
 
       {/* The year is prerendered at build time; a visit in a later year keeps
           the build's year rather than failing hydration. */}
-      <div className={`container ${styles.legal}`} suppressHydrationWarning>
+      <div className="container foot__legal" suppressHydrationWarning>
         © {new Date().getFullYear()} Morse Protocol · Arcadia Systems ·{' '}
-        <a className={styles.link} href={LICENSE} target="_blank" rel="noopener noreferrer">
+        <a href={LICENSE} target="_blank" rel="noopener noreferrer">
           Open source, MIT licence
         </a>
       </div>

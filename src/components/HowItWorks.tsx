@@ -1,45 +1,48 @@
 import { useSmilPlayback } from '../lib/useSmilPlayback'
+import { SectionEyebrow } from '../ui/SectionEyebrow'
 import { TravellingPulse } from '../ui/TravellingPulse'
-import styles from './HowItWorks.module.css'
 
 const STEPS = [
   {
     title: 'Publish',
-    body: 'One command pushes markdown and metadata into the protocol. No provisioning, no vendor queue.',
+    body: 'From the CLI, the SDK or an agent. One command writes an entry or a new revision.',
     detail: 'morse entry add',
   },
   {
     title: 'Store',
-    body: 'Payloads land on Walrus as immutable blobs, funded per storage epoch and renewable. Revisions append; nothing overwrites.',
+    body: 'The bytes go to Walrus. Storage is paid for a set period and renewed by the publisher.',
     detail: 'Walrus blob + quilt',
   },
   {
     title: 'Record',
-    body: 'A Move contract on Sui records every blob reference and every permission change. Permissions are objects.',
+    body: 'A contract on Sui records the blob, the author, the time and who holds publishing rights.',
     detail: 'Sui Move contracts',
   },
   {
-    title: 'Serve',
-    body: 'Read through the SDK today. Indexers anyone can run, with a REST API for apps and agents, land in Q1 2027.',
-    detail: 'SDK now · API Q1 2027',
+    title: 'Check',
+    body: 'Anyone verifies the bytes, the revision and the author. No account, no wallet, no trust in us.',
+    detail: 'CLI now · Morse Receipts Q4 2026',
   },
 ]
 
 const CAPABILITIES = [
-  { title: 'On-chain governance', body: 'Editor and admin permissions are Sui objects. Grant, revoke, prove.' },
-  { title: 'Verifiable revisions', body: 'Every edit has an on-chain proof. No hidden changes.' },
-  { title: 'Seal-gated access', body: 'Policies enforced by keys, not by promises.' },
-  { title: 'AI-readable', body: 'Structured content any agent can query and operate.' },
-  { title: 'One-command deploy', body: 'Contract addresses ship built in. No dashboard, no provisioning step.' },
-  { title: 'Every layer replaceable', body: 'Only the Sui contracts are the source of truth.' },
+  { title: 'Corrections append', body: 'A fix is a new revision. What it replaced stays on the record.' },
+  {
+    title: 'Verifiable, not irrevocable',
+    body: 'History can be checked by anyone. Storage is a funded lease, not forever.',
+  },
+  { title: 'Agent-readable', body: 'llms.txt, Markdown docs and JSON output on every command.' },
 ]
 
-/** The wire the four steps hang from. Stretches to the row; nodes live on the steps. */
+/* The wire is drawn on a 1136-unit row, one node above each of the four steps. */
+const WIRE_NODES = [142, 426, 710, 994]
+
+/** The wire the four steps hang from. Stretches to the row. */
 function Wire() {
   const svgRef = useSmilPlayback()
   return (
-    <svg ref={svgRef} className={styles.wireSvg} viewBox="0 0 1136 60" preserveAspectRatio="none" aria-hidden="true">
-      <path className={styles.wireLine} d="M0 30H1136" vectorEffect="non-scaling-stroke" />
+    <svg ref={svgRef} viewBox="0 0 1136 60" preserveAspectRatio="none" aria-hidden="true">
+      <path className="line" d="M0 30H1136" vectorEffect="non-scaling-stroke" />
       <TravellingPulse
         baseline={30}
         unit={30}
@@ -47,45 +50,48 @@ function Wire() {
         from={-160}
         to={1180}
         duration={7}
-        className={styles.wirePulse}
+        className="pulse"
         nonScalingStroke
       />
+      <g className="nodes">
+        {WIRE_NODES.map(x => (
+          <circle key={x} cx={x} cy={30} r={8} vectorEffect="non-scaling-stroke" />
+        ))}
+      </g>
     </svg>
   )
 }
 
 export function HowItWorks() {
   return (
-    <section id="how" className={`${styles.how} on-ink`} aria-labelledby="how-title">
-      <div className={`container ${styles.inner}`}>
+    <section id="how" className="how on-ink" aria-labelledby="how-title">
+      <div className="container">
         <div>
-          <p className={`eyebrow ${styles.eyebrow}`}>How it works</p>
-          <h2 id="how-title" className={`section-title ${styles.title}`}>
-            Four steps. No middleman in any of them.
-          </h2>
+          <SectionEyebrow number={2}>What happens on every write</SectionEyebrow>
+          <h2 id="how-title">Four steps. The chain stays under the hood.</h2>
         </div>
 
-        <div className={styles.wire}>
+        <div className="how__wire">
           <Wire />
-          <ol className={styles.steps}>
+          <ol className="steps">
             {STEPS.map((step, i) => (
-              <li key={step.title} className={styles.step}>
-                <span className={styles.stepNumber} aria-hidden="true">
+              <li key={step.title} className="step">
+                <span className="n" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <p className={styles.stepBody}>{step.body}</p>
-                <span className={styles.stepDetail}>{step.detail}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+                <span className="c">{step.detail}</span>
               </li>
             ))}
           </ol>
         </div>
 
-        <ul className={styles.caps}>
+        <ul className="caps">
           {CAPABILITIES.map(cap => (
-            <li key={cap.title} className={styles.cap}>
-              <strong className={styles.capTitle}>{cap.title}</strong>
-              <span className={styles.capBody}>{cap.body}</span>
+            <li key={cap.title} className="cap">
+              <b>{cap.title}</b>
+              <span>{cap.body}</span>
             </li>
           ))}
         </ul>

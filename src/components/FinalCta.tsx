@@ -1,8 +1,7 @@
-import { DEMO_BLOG, QUICK_START_CLI } from '../lib/links'
+import { QUICK_START_CLI } from '../lib/links'
 import { useSmilPlayback } from '../lib/useSmilPlayback'
 import { Cta } from '../ui/Button'
 import { TravellingPulse } from '../ui/TravellingPulse'
-import styles from './FinalCta.module.css'
 
 const LANES = [
   { y: 80, duration: 12, begin: -4 },
@@ -13,14 +12,8 @@ const LANES = [
 function PulseBand() {
   const svgRef = useSmilPlayback()
   return (
-    <svg
-      ref={svgRef}
-      className={styles.band}
-      viewBox="0 0 1440 400"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-    >
-      <path className={styles.bandLines} d={LANES.map(lane => `M0 ${lane.y}H1440`).join('')} />
+    <svg ref={svgRef} viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path className="lines" d={LANES.map(lane => `M0 ${lane.y}H1440`).join('')} />
       {LANES.map(lane => (
         <TravellingPulse
           key={lane.y}
@@ -31,7 +24,7 @@ function PulseBand() {
           to={1740}
           duration={lane.duration}
           begin={lane.begin}
-          className={styles.bandPulse}
+          className="pulse"
         />
       ))}
     </svg>
@@ -40,20 +33,20 @@ function PulseBand() {
 
 export function FinalCta() {
   return (
-    <section className={styles.final} aria-labelledby="final-title">
+    <section className="final" aria-labelledby="final-title">
       <PulseBand />
-      <div className={`container ${styles.inner}`}>
-        <h2 id="final-title" className={styles.title}>
-          Your content.
+      <div className="container">
+        <h2 id="final-title">
+          Your app on top.
           <br />
-          Your keys.
+          Morse underneath.
         </h2>
-        <div className={styles.buttons}>
+        <div className="final__btns">
           <Cta tone="ink" href={QUICK_START_CLI}>
             Start building
           </Cta>
-          <Cta tone="outline-white" href={DEMO_BLOG} external>
-            See it live
+          <Cta tone="outline-white" href="#kit">
+            See what is in the kit
           </Cta>
         </div>
       </div>
