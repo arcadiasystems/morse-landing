@@ -99,16 +99,17 @@
 }
 .lk svg { flex-shrink: 0; }
 .lk .wm { display: flex; flex-direction: column; }
-.lk em { font-style: normal; color: var(--ultra); }
-.lk .accent { fill: var(--ultra); }
+.lk em { font-style: normal; }
 /* A product's lockup carries its own colour wherever it appears. Lime and
-   paper only pass on the dark family, and vermilion misses 4.5:1 on paper, so
-   on paper the colour stays in the icon tile and the word takes a tone that
-   passes. */
+   paper only pass on the dark family, and vermilion, magenta and yellow miss
+   4.5:1 on paper, so on paper the colour stays in the icon tile and the word
+   takes a tone that passes. */
 .lk-receipts em { color: var(--receipts-word); }
 .lk-agents em { color: var(--agents); }
 .lk-press em { color: var(--press-word); }
 .lk-uploader em { color: var(--ultra-lift); }
+.lk-agent-publisher em { color: var(--publisher-word); }
+.lk-site-importer em { color: var(--importer-word); }
 
 /* ─── Row label inside a section: a name, a note, a rule ── */
 .rowlab {

@@ -55,10 +55,13 @@ export function UploaderTile({ size }: ProductTileProps) {
   return <TraceTile size={size} field="#2B3BE0" stroke="#FFFFFF" />
 }
 
-/** Morse Press: the Trace raised over the vermilion press bed, on warm black. */
-export function PressTile({ size }: ProductTileProps) {
+/**
+ * The bone Trace raised over the product's accent in the bottom band (y 80 to 94), as Press,
+ * Agent Publisher and Site Importer draw it.
+ */
+function RaisedTile({ size, field, children }: TileProps) {
   return (
-    <Tile size={size} field="#0A0807">
+    <Tile size={size} field={field}>
       <g transform="translate(18 15.52) scale(0.64)">
         <path
           d={MARK_PATH}
@@ -69,8 +72,44 @@ export function PressTile({ size }: ProductTileProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <rect x={8} y={80} width={84} height={14} rx={7} fill="#FF5A36" />
+        {children}
       </g>
     </Tile>
+  )
+}
+
+/** Morse Press: the Trace raised over the vermilion press bed, on warm black. */
+export function PressTile({ size }: ProductTileProps) {
+  return (
+    <RaisedTile size={size} field="#0A0807">
+      <rect x={8} y={80} width={84} height={14} rx={7} fill="#FF5A36" />
+    </RaisedTile>
+  )
+}
+
+/**
+ * Morse Agent Publisher: a Process Magenta dot and dash, A in Morse, on magenta black. Its
+ * favicon also holds a pixel-grid drawing for 20px and under; the lockups draw the tile larger,
+ * so only the full drawing is here.
+ */
+export function AgentPublisherTile({ size }: ProductTileProps) {
+  return (
+    <RaisedTile size={size} field="#0A070A">
+      <circle cx={15} cy={87} r={7} fill="#FF3EA5" />
+      <rect x={30} y={80} width={62} height={14} rx={7} fill="#FF3EA5" />
+    </RaisedTile>
+  )
+}
+
+const IMPORTER_SEGMENTS = [8, 38, 68]
+
+/** Morse Site Importer: three Marker Yellow segments, one site in and many entries out, on yellow black. */
+export function SiteImporterTile({ size }: ProductTileProps) {
+  return (
+    <RaisedTile size={size} field="#0A0A06">
+      {IMPORTER_SEGMENTS.map(x => (
+        <rect key={x} x={x} y={80} width={24} height={14} rx={7} fill="#FFE62E" />
+      ))}
+    </RaisedTile>
   )
 }
