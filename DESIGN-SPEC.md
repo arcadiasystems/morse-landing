@@ -107,7 +107,8 @@ Every section component is a named export in `src/components/`.
 - Encryption works out of the box on testnet only. On mainnet, Seal needs the
   developer's own key-server credentials; the page says so under the tracks.
 - Every docs link on the page resolves, and so do uploader.morsecms.xyz,
-  receipts.morsecms.xyz, agents.morsecms.xyz and press.morsecms.xyz.
+  receipts.morsecms.xyz, agents.morsecms.xyz, press.morsecms.xyz,
+  agentpublisher.morsecms.xyz and siteimporter.morsecms.xyz.
 - The `ecosystem` label exists on `arcadiasystems/morse-dcms`, so "Your
   product here" opens a labelled issue.
 - Morse Uploader's own page states "up to 1 GiB per file in the browser" and

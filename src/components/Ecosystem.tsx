@@ -1,11 +1,5 @@
 import { useId, type ReactNode } from 'react'
-import {
-  DOCS_AGENT_COOKBOOK,
-  DOCS_SITE_IMPORTER,
-  ECOSYSTEM_LISTING,
-  PRESS,
-  UPLOADER_APP,
-} from '../lib/links'
+import { AGENT_PUBLISHER, ECOSYSTEM_LISTING, PRESS, SITE_IMPORTER, UPLOADER_APP } from '../lib/links'
 import { MORSE_WORDMARK } from '../lib/morse'
 import { CtaLabel } from '../ui/Button'
 import { Chip } from '../ui/Chip'
@@ -143,6 +137,7 @@ interface Recipe {
   description: string
   /** Foot line: the recipe's kind and tooling. */
   kind: string
+  /** The product's own site. */
   link: string
 }
 
@@ -154,7 +149,7 @@ const RECIPES: Recipe[] = [
     title: 'Let any agent publish, under rights you can revoke.',
     description: 'A cookbook and a CLAUDE.md snippet to start from.',
     kind: 'Docs recipe · CLI or SDK',
-    link: DOCS_AGENT_COOKBOOK,
+    link: AGENT_PUBLISHER,
   },
   {
     product: 'site importer',
@@ -162,10 +157,11 @@ const RECIPES: Recipe[] = [
     title: 'Bring a Hugo, Astro or Markdown site in.',
     description: 'One entry per post, safe to re-run, with CI publishing on push.',
     kind: 'Docs recipe · bash',
-    link: DOCS_SITE_IMPORTER,
+    link: SITE_IMPORTER,
   },
 ]
 
+/** A recipe with its own site. The whole card is the link. */
 function RecipeCard({ recipe }: { recipe: Recipe }) {
   const titleId = useId()
   return (
