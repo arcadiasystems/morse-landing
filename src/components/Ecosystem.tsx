@@ -3,10 +3,9 @@ import { AGENT_PUBLISHER, ECOSYSTEM_LISTING, PRESS, SITE_IMPORTER, UPLOADER_APP 
 import { MORSE_WORDMARK } from '../lib/morse'
 import { CtaLabel } from '../ui/Button'
 import { Chip } from '../ui/Chip'
-import { Lockup } from '../ui/Lockup'
+import { Lockup, type LockupTone } from '../ui/Lockup'
 import { MorseMark } from '../ui/MorseMark'
-import { AgentPublisherMark, SiteImporterMark } from '../ui/ProductMarks'
-import { PressTile, UploaderTile } from '../ui/ProductTiles'
+import { AgentPublisherTile, PressTile, SiteImporterTile, UploaderTile } from '../ui/ProductTiles'
 
 const UPLOADER_TAGS = ['Non-custodial', 'Open source']
 
@@ -132,7 +131,9 @@ function Switchboard() {
 interface Recipe {
   /** The word set under "morse" in the lockup. */
   product: string
+  /** The product's icon tile. */
   mark: ReactNode
+  tone: LockupTone
   title: string
   description: string
   /** Foot line: the recipe's kind and tooling. */
@@ -145,7 +146,8 @@ interface Recipe {
 const RECIPES: Recipe[] = [
   {
     product: 'agent publisher',
-    mark: <AgentPublisherMark size={32} />,
+    mark: <AgentPublisherTile size={32} />,
+    tone: 'agent-publisher',
     title: 'Let any agent publish, under rights you can revoke.',
     description: 'A cookbook and a CLAUDE.md snippet to start from.',
     kind: 'Docs recipe · CLI or SDK',
@@ -153,7 +155,8 @@ const RECIPES: Recipe[] = [
   },
   {
     product: 'site importer',
-    mark: <SiteImporterMark size={32} />,
+    mark: <SiteImporterTile size={32} />,
+    tone: 'site-importer',
     title: 'Bring a Hugo, Astro or Markdown site in.',
     description: 'One entry per post, safe to re-run, with CI publishing on push.',
     kind: 'Docs recipe · bash',
@@ -167,7 +170,7 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
   return (
     <a className="eco__item" href={recipe.link} aria-labelledby={titleId}>
       <div className="top">
-        <Lockup mark={recipe.mark} product={recipe.product} />
+        <Lockup mark={recipe.mark} product={recipe.product} tone={recipe.tone} />
         <Chip tone="live">Live</Chip>
       </div>
       <h3 id={titleId}>{recipe.title}</h3>

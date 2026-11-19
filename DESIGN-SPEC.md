@@ -47,9 +47,10 @@ Every section component is a named export in `src/components/`.
   its number in Morse.
 - `src/ui/Chip.tsx`: `<Chip tone onInk>`. Tones: `live`, `next`, `plan`.
 - `src/ui/Lockup.tsx`: stacked product lockups; `tone` sets the product word
-  in the product's own colour. `src/ui/ProductTiles.tsx`: the icon tiles of
-  Receipts, Agents, Press and Uploader, drawn from each product's favicon.
-  `src/ui/ProductMarks.tsx`: the Agent Publisher and Site Importer marks.
+  in the product's own colour, or in the passing tone brand.md gives where
+  that colour misses 4.5:1 on paper. `src/ui/ProductTiles.tsx`: the icon
+  tiles of Receipts, Agents, Press, Uploader, Agent Publisher and Site
+  Importer, drawn from each product's favicon.
 - `src/ui/MorseMark.tsx`: the mark in `currentColor`.
 - `src/ui/PartnerLogos.tsx`: official Mysten Labs, Walrus, Sui and Seal
   marks, all in `currentColor`, each with `role="img"` and an `aria-label`.

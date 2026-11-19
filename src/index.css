@@ -20,9 +20,11 @@
 
   /* The product words in the lockups. The marks carry each product's full
      colour inside its icon tile (src/ui/ProductTiles.tsx). */
-  --agents:        #C6F135; /* Morse Agents lime, on ink; 14.1:1 */
-  --receipts-word: #5C5F66; /* Morse Receipts' caption tone on paper; 6.4:1 */
-  --press-word:    #C7462A; /* Morse Press vermilion #FF5A36 deepened for paper; 4.8:1 */
+  --agents:         #C6F135; /* Morse Agents lime, on ink; 14.1:1 */
+  --receipts-word:  #5C5F66; /* Morse Receipts' caption tone on paper; 6.4:1 */
+  --press-word:     #C7462A; /* Morse Press vermilion #FF5A36 deepened for paper; 4.8:1 */
+  --publisher-word: #C73081; /* Agent Publisher magenta #FF3EA5 deepened as Press is; 5.0:1 */
+  --importer-word:  #615F54; /* Site Importer's caption tone #999684 deepened for paper; 6.4:1 */
 
   --on-ink:   #F2EFE8;
   --on-ink-2: #C9CBD2;

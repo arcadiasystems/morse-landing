@@ -31,17 +31,20 @@ carries its number. They are decorative and `aria-hidden`.
 
 **Product lockups** stack "morse" over the product word
 (`src/ui/Lockup.tsx`). A product's lockup carries its own colour wherever it
-appears, so Morse Receipts, Morse Agents, Morse Press and Morse Uploader each
-show their icon tile, the mark on the product's own field exactly as in its
-favicon (`src/ui/ProductTiles.tsx`): paper `#F6F2E7` on `#09090A`, lime
-`#C6F135` on `#080A07`, the Trace over the vermilion `#FF5A36` press bed on
-`#0A0807`, and the white Trace on Ultramarine. On ink the product word is in
-the product's colour (`--agents`, `--ultra-lift`). On paper, where paper,
-lime and vermilion miss 4.5:1, the colour stays in the tile and the word
-takes a tone that passes: `--receipts-word` (6.4:1) and `--press-word`,
-vermilion deepened (4.8:1). Morse Agent Publisher and Morse Site Importer
-keep the accent and raise the mark over one accent in the bottom band
-(`src/ui/ProductMarks.tsx`).
+appears, so Morse Receipts, Morse Agents, Morse Press, Morse Uploader, Morse
+Agent Publisher and Morse Site Importer each show their icon tile, the mark
+on the product's own field exactly as in its favicon
+(`src/ui/ProductTiles.tsx`): paper `#F6F2E7` on `#09090A`, lime `#C6F135` on
+`#080A07`, the Trace over the vermilion `#FF5A36` press bed on `#0A0807`, the
+white Trace on Ultramarine, the Trace over a Process Magenta `#FF3EA5` dot
+and dash on `#0A070A`, and the Trace over three Marker Yellow `#FFE62E`
+segments on `#0A0A06`. On ink the product word is in the product's colour
+(`--agents`, `--ultra-lift`). On paper, where paper, lime, vermilion,
+magenta (3.2:1) and yellow (1.3:1) miss 4.5:1, the colour stays in the tile
+and the word takes a tone that passes: `--receipts-word` (6.4:1);
+`--press-word`, vermilion deepened (4.8:1); `--publisher-word` `#C73081`,
+magenta deepened by the same factor (5.0:1); and `--importer-word`
+`#615F54`, Site Importer's caption tone `#999684` deepened for paper (6.4:1).
 
 A filled accent pill means LIVE on the Roadmap; every other status there is
 an outline. Elsewhere a chip says what is true: green for live, an
