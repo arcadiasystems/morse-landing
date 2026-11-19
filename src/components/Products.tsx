@@ -5,7 +5,7 @@ import { CheckIcon } from '../ui/CheckIcon'
 import { Chip } from '../ui/Chip'
 import { Lockup } from '../ui/Lockup'
 import { SectionEyebrow } from '../ui/SectionEyebrow'
-import { MorseMark } from '../ui/MorseMark'
+import { AgentsTile, ReceiptsTile } from '../ui/ProductTiles'
 
 const RECEIPT_CHECKS = [
   'These are the bytes that were published',
@@ -23,7 +23,7 @@ function ReceiptsCard() {
   const ctaId = useId()
   return (
     <a className="prod slip" href={RECEIPTS} aria-labelledby={ctaId}>
-      <Lockup mark={<MorseMark size={34} />} product="receipts" />
+      <Lockup mark={<ReceiptsTile size={40} />} product="receipts" tone="receipts" />
       <h3>Proof of what was published.</h3>
       <p>
         A link anyone can open to check a post against its record. For newsrooms, researchers and anyone
@@ -63,7 +63,7 @@ function AgentsCard() {
   const ctaId = useId()
   return (
     <a className="prod ink on-ink" href={AGENTS} aria-labelledby={ctaId}>
-      <Lockup mark={<MorseMark size={34} />} product="agents" />
+      <Lockup mark={<AgentsTile size={40} />} product="agents" tone="agents" />
       <h3>Agent templates you fork.</h3>
       <p>
         One skeleton with memory, publishing and gating fixed, and a brain you swap. For teams shipping
