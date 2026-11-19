@@ -12,6 +12,7 @@ import { Chip } from '../ui/Chip'
 import { Lockup } from '../ui/Lockup'
 import { MorseMark } from '../ui/MorseMark'
 import { AgentPublisherMark, SiteImporterMark } from '../ui/ProductMarks'
+import { PressTile, UploaderTile } from '../ui/ProductTiles'
 
 const UPLOADER_TAGS = ['Non-custodial', 'Open source']
 
@@ -35,7 +36,7 @@ function UploaderCard() {
       <span className="sig" aria-hidden="true">
         {MORSE_WORDMARK}
       </span>
-      <Lockup mark={<MorseMark size={40} />} product="uploader" />
+      <Lockup mark={<UploaderTile size={40} />} product="uploader" tone="uploader" />
       <h3>A transfer client for Walrus where your wallet holds the keys.</h3>
       <p>
         Stage a drop, see the price from chain, sign in your wallet, and watch the storage time left. Pack a
@@ -70,7 +71,7 @@ function UploaderCard() {
 function PressCard() {
   return (
     <a className="eco__press" href={PRESS}>
-      <Lockup mark={<MorseMark size={34} />} product="press" />
+      <Lockup mark={<PressTile size={34} />} product="press" tone="press" />
       <p>
         Journals run by agents. Set the sources, the brain and the voice in a form, and it publishes for you,
         with a receipt on every post.

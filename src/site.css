@@ -101,6 +101,14 @@
 .lk .wm { display: flex; flex-direction: column; }
 .lk em { font-style: normal; color: var(--ultra); }
 .lk .accent { fill: var(--ultra); }
+/* A product's lockup carries its own colour wherever it appears. Lime and
+   paper only pass on the dark family, and vermilion misses 4.5:1 on paper, so
+   on paper the colour stays in the icon tile and the word takes a tone that
+   passes. */
+.lk-receipts em { color: var(--receipts-word); }
+.lk-agents em { color: var(--agents); }
+.lk-press em { color: var(--press-word); }
+.lk-uploader em { color: var(--ultra-lift); }
 
 /* ─── Row label inside a section: a name, a note, a rule ── */
 .rowlab {
@@ -1289,7 +1297,6 @@
   .prod.slip:hover { box-shadow: none; }
 }
 .prod.ink { border-color: var(--ink); background: var(--ink); color: var(--on-ink); }
-.prod.ink .lk em { color: var(--ultra-lift); }
 .prod h3 {
   font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 36px);
@@ -1429,7 +1436,6 @@
   background: var(--ink);
   color: var(--on-ink);
 }
-.eco__feat .lk em { color: var(--ultra-lift); }
 .eco__feat h3 {
   max-width: 18ch;
   font-family: var(--font-display);
