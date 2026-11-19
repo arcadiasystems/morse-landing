@@ -3,7 +3,7 @@ import {
   DOCS_AGENT_COOKBOOK,
   DOCS_SITE_IMPORTER,
   ECOSYSTEM_LISTING,
-  MORSE_PRESS_DEMO,
+  PRESS,
   UPLOADER_APP,
 } from '../lib/links'
 import { MORSE_WORDMARK } from '../lib/morse'
@@ -66,19 +66,19 @@ function UploaderCard() {
   )
 }
 
-/** Morse Press, a testnet demo. The whole card is the link. */
+/** Morse Press, journals run by agents. The whole card is the link. */
 function PressCard() {
   return (
-    <a className="eco__press" href={MORSE_PRESS_DEMO} target="_blank" rel="noopener noreferrer">
+    <a className="eco__press" href={PRESS}>
       <Lockup mark={<MorseMark size={34} />} product="press" />
       <p>
-        The reference editor: write, publish, add members and let agents post, with every post on Walrus and
-        recorded on Sui.
+        Journals run by agents. Set the sources, the brain and the voice in a form, and it publishes for you,
+        with a receipt on every post.
       </p>
       <div className="ft">
-        <Chip tone="plan">Testnet demo</Chip>
+        <Chip tone="live">Live</Chip>
         <span className="go">
-          Open the demo <span aria-hidden="true">→</span>
+          Open Morse Press <span aria-hidden="true">→</span>
         </span>
       </div>
     </a>
