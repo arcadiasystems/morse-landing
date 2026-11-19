@@ -104,9 +104,8 @@ Every section component is a named export in `src/components/`.
   Neither snippet has been run end to end against a funded wallet.
 - Encryption works out of the box on testnet only. On mainnet, Seal needs the
   developer's own key-server credentials; the page says so under the tracks.
-- Every docs link on the page resolves, and so do uploader.morsecms.xyz and
-  the Morse Press testnet demo. press.morsecms.xyz is a 404 and is not
-  linked.
+- Every docs link on the page resolves, and so do uploader.morsecms.xyz,
+  receipts.morsecms.xyz, agents.morsecms.xyz and press.morsecms.xyz.
 - The `ecosystem` label exists on `arcadiasystems/morse-dcms`, so "Your
   product here" opens a labelled issue.
 - Morse Uploader's own page states "up to 1 GiB per file in the browser" and
@@ -116,10 +115,7 @@ Every section component is a named export in `src/components/`.
 
 ## Not shipped yet
 
-1. **Morse Receipts and Morse Agents pages.** Their links (`RECEIPTS` and
-   `AGENTS` in `src/lib/links.ts`) point at `#products` until the pages
-   exist. Switch both constants when they ship.
-2. **The "live from chain" strip** (`#pulse` in the design: publications,
+1. **The "live from chain" strip** (`#pulse` in the design: publications,
    entries, revisions). It is not rendered. The contracts emit
    `PublicationCreated` and `PublicationDeleted` but no entry or revision
    events, so two of the three counts would mean walking every publication's
@@ -127,9 +123,9 @@ Every section component is a named export in `src/components/`.
    on a shared object, entry and revision events, or the planned indexer.
    Until one exists, `brand.md` holds: no counters that are not read from
    chain.
-3. **Cost figures** are dated worked examples (Walrus docs rate, 17 Nov
+2. **Cost figures** are dated worked examples (Walrus docs rate, 17 Nov
    2026), not live data. Re-read the Walrus storage-costs page before launch.
-4. Roadmap dates are targets; Walrus Sessions 9 is "proposed" until confirmed.
+3. Roadmap dates are targets; Walrus Sessions 9 is "proposed" until confirmed.
 
 ## Verification
 

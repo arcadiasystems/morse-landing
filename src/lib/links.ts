@@ -10,15 +10,12 @@ export const DOCS_AGENTS = `${DOCS}/use-morse-with-ai.html`
 export const DOCS_AGENT_COOKBOOK = `${DOCS}/agent-publishes.html`
 export const DOCS_SITE_IMPORTER = `${DOCS}/import-a-site.html`
 
-/* The Morse Receipts and Morse Agents pages are not built yet, so their links
-   stay on this page, at the section that introduces both products. Point
-   these at '/receipts' and '/agents' when the pages ship. */
-export const RECEIPTS = '#products'
-export const AGENTS = '#products'
+/* The product sites, each on its own subdomain. */
+export const RECEIPTS = 'https://receipts.morsecms.xyz/'
+export const AGENTS = 'https://agents.morsecms.xyz/'
+export const PRESS = 'https://press.morsecms.xyz/'
 
 export const UPLOADER_APP = 'https://uploader.morsecms.xyz'
-/* Morse Press links its testnet demo. press.morsecms.xyz is not live and must not be linked. */
-export const MORSE_PRESS_DEMO = 'https://morse-blog-demo.vercel.app/'
 export const GITHUB = 'https://github.com/arcadiasystems/morse-dcms'
 export const ECOSYSTEM_LISTING = `${GITHUB}/issues/new?labels=ecosystem`
 export const LICENSE = `${GITHUB}/blob/main/LICENSE`
